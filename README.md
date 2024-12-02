@@ -17,6 +17,7 @@ Maybe you can mention me or this repo in the acknowledgements too
   
   
 <!-- Badges -->
+<!--
 <p>
   <a href="https://github.com/Louis3797/awesome-readme-template/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/Louis3797/awesome-readme-template" alt="contributors" />
@@ -37,7 +38,7 @@ Maybe you can mention me or this repo in the acknowledgements too
     <img src="https://img.shields.io/github/license/Louis3797/awesome-readme-template.svg" alt="license" />
   </a>
 </p>
-   
+-->
 <h4>
     <a href="https://github.com/Louis3797/awesome-readme-template/">View Demo</a>
   <span> · </span>
@@ -279,9 +280,9 @@ Distributed under the no License. See LICENSE.txt for more information.
 <!-- Contact -->
 ## :handshake: Contact
 
-Borfălău Valentin - borfalau.valentin@gmail.com
-Pasat Cosmin - tcosmin.pasat@gmail.com
-Project Link: [https://github.com/TudorPCT/WADE](https://github.com/TudorPCT/WADE)
+- Borfălău Valentin - borfalau.valentin@gmail.com
+- Pasat Cosmin - tcosmin.pasat@gmail.com
+- Project Link: [https://github.com/TudorPCT/WADE](https://github.com/TudorPCT/WADE)
 
 
 <!-- Acknowledgments -->
