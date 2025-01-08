@@ -1,31 +1,21 @@
-from src.services.parsing_service import ParsingService
 from flask import request
+
+from src.services.parsing_service import ParsingService
 
 
 class ParsingController:
-    def __init__(self, app):
+    def __init__(self, app, parsing_service: ParsingService):
         self.app = app
-        self.parsing_service = ParsingService("http://localhost:3030/wade/query")
+        self.parsing_service = parsing_service
         self.register_routes()
 
     def register_routes(self):
-        @self.app.route("/parse", methods=["GET"])
-        def hello():
-            return "This is the parsing controller!"
-
-        @self.app.route("/help", methods=["GET"])
-        def help():
-            return """
-                This is the help page for the parsing controller!
-                You can use the /parse endpoint to parse user input. 
-                - The user input should be sent as a JSON object with a key "user_input".
-                - The value of "user_input" should be a string.
-                - The response will be a JSON object with the results of parsing the user input.
-            """
 
         @self.app.route("/parse", methods=["POST"])
         def parse():
             data = request.json
             user_input = data.get("user_input")
             results = self.parsing_service.process_user_input(user_input)
+            if not results:
+                return "", 204
             return results

@@ -1,4 +1,4 @@
-from SPARQLWrapper import SPARQLWrapper, JSON
+from SPARQLWrapper import SPARQLWrapper, JSON, TURTLE
 
 
 class SPARQLWrapperConfig:

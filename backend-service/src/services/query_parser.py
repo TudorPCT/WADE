@@ -1,3 +1,6 @@
+from urllib.parse import urlparse
+
+
 class QueryResultParser:
     @staticmethod
     def parse_results(results, key, fallback_key=None, plural=False):
