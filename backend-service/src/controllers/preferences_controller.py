@@ -32,11 +32,16 @@ class PreferencesController:
             self.preferences_service.delete_preference(preference_id, user_id)
             return ""
 
-        @self.app.route("/preferences/search", methods=["GET"])
+        @self.app.route("/preferences", methods=["GET"])
         @auth(self.user_service)
-        def get_search_preferences():
+        def get_preferences():
             user_id = request.json.get("user_id")
-            preferences = self.preferences_service.get_search_preferences(user_id)
+            preference_key = int(request.args.get("key"))
+
+            if preference_key:
+                preferences = self.preferences_service.get_preferences_by_key(preference_key, user_id)
+            else:
+                preferences = self.preferences_service.get_all_preferences(user_id)
 
             if not preferences:
                 return "", 204

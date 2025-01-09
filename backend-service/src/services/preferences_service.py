@@ -8,8 +8,6 @@ import jwt
 from src.models.user import UserPreference
 from src.repositories.users_repository import UserManagementRepository
 
-SECRET_KEY = "ASDASDASD"
-
 
 def generate_password(length=10):
     characters = string.ascii_letters + string.digits + string.punctuation
@@ -48,5 +46,8 @@ class PreferencesService:
         if preference:
             self.user_repository.delete(preference)
 
-    def get_search_preferences(self, user_id):
-        return self.user_repository.get_user_preferences_by_key("search", user_id)
+    def get_preferences_by_key(self, key, user_id):
+        return self.user_repository.get_user_preferences_by_key(key, user_id)
+
+    def get_all_preferences(self, user_id):
+        return self.user_repository.get_all_user_preferences(user_id)

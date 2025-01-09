@@ -76,3 +76,15 @@ class UserManagementRepository:
         finally:
             session.close()
         return preferences
+
+    def get_all_user_preferences(self, user_id):
+        session = self.Session()
+        try:
+            preferences = (
+                session.query(UserPreference)
+                .filter_by(user_id=user_id)
+                .all()
+            )
+        finally:
+            session.close()
+        return preferences

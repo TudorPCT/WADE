@@ -1,6 +1,6 @@
 from src.config.sparql_wrapper_config import SPARQLWrapperConfig, JSON, TURTLE
 from src.services.query_parser import QueryResultParser
-from urllib.parse import quote
+
 
 class OntologyRepository:
     def __init__(self, sparql_config: SPARQLWrapperConfig):
@@ -51,14 +51,13 @@ class OntologyRepository:
 
     def describe_input(self, input):
         query = f"""
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
         DESCRIBE <{input}>
         """
         return self.execute_query(query)
 
     def describe(self):
         query = """
+        
         DESCRIBE ?s
         WHERE {
           ?s ?p ?o .
