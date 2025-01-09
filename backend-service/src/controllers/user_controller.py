@@ -11,7 +11,7 @@ class UserController:
 
     def register_routes(self):
         @self.app.route("/generate-password", methods=["POST"])
-        def create_user():
+        def generate_password():
             email = request.json["email"]
             user = self.user_service.generate_password(email)
             return user

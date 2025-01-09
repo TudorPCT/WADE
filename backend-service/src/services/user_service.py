@@ -6,7 +6,7 @@ import bcrypt
 import jwt
 from flask_mail import Mail, Message
 
-from src.models.user import OneTimePassword
+from src.models.user import OneTimePassword, User
 from src.repositories.users_repository import UserManagementRepository
 
 def generate_password(length=10):
@@ -43,9 +43,13 @@ class UserService:
     def generate_password(self, email):
         password = generate_password()
 
-        user_id = self.user_repository.get_user_by_email(email).id
+        user = self.user_repository.get_user_by_email(email)
 
-        otp = OneTimePassword(otp=hash_password(password), user_id=user_id)
+        if not user:
+            user = User(email=email)
+            self.user_repository.create(user)
+
+        otp = OneTimePassword(otp=hash_password(password), user_id=user.id)
         self.user_repository.create(otp)
 
         msg = Message(

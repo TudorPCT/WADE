@@ -6,7 +6,7 @@ from src.config.sparql_wrapper_config import SPARQLWrapperConfig
 from src.controllers.ontology_controller import OntologyController
 from src.controllers.preferences_controller import PreferencesController
 from src.controllers.search_controller import SearchController
-from src.controllers.user_management import UserController
+from src.controllers.user_controller import UserController
 from src.repositories.ontology_repository import OntologyRepository
 from src.repositories.users_repository import UserManagementRepository
 from src.services.ontology_service import OntologyService
