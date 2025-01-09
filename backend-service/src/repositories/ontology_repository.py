@@ -53,7 +53,7 @@ class OntologyRepository:
         query = f"""
         DESCRIBE <{input}>
         """
-        return self.execute_query(query)
+        return self.execute_query(query, format=TURTLE)
 
     def describe(self):
         query = """

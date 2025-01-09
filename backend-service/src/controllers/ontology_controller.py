@@ -27,7 +27,6 @@ class OntologyController:
 
             if not query:
                 return "", 400
-
             try:
                 results = self.ontology_service.execute_query(query, format=TURTLE)
             except QueryBadFormed as e:

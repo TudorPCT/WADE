@@ -21,7 +21,7 @@ class OntologyService:
                 "object": str(o)
             })
 
-        return json.dumps(result, indent=2)
+        return result
 
     def describe(self):
         return self.repository.describe()
