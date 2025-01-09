@@ -25,7 +25,6 @@ class PreferencesController:
         @self.app.route("/preferences", methods=["DELETE"])
         @auth(self.user_service)
         def delete_preference(user_id):
-            data = request.json
             preference_id = int(request.args.get("id"))
             self.preferences_service.delete_preference(preference_id, user_id)
             return ""
