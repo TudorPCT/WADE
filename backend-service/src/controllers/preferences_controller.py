@@ -32,7 +32,7 @@ class PreferencesController:
         @self.app.route("/preferences", methods=["GET"])
         @auth(self.user_service)
         def get_preferences(user_id):
-            preference_key = int(request.args.get("key"))
+            preference_key = request.args.get("key")
 
             if preference_key:
                 preferences = self.preferences_service.get_preferences_by_key(preference_key, user_id)
