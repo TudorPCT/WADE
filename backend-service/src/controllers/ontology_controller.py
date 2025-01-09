@@ -9,13 +9,6 @@ class OntologyController:
         self.app = app
         self.register_routes()
 
-    def is_safe_query(self, query):
-        query = query.strip().lower()
-
-        allowed_queries = ['select', 'construct', 'ask', 'describe']
-
-        return any(query.startswith(keyword) for keyword in allowed_queries)
-
     def register_routes(self):
 
         @self.app.route("/software-ontology", methods=["GET"])
@@ -34,10 +27,6 @@ class OntologyController:
 
             if not query:
                 return "", 400
-
-            if not self.is_safe_query(query):
-                return "", 403
-
 
             try:
                 results = self.ontology_service.execute_query(query, format=TURTLE)

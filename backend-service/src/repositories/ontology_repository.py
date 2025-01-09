@@ -57,7 +57,6 @@ class OntologyRepository:
 
     def describe(self):
         query = """
-        
         DESCRIBE ?s
         WHERE {
           ?s ?p ?o .
