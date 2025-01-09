@@ -19,6 +19,7 @@ class OntologyController:
                 result = self.ontology_service.describe_input(request.base_url + "#" + request.args.get('fragment'))
                 if not result:
                     return "", 204
+                return result
 
         @self.app.route("/software-ontology/query", methods=["POST"])
         def query():
