@@ -22,8 +22,7 @@ def auth(user_service: UserService):
 
             try:
                 user = user_service.validate_token(token)
-                request.json["user_id"] = int(user["user_id"])
-                request.json["email"] = user["email"]
+                kwargs["user_id"] = int(user["user_id"])
             except ValueError as e:
                 return jsonify({"error": str(e)}), 401
 
