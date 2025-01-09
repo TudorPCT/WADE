@@ -1,0 +1,45 @@
+from flask import request
+
+from src.decorators.auth_decorators import auth
+from src.services.preferences_service import PreferencesService
+from src.services.user_service import UserService
+
+
+class PreferencesController:
+    def __init__(self, app, preferences_service: PreferencesService, user_service: UserService):
+        self.app = app
+        self.preferences_service = preferences_service
+        self.user_service = user_service
+        self.register_routes()
+
+    def register_routes(self):
+        @self.app.route("/preferences", methods=["POST"])
+        @auth(self.user_service)
+        def save_preference():
+            data = request.json
+            key = data.get("key")
+            value = data.get("value")
+            user_id = data.get("user_id")
+            self.preferences_service.save_preference(user_id, key, value)
+            return ""
+
+        @self.app.route("/preferences", methods=["DELETE"])
+        @auth(self.user_service)
+        def delete_preference():
+            data = request.json
+            user_id = data.get("user_id")
+            preference_id = int(request.args.get("id"))
+            self.preferences_service.delete_preference(preference_id, user_id)
+            return ""
+
+        @self.app.route("/preferences/search", methods=["GET"])
+        @auth(self.user_service)
+        def get_search_preferences():
+            user_id = request.json.get("user_id")
+            preferences = self.preferences_service.get_search_preferences(user_id)
+
+            if not preferences:
+                return "", 204
+
+            return [preference.to_json() for preference in preferences]
+
