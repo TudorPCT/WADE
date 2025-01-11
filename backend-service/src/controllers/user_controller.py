@@ -13,8 +13,12 @@ class UserController:
         @self.app.route("/generate-password", methods=["POST"])
         def generate_password():
             email = request.json["email"]
-            user = self.user_service.generate_password(email)
-            return user
+            status, time = self.user_service.generate_password(email)
+
+            if status == 429:
+                return "", 429, {"Retry-After": time}
+
+            return "", status
 
         @self.app.route("/auth", methods=["POST"])
         def verify_password():

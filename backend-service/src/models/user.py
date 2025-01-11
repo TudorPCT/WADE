@@ -1,5 +1,3 @@
-from datetime import datetime, UTC
-
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
@@ -12,13 +10,14 @@ class User(Base):
     __tablename__ = "users"
     id = Column(Integer, primary_key=True, autoincrement=True)
     email = Column(String(255), unique=True, nullable=False)
-    created_at = Column(DateTime, default=datetime.now(UTC))
+    created_at = Column(DateTime, default=func.now())
+    activated = Column(Boolean, default=False)
 
     otps = relationship("OneTimePassword", back_populates="user", cascade="all, delete-orphan")
     preferences = relationship("UserPreference", back_populates="user", cascade="all, delete-orphan")
 
     def __repr__(self):
-        return f"<User(email={self.email})>"
+        return f"<User(email={self.email}, created_at={self.created_at}, activated={self.activated})>)>"
 
 
 class OneTimePassword(Base):
@@ -42,7 +41,7 @@ class UserPreference(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     preference_key = Column(String(255), nullable=False)
     preference_value = Column(String(255), nullable=False)
-    created_at = Column(DateTime, default=datetime.now(UTC))
+    created_at = Column(DateTime, default=func.now())
 
     user = relationship("User", back_populates="preferences")
 

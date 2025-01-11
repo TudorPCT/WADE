@@ -1,3 +1,5 @@
+from datetime import datetime, UTC, timedelta
+
 from src.models.user import User, Base, OneTimePassword, func, UserPreference
 
 
@@ -88,3 +90,15 @@ class UserManagementRepository:
         finally:
             session.close()
         return preferences
+
+    def get_unactivated_users(self):
+        session = self.Session()
+        try:
+            one_week_ago = datetime.now(UTC) - timedelta(days=7)
+            users = session.query(User).filter(
+                User.activated == False,
+                User.created_at < one_week_ago
+            ).all()
+        finally:
+            session.close()
+        return users

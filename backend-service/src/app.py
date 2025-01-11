@@ -2,6 +2,9 @@ import os
 
 from flask import Flask
 
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
+
 from src.config.sparql_wrapper_config import SPARQLWrapperConfig
 from src.controllers.ontology_controller import OntologyController
 from src.controllers.preferences_controller import PreferencesController
@@ -43,5 +46,13 @@ ontology_controller = OntologyController(app, OntologyService(ontology_repositor
 users_controller = UserController(app, user_service)
 preferences_controller = PreferencesController(app, PreferencesService(user_repository), user_service)
 
+scheduler = BackgroundScheduler()
+scheduler.add_job(user_service.delete_unactivated_users, CronTrigger(hour=0, minute=1))
+scheduler.start()
+
+
 if __name__ == '__main__':
-    app.run()
+    try:
+        app.run()
+    finally:
+        scheduler.shutdown()
