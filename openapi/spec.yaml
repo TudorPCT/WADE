@@ -1,0 +1,258 @@
+openapi: 3.0.3
+info:
+  title: WADE API
+  version: 1.0.0
+  description: |
+    This API provides endpoints for Ontology operations, Preferences management,
+    Search functionality, and User authentication/authorization.
+
+servers:
+  - url: https://wade-8e36773161ad.herokuapp.com
+    description: Cloud development server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    # Example of how you might define a "Preference" schema
+    Preference:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        user_id:
+          type: integer
+          example: 42
+        key:
+          type: string
+          example: "theme"
+        value:
+          type: string
+          example: "dark"
+    
+    # Example of how you might define a "SearchRequest" schema
+    SearchRequest:
+      type: object
+      properties:
+        user_input:
+          type: string
+          example: "Hello, world!"
+    
+    # Example of how you might define an "AuthRequest" schema
+    AuthRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: "test@example.com"
+        otp:
+          type: string
+          example: "A1b2C3d4"
+
+    # Example of how you might define a "GeneratePasswordRequest" schema
+    GeneratePasswordRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          example: "test@example.com"
+
+    # Example of how you might define a "QueryRequest" schema
+    QueryRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          example: "SELECT ?s WHERE { ?s a <http://example.com/Software> }"
+
+paths:
+  ##############################
+  #         ONTOLOGY          #
+  ##############################
+  /software-ontology:
+    get:
+      summary: Describe Software Ontology
+      description: |
+        Returns the software ontology description. If a `fragment` query param is provided,
+        it returns the ontology description related to that specific fragment.
+      parameters:
+        - name: fragment
+          in: query
+          required: false
+          schema:
+            type: string
+          description: |
+            Fragment of the ontology to describe. E.g. `SomeConcept`
+      responses:
+        '200':
+          description: Description found
+          content:
+            text/turtle:
+              schema:
+                type: string
+        '204':
+          description: No content found for the provided fragment (or no results)
+  
+  /software-ontology/query:
+    post:
+      summary: Execute SPARQL Query
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+      responses:
+        '200':
+          description: Query results in Turtle format
+          content:
+            text/turtle:
+              schema:
+                type: string
+        '204':
+          description: No results found
+        '400':
+          description: Malformed query or missing query data
+
+  ##############################
+  #        PREFERENCES        #
+  ##############################
+  /preferences:
+    post:
+      summary: Save a new preference
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                value:
+                  type: string
+              required:
+                - key
+                - value
+      responses:
+        '200':
+          description: Preference saved
+        '401':
+          description: Unauthorized (missing or invalid token)
+
+    delete:
+      summary: Delete a preference
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: ID of the preference to delete
+      responses:
+        '200':
+          description: Preference deleted
+        '401':
+          description: Unauthorized (missing or invalid token)
+
+    get:
+      summary: Retrieve preferences
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: key
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Retrieve preferences for this particular key
+      responses:
+        '200':
+          description: List of preferences
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Preference'
+        '204':
+          description: No preferences found
+        '401':
+          description: Unauthorized (missing or invalid token)
+
+  ##############################
+  #          SEARCH           #
+  ##############################
+  /search:
+    post:
+      summary: Perform a search operation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Free-form search results (may vary)
+        '204':
+          description: No results found
+
+  ##############################
+  #           USER            #
+  ##############################
+  /generate-password:
+    post:
+      summary: Generate and email a one-time password (OTP)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GeneratePasswordRequest'
+      responses:
+        '201':
+          description: User created and OTP generated
+        '204':
+          description: OTP generated for an existing user
+        '429':
+          description: Rate limited (too many attempts). Includes "Retry-After" header
+        '400':
+          description: Invalid request data
+
+  /auth:
+    post:
+      summary: Verify password (OTP) and return JWT
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRequest'
+      responses:
+        '200':
+          description: Returns a JWT if OTP verification succeeded
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jwt:
+                    type: string
+                    description: The JSON Web Token
+        '401':
+          description: Unauthorized (invalid or expired OTP)
