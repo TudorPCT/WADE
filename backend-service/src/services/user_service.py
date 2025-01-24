@@ -11,7 +11,7 @@ from src.models.user import OneTimePassword, User
 from src.repositories.users_repository import UserManagementRepository
 
 def generate_password(length=10):
-    characters = string.ascii_letters + string.digits + string.punctuation
+    characters = string.ascii_letters + string.digits
     password = ''.join(secrets.choice(characters) for _ in range(length))
     return password
 
