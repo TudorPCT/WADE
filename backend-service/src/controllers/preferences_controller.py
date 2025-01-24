@@ -13,7 +13,7 @@ class PreferencesController:
         self.register_routes()
 
     def register_routes(self):
-        @self.app.route("/preferences", methods=["POST"])
+        @self.app.route("/api/preferences", methods=["POST"])
         @auth(self.user_service)
         def save_preference(user_id):
             data = request.json
@@ -22,14 +22,14 @@ class PreferencesController:
             self.preferences_service.save_preference(user_id, key, value)
             return ""
 
-        @self.app.route("/preferences", methods=["DELETE"])
+        @self.app.route("/api/preferences", methods=["DELETE"])
         @auth(self.user_service)
         def delete_preference(user_id):
             preference_id = int(request.args.get("id"))
             self.preferences_service.delete_preference(preference_id, user_id)
             return ""
 
-        @self.app.route("/preferences", methods=["GET"])
+        @self.app.route("/api/preferences", methods=["GET"])
         @auth(self.user_service)
         def get_preferences(user_id):
             preference_key = request.args.get("key")

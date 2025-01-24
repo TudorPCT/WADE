@@ -129,7 +129,6 @@ class UserService:
             raise ValueError("Invalid token")
 
     def delete_unactivated_users(self):
-        print("Deleting unactivated users")
         users = self.user_repository.get_unactivated_users()
         for user in users:
             self.user_repository.delete(user)

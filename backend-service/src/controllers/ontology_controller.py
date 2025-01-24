@@ -11,7 +11,7 @@ class OntologyController:
 
     def register_routes(self):
 
-        @self.app.route("/software-ontology", methods=["GET"])
+        @self.app.route("/api/software-ontology", methods=["GET"])
         def describe():
             if request.args.get('fragment') is None:
                 return self.ontology_service.describe()
@@ -21,7 +21,7 @@ class OntologyController:
                     return "", 204
                 return result
 
-        @self.app.route("/software-ontology/query", methods=["POST"])
+        @self.app.route("/api/software-ontology/query", methods=["POST"])
         def query():
             data = request.json
             query = data.get("query")

@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from flask_cors import CORS
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -20,6 +21,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 app = Flask(__name__)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
@@ -49,7 +52,6 @@ preferences_controller = PreferencesController(app, PreferencesService(user_repo
 scheduler = BackgroundScheduler()
 scheduler.add_job(user_service.delete_unactivated_users, CronTrigger(hour=0, minute=1))
 scheduler.start()
-
 
 if __name__ == '__main__':
     try:

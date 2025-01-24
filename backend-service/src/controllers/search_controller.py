@@ -12,7 +12,7 @@ class SearchController:
         self.register_routes()
 
     def register_routes(self):
-        @self.app.route("/search", methods=["POST"])
+        @self.app.route("/api/search", methods=["POST"])
         def search():
             data = request.json
             user_input = data.get("user_input")

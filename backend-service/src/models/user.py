@@ -26,7 +26,7 @@ class OneTimePassword(Base):
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     otp = Column(String(255), nullable=False, unique=True)
     created_at = Column(DateTime, default=func.now())
-    expires_at = Column(DateTime, default=text("(NOW() + INTERVAL '5 minutes')"))
+    expires_at = Column(DateTime, default=text("(NOW() + INTERVAL '10 minutes')"))
     is_used = Column(Boolean, default=False)
 
     user = relationship("User", back_populates="otps")
