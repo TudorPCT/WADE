@@ -2,18 +2,19 @@ import React, {useEffect, useState} from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Header from './components/header/Header';
 import Footer from './components/Footer';
-import 'primereact/resources/themes/lara-light-indigo/theme.css';
+import 'primereact/resources/themes/lara-dark-cyan/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import {useAuth} from "./core/AuthProvider";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {ProgressSpinner} from 'primereact/progressspinner';
+import Background from './assets/v796-nunny-02.jpg';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
     const auth = useAuth();
-    const style = {
+    const styleSpinner = {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -25,6 +26,18 @@ const App = () => {
         backgroundColor: "rgba(255, 255, 255, 0.8)",
         zIndex: 9999,
     };
+
+    const style = {
+        backgroundImage: `url(${Background})`,
+        height: "100vh",
+        backgroundSize: "cover",
+        backgroundPosition: "bottom left",
+        backgroundRepeat: "no-repeat",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        gap: "10rem",
+    }
 
     useEffect(() => {
 
@@ -40,18 +53,20 @@ const App = () => {
     }, [auth]);
 
     if (loading) {
-        return <div style={style}><ProgressSpinner/></div>
+        return <div style={styleSpinner}><ProgressSpinner/></div>
     }
 
     return (
-        <Router>
-            <Header/>
-            <Routes>
-                <Route path="/" element={<h1>Welcome to the App</h1>}/>
-            </Routes>
-            <Footer/>
-            <ToastContainer position="bottom-right"/>
-        </Router>
+        <div style={style}>
+            <Router>
+                <Header/>
+                <Routes>
+                    <Route path="/" element={<h1>Welcome to the App</h1>}/>
+                </Routes>
+                <Footer />
+                <ToastContainer position="bottom-right"/>
+            </Router>
+        </div>
     );
 };
 

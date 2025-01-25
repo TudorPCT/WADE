@@ -9,7 +9,8 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 const Header = () => {
     const [logoUrl] = useState("/logo.svg");
     const [logoAlt] = useState("Logo");
-    const [title] = useState("CodeOwl");
+    const [title1] = useState("Code");
+    const [title2] = useState("Owl");
     const [menuItems, setMenuItems] = useState([]);
     const menuRef = useRef(null); // Reference for the menu component
     const [showOTPDialog, setShowOTPDialog] = useState(false);
@@ -80,7 +81,8 @@ const Header = () => {
                     />
                 </div>
                 <h1>
-                    <span className="branding-text">{title}</span>
+                    <span className="branding-text p-text-secondary">{title1}</span>
+                    <span className="branding-text p-text-secondary" style={{color: "rgb(34, 211, 238)"}}>{title2}</span>
                 </h1>
             </div>
 

@@ -15,6 +15,8 @@
     justify-content: flex-start;
     align-items: center;
     width: 300px;
+    font-family: cursive;
+
 }
 
 .main > .branding > .logo-wrapper {
@@ -73,4 +75,24 @@
     .main > .branding > h1 > span {
         font-size: 1.5rem;
     }
+}
+
+
+.layout-topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1100;
+    transition: background-color .5s,border-color .5s;
+    border-bottom: 1px solid transparent;
+}
+
+.layout-topbar-logo-container {
+    width: 250px;
+    margin-right: 4rem;
+}
+
+.layout-topbar-inner .layout-topbar-logo {
+    display: inline-flex;
 }
