@@ -18,7 +18,7 @@ const OTPDialog = ({ authService, visible, onHide }) => {
     const handleSendOTP = async () => {
         if (!email) return;
         try {
-            // if (await authService.generateOTP(email))
+            if (await authService.generateOTP(email))
                 setStep(2);
         } catch (error) {
             console.error("Error sending OTP:", error);
@@ -41,7 +41,6 @@ const OTPDialog = ({ authService, visible, onHide }) => {
         }
     };
 
-    // Reset dialog states when hiding the dialog
     const handleHide = () => {
         resetDialog();
         onHide();
@@ -51,9 +50,9 @@ const OTPDialog = ({ authService, visible, onHide }) => {
         if (step === 1) {
             return (
                 <div className="p-fluid">
-                    <div className="field">
+                    <div className="field" >
                         <label htmlFor="email" className="block mb-2">
-                            Email
+                            <p>Email</p>
                         </label>
                         <InputText
                             id="email"
@@ -70,7 +69,7 @@ const OTPDialog = ({ authService, visible, onHide }) => {
                 <div className="p-fluid">
                     <div className="field">
                         <label htmlFor="otp" className="block mb-2">
-                            One-Time Password
+                            <p>One-Time Password</p>
                         </label>
                         <InputText
                             id="otp"
@@ -106,11 +105,12 @@ const OTPDialog = ({ authService, visible, onHide }) => {
 
     return (
         <Dialog
+            draggable={false}
             visible={visible}
             onHide={handleHide}
             header="Login"
             footer={renderFooter()}
-            style={{ width: "30rem" }}
+            style={{ minWidth: "30vw" }}
             modal
         >
             {renderDialogContent()}
