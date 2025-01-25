@@ -1,4 +1,3 @@
-import json
 
 from src.repositories.ontology_repository import OntologyRepository, JSON
 

@@ -1,3 +1,4 @@
+from src.cache.cache import TTL_LRU_Cache
 from src.config.sparql_wrapper_config import SPARQLWrapperConfig, JSON, TURTLE
 from src.services.query_parser import QueryResultParser
 
@@ -5,11 +6,20 @@ from src.services.query_parser import QueryResultParser
 class OntologyRepository:
     def __init__(self, sparql_config: SPARQLWrapperConfig):
         self.sparql = sparql_config.get_sparql_instance()
+        self.cache = TTL_LRU_Cache()
 
     def execute_query(self, query, format=JSON):
-        self.sparql.setQuery(query)
-        self.sparql.setReturnFormat(format)
-        return self.sparql.query().convert()
+        cached_results = self.cache.get(query)
+
+        if not cached_results:
+            self.sparql.setQuery(query)
+            self.sparql.setReturnFormat(format)
+            results = self.sparql.query().convert()
+            self.cache.set(query, results)
+        else:
+            results = cached_results
+
+        return results
 
     def get_classes_and_labels(self, format=JSON):
         query = """

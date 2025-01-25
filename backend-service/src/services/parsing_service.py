@@ -13,6 +13,7 @@ class ParsingService:
             return
 
         query = self.query_service.build_sparql_query(rdf_type, filters)
+
         results = self.repository.execute_query(query)
 
         return results
