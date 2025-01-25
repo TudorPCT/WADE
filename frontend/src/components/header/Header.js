@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate hook
 const Header = () => {
     const [logoUrl] = useState("/logo.svg");
     const [logoAlt] = useState("Logo");
-    const [title] = useState("WADO");
+    const [title] = useState("CodeOwl");
     const [menuItems, setMenuItems] = useState([]);
     const menuRef = useRef(null); // Reference for the menu component
     const [showOTPDialog, setShowOTPDialog] = useState(false);
@@ -76,7 +76,7 @@ const Header = () => {
                         id="logo"
                         src={logoUrl}
                         alt={logoAlt}
-                        style={{ width: "75%", height: "auto", minWidth: "40px" }}
+                        style={{ width: "80%", height: "auto", minWidth: "40px" }}
                     />
                 </div>
                 <h1>
