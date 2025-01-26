@@ -1,0 +1,33 @@
+.ontology-page {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.ontology-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.ontology-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ontology-table th, .ontology-table td {
+    border: 1px solid #000000;
+    padding: 8px;
+    text-align: left;
+}
+
+.ontology-table th {
+    background-color: #02045c;
+    font-weight: bold;
+}
+
+.ontology-table tr:nth-child(even) {
+    background-color: #0051ff;
+}
+
+.ontology-table tr:hover {
+    background-color: #f1f1f12d;
+}

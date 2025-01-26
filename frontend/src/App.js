@@ -10,6 +10,9 @@ import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {ProgressSpinner} from 'primereact/progressspinner';
 import Background from './assets/v796-nunny-02.jpg';
+import SearchPage from './pages/SearchPage';
+import PreferencesPage from './pages/PreferencesPage';
+import SoftwareOntologyPage from './pages/SoftwareOntologyPage';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
@@ -62,6 +65,9 @@ const App = () => {
                 <Header/>
                 <Routes>
                     <Route path="/" element={<h1>Welcome to the App</h1>}/>
+                    <Route path="/search" element={<SearchPage/>}/>
+                    <Route path="/saved" element={<PreferencesPage/>}/>
+                    <Route path="/software-ontology" element={<SoftwareOntologyPage />} />
                 </Routes>
                 <Footer />
                 <ToastContainer position="bottom-right"/>

@@ -1,0 +1,75 @@
+.search-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.search-page-title {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.search-button, .save-button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #61dafb;
+    color: white;
+    cursor: pointer;
+}
+
+.search-button:hover, .save-button:hover {
+    background-color: #61dafb;
+}
+
+.save-button {
+    background-color: #28a745;
+}
+
+.save-button:hover {
+    background-color: #218838;
+}
+
+.p-datatable {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+    text-align: left;
+}
+
+.p-datatable .p-datatable-tbody > tr > td {
+    text-align: left;
+}
+
+button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #61dafb;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
