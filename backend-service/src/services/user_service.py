@@ -86,7 +86,7 @@ class UserService:
             msg = Message(
                 subject="One-time password",
                 sender=self.default_email,
-                recipients=['tcosmin.pasat@gmail.com'],
+                recipients=[email],
                 body=otp_email_template.format(
                     user_name=user.email,
                     otp_code=password,
