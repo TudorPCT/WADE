@@ -30,33 +30,39 @@ const SoftwareOntologyPage = () => {
         }
     };
 
-    const handleLinkClick = (e, link) => {
+    const handleLinkClick = (e, url) => {
         e.preventDefault();
-        const url = new URL(link);
         const newFragment = url.hash.substring(1);
-        if (link.includes('/software-ontology')) {
+        if (url.href.includes('/software-ontology')) {
             navigate(`/software-ontology?fragment=${newFragment}`);
         } else {
-            window.open(link, '_blank', 'noopener,noreferrer');
+            window.open(url.href, '_blank', 'noopener,noreferrer');
         }
     };
 
-    const isValidURL = (string) => {
+    const getURL = (string) => {
         try {
-            new URL(string);
-            return true;
+            return new URL(string);
         } catch (_) {
             return false;
         }
     };
 
+    const predicateTemplate = (rowData) => {
+        return template(rowData.predicate);
+    }
+
     const objectTemplate = (rowData) => {
-        const link = rowData.object;
-        if (isValidURL(link)) {
-            if (link.includes('/software-ontology')) {
-                return <a href={link} onClick={(e) => handleLinkClick(e, link)}>{link}</a>;
+        return template(rowData.object);
+    }
+    const template = (link) => {
+        const url = getURL(link);
+        if (url) {
+            if (url.href.includes('/software-ontology')) {
+                return <a href={url.href} onClick={(e) => handleLinkClick(e, url)}>{url.hash.substring(1)}</a>;
             }
-            return <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>;
+            console.log(url.hash.substring(1));
+            return <a href={url.href} target="_blank" rel="noopener noreferrer">{url.hash.substring(1)}</a>;
         }
         return <span>{link}</span>;
     };
@@ -65,7 +71,7 @@ const SoftwareOntologyPage = () => {
         <div className="ontology-page">
             <h1 className="ontology-title">Software Ontology - {fragment}</h1>
             <DataTable value={data} showGridlines>
-                <Column field="predicate" header="Predicate" body={objectTemplate}></Column>
+                <Column field="predicate" header="Predicate" body={predicateTemplate}></Column>
                 <Column field="object" header="Object" body={objectTemplate}></Column>
             </DataTable>
         </div>

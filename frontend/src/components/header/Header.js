@@ -36,7 +36,7 @@ const Header = () => {
                         icon: "pi pi-fw pi-search",
                         command: () => navigate("/search"), // Use navigate here
                     },
-                    {
+                    authService.isAuthenticated() && {
                         label: "Saved Searches",
                         icon: "pi pi-save",
                         command: () => navigate("/saved"), // Use navigate here
