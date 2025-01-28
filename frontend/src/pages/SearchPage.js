@@ -69,6 +69,21 @@ const SearchPage = () => {
         );
     };
 
+    const renderFragment = (rowData) => {
+        let fragment = '';
+        if (rowData && rowData.indiv && rowData.indiv.value) {
+            try {
+                const fullUri = rowData.indiv.value;
+                fragment = fullUri.split('#')[1] || '';
+            } catch (e) {
+                console.error('Error extracting fragment:', e);
+            }
+        } else {
+            console.error('indiv.value not found in rowData');
+        }
+        return fragment;
+    };
+
     return (
         <div className="search-page">
             {results.length === 0 && <h1 className="search-page-title">Search Page</h1>}
@@ -85,10 +100,9 @@ const SearchPage = () => {
                     <button type="button" className="save-button" onClick={handleSaveSearch}>Save Search</button>
                 )}
             </form>
-            {/*{results.length === 0 && <div style={{height: "140vh"}}></div>}*/}
             {results.length > 0 && (
                 <DataTable value={results} showGridlines tableStyle={{ minWidth: '50rem' }}>
-                    <Column field="indiv.value" header="Individual" />
+                    <Column body={renderFragment} header="Individual" />
                     <Column body={renderButton} header="Action" />
                 </DataTable>
             )}

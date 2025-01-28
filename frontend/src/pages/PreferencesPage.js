@@ -17,6 +17,11 @@ const PreferencesPage = () => {
     return (
         <div>
             <h1>Preferences</h1>
+            <DataTable value={data}>
+                <Column field="id" header="ID" />
+                <Column field="name" header="Name" />
+                <Column field="value" header="Value" />
+            </DataTable>
         </div>
     );
 };
