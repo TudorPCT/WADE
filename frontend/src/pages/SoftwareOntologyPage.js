@@ -64,7 +64,7 @@ const SoftwareOntologyPage = () => {
     return (
         <div className="ontology-page">
             <h1 className="ontology-title">Software Ontology - {fragment}</h1>
-            <DataTable value={data} showGridlines tableStyle={{ minWidth: '50rem' }}>
+            <DataTable value={data} showGridlines>
                 <Column field="predicate" header="Predicate" body={objectTemplate}></Column>
                 <Column field="object" header="Object" body={objectTemplate}></Column>
             </DataTable>

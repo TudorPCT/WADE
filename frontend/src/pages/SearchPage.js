@@ -101,7 +101,7 @@ const SearchPage = () => {
                 )}
             </form>
             {results.length > 0 && (
-                <DataTable value={results} showGridlines tableStyle={{ minWidth: '50rem' }}>
+                <DataTable value={results} showGridlines >
                     <Column body={renderFragment} header="Individual" />
                     <Column body={renderButton} header="Action" />
                 </DataTable>

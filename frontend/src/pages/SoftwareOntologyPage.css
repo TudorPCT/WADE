@@ -1,19 +1,43 @@
+/* SoftwareOntologyPage.css */
+
 .ontology-page {
     padding: 20px;
     font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .ontology-title {
     font-size: 24px;
     margin-bottom: 20px;
-    text-align: center;
 }
 
-.ontology-table {
-    width: 100%;
-    max-width: 800px; /* Optional: to limit the table width */
-    border-collapse: collapse;
+.p-datatable .p-datatable-thead > tr > th,
+.p-datatable .p-datatable-tbody > tr > td {
+    font-size: 16px; /* Adjust the text size here */
+}
+
+.p-datatable .p-datatable-tbody > tr > td a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.p-datatable .p-datatable-tbody > tr > td a:hover {
+    text-decoration: underline;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 625px) {
+    .ontology-page {
+        padding: 10px; /* Reduce padding */
+    }
+
+    .ontology-title {
+        font-size: 20px;
+        margin-bottom: 10px; /* Reduce margin */
+    }
+
+    .p-datatable .p-datatable-thead > tr > th,
+    .p-datatable .p-datatable-tbody > tr > td {
+        font-size: 16px; 
+        padding: 5px; 
+    }
 }

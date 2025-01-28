@@ -1,0 +1,23 @@
+.page-container {
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.p-datatable {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.p-button-danger {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+.p-button-danger:hover {
+    background-color: #c9302c;
+    border-color: #ac2925;
+}
