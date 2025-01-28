@@ -32,14 +32,14 @@ const App = () => {
 
     const style = {
         backgroundImage: `url(${Background})`,
-        height: "100vh",
         backgroundSize: "cover",
         backgroundPosition: "bottom left",
         backgroundRepeat: "no-repeat",
+        backgroundAttachment: "fixed",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        gap: "10rem",
+        minHeight: "100vh",
     }
 
     useEffect(() => {
@@ -62,13 +62,15 @@ const App = () => {
     return (
         <div style={style}>
             <Router>
-                <Header/>
-                <Routes>
-                    <Route path="/" element={<h1>Welcome to the App</h1>}/>
-                    <Route path="/search" element={<SearchPage/>}/>
-                    <Route path="/saved" element={<PreferencesPage/>}/>
-                    <Route path="/software-ontology" element={<SoftwareOntologyPage />} />
-                </Routes>
+                <div style={{flexGrow: "100"}}>
+                    <Header/>
+                    <Routes>
+                        <Route path="/" element={<h1>Welcome to the App</h1>}/>
+                        <Route path="/search" element={<SearchPage/>}/>
+                        <Route path="/saved" element={<PreferencesPage/>}/>
+                        <Route path="/software-ontology" element={<SoftwareOntologyPage />} />
+                    </Routes>
+                </div>
                 <Footer />
                 <ToastContainer position="bottom-right"/>
             </Router>

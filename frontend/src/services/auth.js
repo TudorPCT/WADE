@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:5000/api";
+const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:5000";
 
 class AuthService {
     constructor() {
@@ -9,7 +9,7 @@ class AuthService {
     }
 
     async login(email, otp) {
-        const requestPath = `${API_URL}/auth/login`;
+        const requestPath = `${API_URL}/api/auth/login`;
         const response = await axios.post(requestPath, { email, otp });
         localStorage.setItem("token", response.data.jwt);
         this.authenticated = true;
@@ -25,7 +25,7 @@ class AuthService {
     }
 
     async validateToken() {
-        const requestPath = `${API_URL}/auth/validate`;
+        const requestPath = `${API_URL}/api/auth/validate`;
         try {
             await axios.get(requestPath);
             this.authenticated = true;
@@ -45,7 +45,7 @@ class AuthService {
     }
 
     async generateOTP(email) {
-        const requestPath = `${API_URL}/auth/generate-password`;
+        const requestPath = `${API_URL}/api/auth/generate-password`;
         try {
             await axios.post(requestPath, { email });
             return true;

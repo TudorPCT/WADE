@@ -4,6 +4,8 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import './SoftwareOntologyPage.css'; // Import the CSS file
 
+const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:5000";
+
 const SoftwareOntologyPage = () => {
     const [data, setData] = useState([]);
     const location = useLocation();
@@ -19,7 +21,7 @@ const SoftwareOntologyPage = () => {
     const fetchData = async (fragment) => {
         try {
             console.log('Fetching data for:', fragment);
-            const response = await fetch(`http://127.0.0.1:5000/software-ontology?fragment=${fragment}`);
+            const response = await fetch(`${API_URL}/software-ontology?fragment=${fragment}`);
             const json = await response.json();
             setData(json);  // Adjust based on your API response
         } catch (error) {

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import axios from "axios";
+
+const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:5000";
 
 const PreferencesPage = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:5000/api/preferences?key=search')
-            .then(response => response.json())
-            .then(data => setData(data))
+        axios.get(`${API_URL}/api/preferences?key=search`)
+            .then(response => setData(response.data))
             .catch(error => console.error('Error fetching data:', error));
-            console.log(data);
     }, []);
 
     return (

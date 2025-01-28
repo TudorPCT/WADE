@@ -4,6 +4,9 @@ import { Column } from 'primereact/column';
 import { useAuth } from "../core/AuthProvider";
 import { useNavigate } from 'react-router-dom';
 import './SearchPage.css';
+import axios from "axios";
+
+const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:5000";
 
 const SearchPage = () => {
     const [query, setQuery] = useState('');
@@ -19,7 +22,7 @@ const SearchPage = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/search', {
+            const response = await fetch(`${API_URL}/api/search`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,7 +37,11 @@ const SearchPage = () => {
     };
 
     const handleSaveSearch = () => {
-        console.log('Search saved:', query);
+        const key = 'search';
+        const value = query;
+        axios.post(`${API_URL}/api/preferences`, { key, value })
+            .then(() => console.log('Search saved successfully'))
+            .catch(error => console.error('Error saving search:', error));
     };
 
     const renderButton = (rowData) => {
@@ -64,7 +71,7 @@ const SearchPage = () => {
 
     return (
         <div className="search-page">
-            <h1 className="search-page-title">Search Page</h1>
+            {results.length === 0 && <h1 className="search-page-title">Search Page</h1>}
             <form className="search-form" onSubmit={handleSubmit}>
                 <input
                     type="text"
@@ -78,6 +85,7 @@ const SearchPage = () => {
                     <button type="button" className="save-button" onClick={handleSaveSearch}>Save Search</button>
                 )}
             </form>
+            {/*{results.length === 0 && <div style={{height: "140vh"}}></div>}*/}
             {results.length > 0 && (
                 <DataTable value={results} showGridlines tableStyle={{ minWidth: '50rem' }}>
                     <Column field="indiv.value" header="Individual" />
