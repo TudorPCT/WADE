@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { useAuth } from "../core/AuthProvider";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './SearchPage.css';
 import axios from "axios";
 
@@ -14,20 +14,23 @@ const SearchPage = () => {
     const authService = useAuth();
     const isAuthenticated = authService.isAuthenticated();
     const navigate = useNavigate();
+    const location = useLocation();
 
-    const handleInputChange = (event) => {
-        setQuery(event.target.value);
-    };
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        const searchQuery = params.get('query');
+        if (searchQuery) {
+            setQuery(searchQuery);
+            fetchResults(searchQuery);
+        }
+    }, [location.search]);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const fetchResults = async (searchQuery) => {
         try {
             const response = await fetch(`${API_URL}/api/search`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ user_input: query }),
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_input: searchQuery })
             });
             const data = await response.json();
             setResults(data.results.bindings);
@@ -36,10 +39,17 @@ const SearchPage = () => {
         }
     };
 
+    const handleInputChange = (event) => {
+        setQuery(event.target.value);
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        navigate(`/search?query=${encodeURIComponent(query)}`);
+    };
+
     const handleSaveSearch = () => {
-        const key = 'search';
-        const value = query;
-        axios.post(`${API_URL}/api/preferences`, { key, value })
+        axios.post(`${API_URL}/api/preferences`, { key: 'search', value: query })
             .then(() => console.log('Search saved successfully'))
             .catch(error => console.error('Error saving search:', error));
     };
@@ -101,7 +111,7 @@ const SearchPage = () => {
                 )}
             </form>
             {results.length > 0 && (
-                <DataTable value={results} showGridlines >
+                <DataTable value={results} showGridlines>
                     <Column body={renderFragment} header="Individual" />
                     <Column body={renderButton} header="Action" />
                 </DataTable>
