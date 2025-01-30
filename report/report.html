@@ -81,7 +81,8 @@
         <p>This section provides an overview of the system architecture used in the Web application. The architecture
             follows a service-oriented approach and consists of the following components:</p>
         <ul>
-            <li><strong>Frontend:</strong> Built using modern web technologies such as ReactJS, providing an interactive and
+            <li><strong>Frontend:</strong> Built using modern web technologies such as ReactJS, providing an interactive
+                and
                 responsive user interface.
             </li>
             <li><strong>Backend:</strong> A RESTful API implemented in Python (Flask), handling
@@ -90,7 +91,8 @@
             <li><strong>Database:</strong> A relational database (PostgreSQL) for
                 storing the user data.
             </li>
-            <li><strong>Query Engine:</strong> Uses Apache Jena Fuseki for querying and managing RDF data, providing SPARQL
+            <li><strong>Query Engine:</strong> Uses Apache Jena Fuseki for querying and managing RDF data, providing
+                SPARQL
                 endpoints for efficient data retrieval and integration.
             </li>
         </ul>
@@ -120,7 +122,310 @@
             <figcaption>Figure 5: Level 3 of the C4 diagram, the back end container.</figcaption>
         </figure>
 
-        <p></p>
+        <p>The Main Server Container acts as the core backend system, orchestrating the functionality between user
+            interactions, ontology processing, and database operations. It is designed to handle requests from the
+            Single-Page Application (SPA) and facilitate communication with external services such as the Ontology Query
+            Engine, Email Notification System, and the Database. The container is modular and comprises several
+            controllers, services, and repositories, each performing distinct roles.</p>
+
+        <section>
+            <h4>
+                Controllers
+            </h4>
+            <p>
+                The controllers serve as entry points for handling HTTP requests from the frontend. Each controller is
+                responsible for a specific domain of functionality:
+            </p>
+            <ol type="1">
+                <li>
+                    <p>Ontology Controller</p>
+                    <ul>
+                        <li>Manages interactions with the ontology.</li>
+                        <li>Provides endpoints for ontology descriptions and SPARQL queries.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p>Search Controller</p>
+                    <ul>
+                        <li>Facilitates natural language query interpretation for ontology interrogation.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p>User Controller</p>
+                    <ul>
+                        <li>Handles user authentication through one-time-use passwords.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p>Preferences Controller</p>
+                    <ul>
+                        <li>Offers endpoints for creating, reading, updating, and deleting user preferences.</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+        <section>
+            <h4>
+                Services
+            </h4>
+            <p>
+                Services implement the business logic and act as intermediaries between the controllers and
+                repositories:
+            </p>
+            <ol type="1">
+                <li>
+                    <p>Ontology Service</p>
+                    <p>The Ontology Service serves as a layer for interacting with the ontology data, enabling both
+                        granular and high-level operations. It provides the ability to describe specific inputs in terms
+                        of their relationships and properties within the ontology, as well as execute SPARQL queries to
+                        retrieve customized data. By delegating all ontology-related interactions to the
+                        OntologyRepository, the service ensures a clean separation of concerns and focuses on processing
+                        and formatting results for downstream use. This service is integral to systems that rely on
+                        semantic data for reasoning or querying.</p>
+                    <ol type="A">
+                        <li>
+                            <p>Input Description</p>
+                            <ul>
+                                <li>Takes user input and queries the ontology to retrieve a detailed description of the
+                                    input entity or concept.
+                                </li>
+                                <li>Returns a structured list of subject-predicate-object triples if the input exists in
+                                    the ontology, or None if no match is found.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Ontology Description</p>
+                            <ul>
+                                <li>Retrieves an overall description of the ontology structure or metadata.</li>
+                                <li>Acts as a way to understand the scope and entities present in the ontology.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Query Execution:</p>
+                            <ul>
+                                <li>Accepts a SPARQL query, executes it against the ontology, and retrieves results in
+                                    the desired format (default: JSON).
+                                </li>
+                                <li>Provides a mechanism for flexible, custom queries beyond predefined methods.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <p>Parsing Service</p>
+                    <p>The Parsing Service translates user queries written in natural language into machine-executable
+                        SPARQL queries. It acts as a bridge between user intent and the ontology system by parsing
+                        inputs, extracting meaningful entities, and dynamically generating queries. The results are
+                        fetched from the ontology repository and provided back in a structured format. This service
+                        enables users to interact with complex ontological data intuitively and efficiently.</p>
+                    <ol type="A">
+                        <li>
+                            <p>Input Handling</p>
+                            <ul>
+                                <li>The user provides a natural language query.</li>
+                                <li>The input is passed to the ParsingService.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Query Parsing</p>
+                            <ul>
+                                <li>The service uses the OntologyQueryService to identify relevant ontology classes
+                                    (e.g., "software," "license") and map keywords to ontology properties and
+                                    relationships (e.g., "depends on," "supports").
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Filter Extraction</p>
+                            <ul>
+                                <li>Filters are created by linking identified properties (e.g., "licensed under") to
+                                    specific entities in the ontology (e.g., a particular software license).
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>SPARQL Query Generation</p>
+                            <ul>
+                                <li>Based on the identified class and filters, a SPARQL query is dynamically built using
+                                    appropriate prefixes, SELECT statements, and WHERE clauses.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Execution and Results</p>
+                            <ul>
+                                <li>The SPARQL query is sent to the ontology repository for execution.</li>
+                                <li>The results are retrieved and returned as output.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <p>User Service</p>
+                    <p>The User Service is a core authentication and user management component that handles password
+                        generation, user verification, and token management. It integrates tightly with the user
+                        repository for data storage and retrieval and ensures secure and efficient user authentication
+                        through hashed OTPs and JWT tokens. Additionally, the service sends email notifications for OTPs
+                        and manages inactive users to keep the database clean.
+                        This service is vital for ensuring secure, user-friendly authentication workflows in the
+                        system.</p>
+                    <ol type="A">
+                        <li>
+                            <p>Password Management</p>
+                            <ul>
+                                <li>The service generates temporary one-time passwords (OTPs) for users to
+                                    authenticate.
+                                </li>
+                                <li>Passwords are hashed and stored securely in the repository.</li>
+                                <li>It enforces rate limits on OTP generation to prevent abuse. Only 3 otp can be active
+                                    at one time. After the first 1 is sent, there is a cooldown of 1 minute and after
+                                    the second a cooldown of 3 minutes
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Email Notification</p>
+                            <ul>
+                                <li>Sends OTPs to users via email using a predefined email template.</li>
+                                <li>Utilizes Flask-Mail for email delivery.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>User Authentication</p>
+                            <ul>
+                                <li>Verifies user-submitted OTPs by comparing them with stored hashed passwords.</li>
+                                <li>Marks OTPs as used once verified.</li>
+                                <li>Activates the user account upon successful OTP verification and generates a JWT
+                                    token for authentication.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Token Management</p>
+                            <ul>
+                                <li>Generates JWT tokens with payloads containing user information and expiration
+                                    times.
+                                </li>
+                                <li>Validates tokens for authenticity and expiration.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>User Cleanup</p>
+                            <ul>
+                                <li>Periodically deletes unactivated users from the repository to maintain database
+                                    hygiene.
+                                </li>
+                                <li>To achieve this we set up a cron job that runs every day at 12:01AM and deletes all
+                                    the unactivated users that created their account more than 7 days before the moment
+                                    of the run.
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <p>Preferences Service</p>
+                    <p>The Preferences Service provides an interface for managing user-specific preferences, ensuring
+                        personalized functionality within the system. It supports creating, retrieving, and deleting
+                        user preferences while maintaining data integrity and security. The service interacts with the
+                        user repository to handle all database operations efficiently. Its streamlined design allows
+                        users to easily manage their preferences while ensuring proper validation and ownership
+                        checks.</p>
+                    <ol type="A">
+                        <li>
+                            <p>Saving Preferences</p>
+                            <ul>
+                                <li>A user can save a specific preference by providing a key-value pair.</li>
+                                <li>The service creates a new UserPreference instance and stores it in the repository.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Deleting Preferences</p>
+                            <ul>
+                                <li>The service allows users to delete specific preferences by their ID.</li>
+                                <li>It validates the preference's existence and ownership before removing it from the
+                                    repository.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Fetching Preferences by Key</p>
+                            <ul>
+                                <li>Users can retrieve preferences filtered by a specific key.</li>
+                                <li>The service queries the repository for preferences matching the key and user ID.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Retrieving All Preferences</p>
+                            <ul>
+                                <li>The service supports fetching all preferences associated with a specific user.</li>
+                                <li>It returns a comprehensive list of preferences for the user.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </section>
+        <section>
+            <h4>Repositories</h4>
+            <p>Repositories abstract data access, enabling seamless interaction with external systems.</p>
+            <p>Each repository serves as the primary data store for a specific set of information. It
+                provides methods for querying and executing queries. By encapsulating all interactions within the
+                repository, the system achieves
+                a clean separation of concerns and ensures efficient data access. The repositories are designed to
+                handle complex queries and deliver structured results to the service layer.</p>
+            <ol type="1">
+                <li>
+                    <p>Ontology Repository</p>
+                    <p>Uses SPARQLWrapper to send SPARQL queries to the Ontology Query Engine.</p>
+                </li>
+                <li>
+                    <p>User Repository</p>
+                    <p>Implements SQLAlchemy to read and write user-related data to and from the PostgreSQL
+                        database.</p>
+                </li>
+                <li>
+                    <p>Preferences Repository</p>
+                    <p>Implements SQLAlchemy to read and write user's preferences-related data to and from the
+                        PostgreSQL database.</p>
+                </li>
+            </ol>
+
+        </section>
+        <section>
+            <h4>Security Filter</h4>
+            <p>The Authentication Decorator provides a reusable mechanism for securing Flask routes by enforcing
+                token-based authentication. It ensures that incoming requests contain a valid Authorization header with
+                a properly formatted Bearer token. The decorator uses the UserService to validate tokens, verify their
+                integrity, and extract user information. By injecting the authenticated user's ID into the request
+                context, it simplifies access control for protected resources. This approach promotes security and
+                reduces boilerplate code in the application.</p>
+        </section>
+        <section>
+            <h4>Design Considerations</h4>
+            <p>The backend architecture is designed to be modular, scalable, and maintainable. By following the
+                principles of separation of concerns and single responsibility, the system ensures that each component
+                focuses on a specific domain of functionality. This design approach enhances code readability,
+                maintainability, and testability, allowing for easier debugging and future enhancements.</p>
+            <p>Python was the ideal choice for the backend server due to its simplicity, readability, and extensive
+                ecosystem of libraries that support web development, authentication, and ontology querying. Its seamless
+                integration with frameworks like Flask allows for rapid API development while maintaining flexibility
+                and scalability. Python’s support for SQLAlchemy ensures efficient database management, and its
+                compatibility with SPARQLWrapper simplifies interaction with ontology-based data sources. Additionally,
+                Python's strong security libraries for cryptographic functions, such as bcrypt for password hashing and
+                PyJWT for token management, make it a robust choice for handling user authentication. Furthermore,
+                Python excels at text processing and parsing, making it particularly well-suited for the Parsing
+                Service, which involves transforming natural language queries into structured SPARQL queries. With
+                built-in string manipulation tools and powerful libraries like NLTK and spaCy, Python makes parsing
+                tasks significantly easier compared to more rigidly typed languages like Java or C++. Unlike lower-level
+                languages that may require extensive boilerplate code or higher learning curves, Python offers a balance
+                between developer productivity and performance, making it an optimal choice for building and maintaining
+                a secure, scalable, and maintainable backend system.</p>
+
+        </section>
     </section>
 
     <section>
