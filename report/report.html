@@ -41,7 +41,14 @@
     </p>
 </section>
 
-<section id="system-architecture">
+<section id="ontology-model" role="doc-chapter">
+    <h2>Ontology Model</h2>
+    <p>
+
+    </p>
+</section>
+
+<section id="system-architecture" role="doc-chapter">
     <h2>Architecture</h2>
 
 
@@ -433,16 +440,58 @@
             Database Architecture
         </h3>
 
+        <p>The class diagram illustrates the relationships between three main entities in the system: Users, User
+            Preferences, and One-Time Passwords (OTPs). These entities are interconnected through foreign key
+            relationships, with the Users table acting as the central entity.</p>
+
         <figure class="figure">
             <img src="./figures/database.drawio.png" alt="Description of the image">
             <figcaption>Figure 6: Class Diagram.</figcaption>
         </figure>
 
-        <p></p>
+        <h4>Design Considerations</h4>
+        <p>Using SQL with PostgreSQL instead of an RDF-based database for this system was a deliberate decision based on
+            the specific nature of the data and its operational requirements. The data model for user management,
+            preferences, and one-time passwords is highly structured and relational, with clearly defined entities and
+            relationships. SQL databases like PostgreSQL are optimized for such scenarios, providing robust support for
+            schema definition, constraints, and indexing, which are essential for ensuring the integrity and efficiency
+            of the data.</p>
+        <p>PostgreSQL offers advanced query optimization, transactional support, and performance tuning capabilities,
+            making it particularly well-suited for tasks like retrieving user preferences, validating one-time
+            passwords, and handling user authentication workflows. For instance, storing hashed passwords and tracking
+            OTPs demand strict control over data consistency, which PostgreSQL enforces through its ACID-compliant
+            transaction model. Additionally, the relational model naturally fits operations like linking user IDs to
+            their respective preferences or OTPs, ensuring data is efficiently stored and queried.</p>
+        <p>While RDF-based databases excel at managing semantic, graph-like data, they are less ideal for transactional
+            operations involving strict relationships and constraints. The core requirements of this system, such as
+            enforcing foreign key constraints and handling highly structured, tabular data, align more closely with the
+            strengths of a relational database. Furthermore, the need for precise, performant querying in authentication
+            workflows would not benefit from the complexity and overhead of an RDF model, which is more appropriate for
+            ontology-related tasks.</p>
+        <p>By choosing PostgreSQL, the system also benefits from a mature ecosystem of tools and libraries, including
+            seamless integration with Python frameworks like SQLAlchemy and Flask. This enhances development
+            productivity, maintainability, and scalability while providing the flexibility to evolve the schema as the
+            system grows. Separating the ontology data into an RDF store and operational data into PostgreSQL ensures
+            that each technology is used for its intended purpose, creating a robust and efficient architecture tailored
+            to the needs of the application.</p>
+    </section>
+
+    <section>
+        <h3>
+            Ontology Query Engine
+        </h3>
+        <p>
+            The Ontology Query Engine is a critical component of the system, responsible for managing and querying the
+            RDF-based knowledge model. It provides a SPARQL endpoint for executing queries against the ontology data,
+            enabling users to retrieve relevant information based on their requirements. The engine is built on Apache
+            Jena Fuseki, a robust and scalable triple store that supports efficient storage and retrieval of RDF data.
+            By leveraging Fuseki's capabilities, the system can handle complex SPARQL queries, ensuring accurate and
+            timely responses to user queries.
+        </p>
     </section>
 </section>
 
-<section id="use-cases">
+<section id="use-cases" role="doc-chapter">
     <h2>Use Cases</h2>
     <section>
         <h3>Use Case 1</h3>
@@ -459,12 +508,12 @@
     </figure>
 </section>
 
-<section id="user-guide">
+<section id="user-guide" role="doc-chapter">
     <h2>User Guide</h2>
     <p>User Guide</p>
 </section>
 
-<section id="video-demonstration">
+<section id="video-demonstration" role="doc-chapter">
     <h2>Video Demonstration</h2>
     <p>An embedded video</p>
     <video controls>
@@ -473,7 +522,7 @@
     </video>
 </section>
 
-<section id="references">
+<section id="references" role="doc-bibliography">
     <h2>References</h2>
     <ul>
         <li>Reference 1</li>
