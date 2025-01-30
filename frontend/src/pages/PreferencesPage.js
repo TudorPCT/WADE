@@ -26,9 +26,14 @@ const PreferencesPage = () => {
             .catch(error => console.error('Error deleting data:', error));
     };
 
+    const handleSearchRedirect = (value) => {
+        navigate(`/search?query=${encodeURIComponent(value)}`);
+    };
+
     const actionBodyTemplate = (rowData) => {
         return (
             <React.Fragment>
+                <Button label="Search" onClick={() => handleSearchRedirect(rowData.value)} className="p-button-primary" />
                 <Button label="Delete" onClick={() => handleDelete(rowData.id)} className="p-button-danger" />
             </React.Fragment>
         );
