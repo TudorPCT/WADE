@@ -12,6 +12,7 @@ from src.controllers.preferences_controller import PreferencesController
 from src.controllers.search_controller import SearchController
 from src.controllers.user_controller import UserController
 from src.repositories.ontology_repository import OntologyRepository
+from src.repositories.preferences_repository import PreferencesRepository
 from src.repositories.users_repository import UserManagementRepository
 from src.services.ontology_service import OntologyService
 from src.services.parsing_service import ParsingService
@@ -47,7 +48,7 @@ user_service = UserService(app, user_repository, os.getenv('SECRET'))
 parsing_controller = SearchController(app, ParsingService(ontology_repository), user_service)
 ontology_controller = OntologyController(app, OntologyService(ontology_repository))
 users_controller = UserController(app, user_service)
-preferences_controller = PreferencesController(app, PreferencesService(user_repository), user_service)
+preferences_controller = PreferencesController(app, PreferencesService(PreferencesRepository(Session)), user_service)
 
 scheduler = BackgroundScheduler()
 scheduler.add_job(user_service.delete_unactivated_users, CronTrigger(hour=0, minute=1))
