@@ -1,11 +1,11 @@
-from src.models.user import UserPreference
-from src.repositories.users_repository import UserManagementRepository
+from src.models.models import UserPreference
+from src.repositories.preferences_repository import PreferencesRepository
 
 
 class PreferencesService:
 
-    def __init__(self, user_repository: UserManagementRepository):
-        self.user_repository = user_repository
+    def __init__(self, preferences_repository: PreferencesRepository):
+        self.user_repository = preferences_repository
 
     def save_preference(self, user_id, key, value):
         user_preference = UserPreference(user_id=user_id, preference_key=key, preference_value=value)

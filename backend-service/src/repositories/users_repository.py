@@ -55,42 +55,6 @@ class UserManagementRepository:
 
         return active_otps
 
-    def get_user_preference_by_id(self, preference_id, user_id):
-        session = self.Session()
-        try:
-            preference = (
-                session.query(UserPreference)
-                .filter_by(id=preference_id, user_id=user_id)
-                .first()
-            )
-        finally:
-            session.close()
-        return preference
-
-    def get_user_preferences_by_key(self, key, user_id):
-        session = self.Session()
-        try:
-            preferences = (
-                session.query(UserPreference)
-                .filter_by(user_id=user_id, preference_key=key)
-                .all()
-            )
-        finally:
-            session.close()
-        return preferences
-
-    def get_all_user_preferences(self, user_id):
-        session = self.Session()
-        try:
-            preferences = (
-                session.query(UserPreference)
-                .filter_by(user_id=user_id)
-                .all()
-            )
-        finally:
-            session.close()
-        return preferences
-
     def get_unactivated_users(self):
         session = self.Session()
         try:
