@@ -1,6 +1,6 @@
 from datetime import datetime, UTC, timedelta
 
-from src.models.user import User, Base, OneTimePassword, func, UserPreference
+from src.models.models import User, Base, OneTimePassword, func, UserPreference
 
 
 class UserManagementRepository:
