@@ -3,99 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Technical report describing the implementation of APIs, RDF-based knowledge models, and usage of external data sources.">
+    <meta name="description"
+          content="Technical report describing the implementation of APIs, RDF-based knowledge models, and usage of external data sources.">
     <meta name="author" content="Tudor Pasat, Valentin Borfalau">
     <meta name="keywords" content="Scholarly HTML, APIs, RDF, Linked Data, Wikidata, DBpedia, SPARQL, Knowledge Models">
-    <title>Scholarly HTML Technical Report</title>
+    <title>Technical Report</title>
+    <link rel="stylesheet" href="./report.css">
 </head>
+
 <body>
-    <!-- Header -->
-    <header>
-        <h1>Scholarly HTML Technical Report</h1>
-        <p>Authors: Tudor Pasat, Valentin Borfalau</p>
-        <p>Date: January 22, 2025</p>
-    </header>
+<header>
+    <h1>Scholarly HTML Technical Report</h1>
+    <dl>
+        <dt>Authors</dt>
+        <dd>
+            Tudor Pasat
+            &amp;
+            Valentin Borfalau
+        </dd>
+        <dt>License</dt>
+        <dd>
+            <a href="https://opensource.org/license/mit">MIT</a>
+        </dd>
+    </dl>
+    <p>Date: January 22, 2025</p>
+</header>
 
-    <!-- Abstract -->
-    <section id="abstract">
-        <h2>Abstract</h2>
-        <p>Abstract</p>
-    </section>
-	
-	<!-- System Architecture -->
-	    <section id="system-architecture">
-	        <h2>System Architecture</h2>
-	        <p>This section provides an overview of the system architecture used in the Web application. The architecture follows a service-oriented approach and consists of the following components:</p>
-	        <ul>
-	            <li><strong>Frontend:</strong> Built using modern web technologies such as ReactJS, providing an interactive and responsive user interface.</li>
-	            <li><strong>Backend:</strong> A RESTful API implemented in Python (Flask/Django) or Node.js, handling application logic and communication with external systems.</li>
-	            <li><strong>Database:</strong> A relational database like PostgreSQL or a NoSQL database like MongoDB for storing structured and unstructured data.</li>
-	            <li><strong>External Data Integration:</strong> Incorporates APIs such as GitHub's GraphQL API and knowledge graphs like DBpedia and Wikidata.</li>
-	            <li><strong>Microservices Architecture:</strong> The application is divided into independent services (e.g., user management, data processing, API gateway) for scalability and maintainability.</li>
-	            <li><strong>Cloud Hosting:</strong> Deployed on platforms like AWS, Azure, or Heroku for robust and scalable infrastructure.</li>
-	        </ul>
-	        <p>The following diagram illustrates the high-level architecture of the system:</p>
-	        <img src="path-to-architecture-diagram.png" alt="System Architecture Diagram" style="width:100%;max-width:600px;">
-	    </section>
+<section typeof="sa:Abstract" id="abstract" role="doc-abstract">
+    <h2>Abstract</h2>
+    <p>Abstract</p>
+</section>
 
-    <!-- Internal Data Structures -->
-    <section id="internal-data-structures">
-        <h2>Internal Data Structures</h2>
-        <p>Internal Data Structures</p>
-    </section>
+<section id="introduction" role="doc-introduction">
+    <h2>Introduction</h2>
+    <p>
 
-    <!-- Implemented APIs -->
-    <section id="implemented-apis">
-        <h2>Implemented APIs</h2>
-        <p>Implemented APIs</p>
-    </section>
+    </p>
+</section>
 
-    <!-- RDF-based Knowledge Models -->
-    <section id="rdf-knowledge-models">
-        <h2>RDF-based Knowledge Models</h2>
-        <p>RDF-based Knowledge Models</p>
-    </section>
+<section id="system-architecture">
+    <h2>Architecture</h2>
 
-    <!-- External Data Sources -->
-    <section id="external-data-sources">
-        <h2>Use of External Data/Knowledge Sources</h2>
-        <p>Use of External Data/Knowledge Sources</p>
-    </section>
 
-    <!-- Case Studies -->
-    <section id="case-studies">
-        <h2>Case Studies</h2>
-        <p>Case Studies</p>
-    </section>
+    <section>
+        <h3>High-Level Architecture</h3>
+        <p>The following diagram illustrates the high-level architecture of the system:</p>
+        <figure class="figure">
+            <img src="./figures/wade_c4.drawio.png" alt="Description of the image">
+            <figcaption>Figure 2: Level 1 of the C4 diagram.</figcaption>
+        </figure>
 
-    <!-- User Guide -->
-    <section id="user-guide">
-        <h2>User Guide</h2>
-        <p>User Guide</p>
+        <p>
+            The diagram represents the system architecture of the CodeOwl platform, outlining its key components and
+            interactions. At the core of the system is the CodeOwl platform, depicted as a web-based application that
+            enables users to explore and query a rich knowledge base of software development ecosystems, including
+            programming languages, tools, frameworks, methodologies, and paradigms. Users access the platform securely
+            through HTTPS, ensuring safe communication between the client and the platform.
+        </p>
+
+        <p>
+            Additionally, the architecture integrates an external Email Notification System, which is responsible for
+            managing user notifications. The CodeOwl platform communicates with this system via the SMTP protocol,
+            facilitating the delivery of emails. This interaction highlights the modular nature of the system, allowing
+            CodeOwl to delegate email-related tasks to a
+            dedicated service.
+        </p>
+
     </section>
 
-    <!-- Video Demonstration -->
-    <section id="video-demonstration">
-        <h2>Video Demonstration</h2>
-        <p>An embedded video</p>
-        <video controls>
-            <source src="path-to-video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </section>
+    <section>
+        <h3>System Architecture</h3>
+        <figure class="figure">
+            <img src="./figures/wade_c4_2.drawio.png" alt="Description of the image">
+            <figcaption>Figure 3: Level 2 of the C4 diagram.</figcaption>
+        </figure>
 
-    <!-- References -->
-    <section id="references">
-        <h2>References</h2>
+        <p>This section provides an overview of the system architecture used in the Web application. The architecture
+            follows a service-oriented approach and consists of the following components:</p>
         <ul>
-            <li>Reference 1</li>
-            <li>Reference 2</li>
+            <li><strong>Frontend:</strong> Built using modern web technologies such as ReactJS, providing an interactive and
+                responsive user interface.
+            </li>
+            <li><strong>Backend:</strong> A RESTful API implemented in Python (Flask), handling
+                application logic and communication with external systems.
+            </li>
+            <li><strong>Database:</strong> A relational database (PostgreSQL) for
+                storing the user data.
+            </li>
+            <li><strong>Query Engine:</strong> Uses Apache Jena Fuseki for querying and managing RDF data, providing SPARQL
+                endpoints for efficient data retrieval and integration.
+            </li>
         </ul>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 Tudor Pasat and Valentin Borfalau. All rights reserved.</p>
-    </footer>
+    <section>
+        <h3>
+            Frontend Architecture
+        </h3>
+
+        <figure class="figure">
+            <img src="" alt="Description of the image">
+            <figcaption>Figure 4: Level 3 of the C4 diagram, the front end container.</figcaption>
+        </figure>
+
+        <p></p>
+
+    </section>
+
+    <section>
+        <h3>
+            Backend Architecture
+        </h3>
+
+        <figure class="figure">
+            <img src="./figures/wade_c3_3_backend.drawio.png" alt="Description of the image">
+            <figcaption>Figure 5: Level 3 of the C4 diagram, the back end container.</figcaption>
+        </figure>
+
+        <p></p>
+    </section>
+
+    <section>
+        <h3>
+            Database Architecture
+        </h3>
+
+        <figure class="figure">
+            <img src="./figures/database.drawio.png" alt="Description of the image">
+            <figcaption>Figure 6: Class Diagram.</figcaption>
+        </figure>
+
+        <p></p>
+    </section>
+</section>
+
+<section id="use-cases">
+    <h2>Use Cases</h2>
+    <section>
+        <h3>Use Case 1</h3>
+        <p>Use Case 1</p>
+    </section>
+    <section>
+        <h3>Use Case 2</h3>
+        <p>Use Case 2</p>
+    </section>
+
+    <figure class="figure">
+        <img src="./figures/use_case.drawio.png" alt="Description of the image">
+        <figcaption>Figure 7: Use Case Diagram.</figcaption>
+    </figure>
+</section>
+
+<section id="user-guide">
+    <h2>User Guide</h2>
+    <p>User Guide</p>
+</section>
+
+<section id="video-demonstration">
+    <h2>Video Demonstration</h2>
+    <p>An embedded video</p>
+    <video controls>
+        <source src="path-to-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</section>
+
+<section id="references">
+    <h2>References</h2>
+    <ul>
+        <li>Reference 1</li>
+        <li>Reference 2</li>
+    </ul>
+</section>
+
+<footer>
+    <p>© 2025 Tudor Pasat and Valentin Borfalau. All rights reserved.</p>
+</footer>
 </body>
 </html>
