@@ -18,7 +18,7 @@ class OntologyQueryService:
             "licensed under": "hassoftwarelicense",
             "depends on": "dependson",
             "supports": "supportslanguage",
-            "classess": "class",
+            "classes": "class",
             "subclass": "subclassof",
             "subclasses": "subclassof",
         }

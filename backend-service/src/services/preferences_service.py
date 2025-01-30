@@ -1,35 +1,5 @@
-import datetime
-import secrets
-import string
-
-import bcrypt
-import jwt
-
 from src.models.user import UserPreference
 from src.repositories.users_repository import UserManagementRepository
-
-
-def generate_password(length=10):
-    characters = string.ascii_letters + string.digits + string.punctuation
-    password = ''.join(secrets.choice(characters) for _ in range(length))
-    return password
-
-
-def hash_password(password: str) -> str:
-    salt = bcrypt.gensalt()
-    hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
-    return hashed.decode('utf-8')
-
-
-def verify_password(plaintext: str, hashed: str) -> bool:
-    return bcrypt.checkpw(plaintext.encode('utf-8'), hashed.encode('utf-8'))
-
-
-def generate_jwt(payload, secret, algorithm="HS256", expiration_minutes=600):
-    payload["exp"] = datetime.datetime.now(datetime.UTC) + datetime.timedelta(minutes=expiration_minutes)
-
-    token = jwt.encode(payload, secret, algorithm=algorithm)
-    return token
 
 
 class PreferencesService:
