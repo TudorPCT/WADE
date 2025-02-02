@@ -9,7 +9,10 @@ class OntologyQueryService:
 
         classes_map["class"] = "http://www.w3.org/2002/07/owl#Class"
         classes_map["classes"] = "http://www.w3.org/2002/07/owl#Class"
+        classes_map["namedindividual"] = "http://www.w3.org/2002/07/owl#NamedIndividual"
+        classes_map["namedindividuals"] = "http://www.w3.org/2002/07/owl#NamedIndividual"
         properties_map["subclassof"] = "http://www.w3.org/2000/01/rdf-schema#subClassOf"
+
 
         rdf_type_iri = next((classes_map[word] for word in words if word in classes_map), None)
 
