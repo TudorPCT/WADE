@@ -14,7 +14,7 @@ class PreferencesService:
     def delete_preference(self, preference_id, user_id):
         preference = self.preferences_repository.get_user_preference_by_id(preference_id, user_id)
         if preference:
-            self.user_repository.delete(preference)
+            self.preferences_repository.delete(preference)
 
     def get_preferences_by_key(self, key, user_id):
         return self.preferences_repository.get_user_preferences_by_key(key, user_id)
