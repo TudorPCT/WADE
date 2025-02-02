@@ -52,19 +52,25 @@
         <p>The foundation of the ontology is built around a few central classes:</p>
         <ul>
             <li>
-                <strong>SoftwareArtifact</strong>: The root class representing any software-related artifact or entity. It provides the base for more specialized classes.
+                <strong>SoftwareArtifact</strong>: The root class representing any software-related artifact or entity.
+                It provides the base for more specialized classes.
             </li>
             <li>
-                <strong>Project</strong>: A subclass of <code>SoftwareArtifact</code> and aligned with <code>doap:Project</code>. It represents a software project or product.
+                <strong>Project</strong>: A subclass of <code>SoftwareArtifact</code> and aligned with <code>doap:Project</code>.
+                It represents a software project or product.
             </li>
             <li>
-                <strong>Repository</strong>: Also a subclass of <code>SoftwareArtifact</code>, this class aligns with <code>doap:Repository</code> and represents code repositories.
+                <strong>Repository</strong>: Also a subclass of <code>SoftwareArtifact</code>, this class aligns with
+                <code>doap:Repository</code> and represents code repositories.
             </li>
             <li>
-                <strong>GitHubRepository</strong>: A specialized form of <code>Repository</code> that refines the repository concept for GitHub-based projects. It is also aligned with Git-specific aspects defined in DOAP.
+                <strong>GitHubRepository</strong>: A specialized form of <code>Repository</code> that refines the
+                repository concept for GitHub-based projects. It is also aligned with Git-specific aspects defined in
+                DOAP.
             </li>
             <li>
-                <strong>ProgrammingLanguage</strong>: Extends <code>SoftwareArtifact</code> and <code>doap:ProgrammingLanguage</code>, representing programming languages used within the software ecosystem.
+                <strong>ProgrammingLanguage</strong>: Extends <code>SoftwareArtifact</code> and <code>doap:ProgrammingLanguage</code>,
+                representing programming languages used within the software ecosystem.
             </li>
         </ul>
     </section>
@@ -74,7 +80,8 @@
         <p>This part of the ontology classifies programming paradigms that software tools and languages might adopt:</p>
         <ul>
             <li>
-                <strong>Paradigm</strong>: The general class for programming paradigms (e.g., object-oriented, functional, procedural).
+                <strong>Paradigm</strong>: The general class for programming paradigms (e.g., object-oriented,
+                functional, procedural).
             </li>
             <li>
                 <strong>ObjectOrientedParadigm</strong>: A subclass representing the object-oriented paradigm.
@@ -102,7 +109,9 @@
             <li>
                 <strong>MonolithicArchitecture</strong>: A subclass that describes monolithic systems.
                 <ul>
-                    <li><strong>LayeredMonolith</strong>: A further specialization that captures layered designs within monolithic architectures.</li>
+                    <li><strong>LayeredMonolith</strong>: A further specialization that captures layered designs within
+                        monolithic architectures.
+                    </li>
                 </ul>
             </li>
             <li>
@@ -112,7 +121,8 @@
                 <strong>EventDrivenArchitecture</strong>: Captures systems designed around events.
             </li>
             <li>
-                <strong>EventDrivenMicroservices</strong>: A hybrid approach combining microservices and event-driven patterns.
+                <strong>EventDrivenMicroservices</strong>: A hybrid approach combining microservices and event-driven
+                patterns.
             </li>
         </ul>
     </section>
@@ -135,30 +145,35 @@
                 <strong>WaterfallMethodology</strong>: Represents the traditional, sequential development process.
             </li>
             <li>
-                <strong>DevOpsMethodology</strong>: Integrates development and operations for continuous integration and delivery.
+                <strong>DevOpsMethodology</strong>: Integrates development and operations for continuous integration and
+                delivery.
             </li>
         </ul>
     </section>
 
     <section id="licenses">
         <h3>Software Licenses</h3>
-        <p>The model includes a class for formal software licenses, ensuring that legal aspects of software distribution are modeled:</p>
+        <p>The model includes a class for formal software licenses, ensuring that legal aspects of software distribution
+            are modeled:</p>
         <ul>
             <li>
-                <strong>SoftwareLicense</strong>: A class capturing license-related details for software artifacts. It is designed to align with DOAP’s licensing properties.
+                <strong>SoftwareLicense</strong>: A class capturing license-related details for software artifacts. It
+                is designed to align with DOAP’s licensing properties.
             </li>
         </ul>
     </section>
 
     <section id="tool-ecosystem">
         <h3>Software Tool Ecosystem</h3>
-        <p>This section models the ecosystem of tools used in software development, arranged in a detailed hierarchy:</p>
+        <p>This section models the ecosystem of tools used in software development, arranged in a detailed
+            hierarchy:</p>
         <ul>
             <li>
                 <strong>SoftwareTool</strong>: The overarching class for any tool used in software development.
             </li>
             <li>
-                <strong>RuntimePlatform</strong>: Tools that provide runtime environments (e.g., interpreters, virtual machines).
+                <strong>RuntimePlatform</strong>: Tools that provide runtime environments (e.g., interpreters, virtual
+                machines).
             </li>
             <li>
                 <strong>OperatingSystem</strong>: Captures operating systems relevant to software deployment.
@@ -182,10 +197,12 @@
                 <strong>ApplicationServer</strong>: Servers that host enterprise applications.
             </li>
             <li>
-                <strong>Framework</strong>: High-level structures that support application development (e.g., web frameworks).
+                <strong>Framework</strong>: High-level structures that support application development (e.g., web
+                frameworks).
             </li>
             <li>
-                <strong>SDK</strong>: Software Development Kits that provide tools and libraries for building applications.
+                <strong>SDK</strong>: Software Development Kits that provide tools and libraries for building
+                applications.
             </li>
             <li>
                 <strong>Library</strong>: Reusable code components and packages.
@@ -194,20 +211,24 @@
                 <strong>Component</strong>: Smaller, reusable software parts that are integrated into larger systems.
             </li>
             <li>
-                <strong>IDE</strong>: Integrated Development Environments, including both desktop and cloud-based platforms.
+                <strong>IDE</strong>: Integrated Development Environments, including both desktop and cloud-based
+                platforms.
             </li>
             <li>
-                <strong>CloudDevelopmentPlatform</strong>: Specialized IDEs or development environments provided as cloud services.
+                <strong>CloudDevelopmentPlatform</strong>: Specialized IDEs or development environments provided as
+                cloud services.
             </li>
         </ul>
     </section>
 
     <section id="object-properties">
         <h3>Object Properties</h3>
-        <p>Object properties in the ontology establish semantic relationships between different classes. Key properties include:</p>
+        <p>Object properties in the ontology establish semantic relationships between different classes. Key properties
+            include:</p>
         <ul>
             <li>
-                <strong>adoptsParadigm</strong>: Connects a software tool (or language) to the programming paradigm it implements.
+                <strong>adoptsParadigm</strong>: Connects a software tool (or language) to the programming paradigm it
+                implements.
             </li>
             <li>
                 <strong>supportsLanguage</strong>: Associates a software tool with the programming language it targets.
@@ -216,7 +237,8 @@
                 <strong>dependsOn</strong>: Models dependency relationships between tools, libraries, or components.
             </li>
             <li>
-                <strong>isCompatibleWith</strong>: Links software tools to architectural styles with which they are compatible.
+                <strong>isCompatibleWith</strong>: Links software tools to architectural styles with which they are
+                compatible.
             </li>
             <li>
                 <strong>followsMethodology</strong>: Connects a project to the development methodology it adheres to.
@@ -235,19 +257,22 @@
 
     <section id="data-properties">
         <h3>Data Properties</h3>
-        <p>Data properties capture literal values and attributes of classes, providing additional descriptive metadata. They include:</p>
+        <p>Data properties capture literal values and attributes of classes, providing additional descriptive metadata.
+            They include:</p>
         <ul>
             <li>
                 <strong>hasVersion</strong>: A string indicating the version of a software tool or artifact.
             </li>
             <li>
-                <strong>hasStars</strong>: A non-negative integer representing metrics such as GitHub stars for a repository.
+                <strong>hasStars</strong>: A non-negative integer representing metrics such as GitHub stars for a
+                repository.
             </li>
             <li>
                 <strong>repoUrl</strong>: A URI pointing to the canonical location of a repository.
             </li>
             <li>
-                <strong>dct:created</strong>: A date value (using the Dublin Core Terms vocabulary) indicating when a project was created.
+                <strong>dct:created</strong>: A date value (using the Dublin Core Terms vocabulary) indicating when a
+                project was created.
             </li>
         </ul>
     </section>
@@ -255,7 +280,47 @@
     <section id="alignment">
         <h3>Alignment with External Vocabularies</h3>
         <p>
-            The model is designed to integrate seamlessly with established metadata standards. The <code>Project</code> class is declared equivalent to <code>doap:Project</code>, and the <code>hasSoftwareLicense</code> property aligns with <code>doap:license</code>. This alignment promotes interoperability and facilitates data integration with other systems using DOAP and Dublin Core.
+            The model is designed to integrate seamlessly with established metadata standards. The <code>Project</code>
+            class is declared equivalent to <code>doap:Project</code>, and the <code>hasSoftwareLicense</code> property
+            aligns with <code>doap:license</code>. This alignment promotes interoperability and facilitates data
+            integration with other systems using DOAP and Dublin Core.
+        </p>
+    </section>
+
+    <section id="github-integration">
+        <h3>Integration with the GitHub API</h3>
+        <p>
+            An important aspect of the model is its practical grounding in real-world data. The ontology was designed
+            with the GitHub API for repositories in mind, providing a reference framework for populating the ontology
+            with live data. Key points include:
+        </p>
+        <ul>
+            <li>
+                <strong>Data Population:</strong> The GitHub API delivers rich metadata about repositories—such as
+                repository URLs, star counts, and programming languages—that can be directly mapped to the ontology’s
+                <code>Repository</code> and <code>GitHubRepository</code> classes. This enables automatic population of
+                properties like <code>repoUrl</code>, <code>hasStars</code>, and more.
+            </li>
+            <li>
+                <strong>Semantic Enrichment:</strong> By aligning repository metadata with the ontology’s structure,
+                developers can enrich data from GitHub with additional semantic layers. For instance, repository data
+                can be linked to associated projects (<code>hostedOnRepository</code>), development methodologies
+                (<code>followsMethodology</code>), and even to software licenses (<code>hasSoftwareLicense</code>).
+            </li>
+            <li>
+                <strong>GraphQL and REST Integration:</strong> The GitHub API, available via both REST and GraphQL
+                endpoints, provides flexible query options. This flexibility facilitates integration, allowing the
+                ontology to be updated in near-real time as repository data changes.
+            </li>
+            <li>
+                <strong>Interoperability and Analytics:</strong> With data sourced from GitHub, the ontology supports
+                advanced querying and analytics over the software ecosystem. This is particularly useful for studies on
+                repository popularity, language usage, and trends in software development practices.
+            </li>
+        </ul>
+        <p>
+            In summary, leveraging the GitHub API as a reference not only grounds the ontology in practical, real-world
+            data but also supports dynamic population and continuous updates of repository-related information.
         </p>
     </section>
 </section>
@@ -707,20 +772,70 @@
 </section>
 
 <section id="use-cases" role="doc-chapter">
-    <h2>Use Cases</h2>
-    <section>
-        <h3>Use Case 1</h3>
-        <p>Use Case 1</p>
-    </section>
-    <section>
-        <h3>Use Case 2</h3>
-        <p>Use Case 2</p>
-    </section>
+    <h2>Case Studies</h2>
 
     <figure class="figure">
         <img src="./figures/use_case.drawio.png" alt="Description of the image">
         <figcaption>Figure 7: Use Case Diagram.</figcaption>
     </figure>
+
+    <p>
+        The following case studies illustrate real-world applications of the CodeOwl system. These scenarios demonstrate how the system can be used to enhance productivity, streamline workflows, and support research and development efforts in software engineering.
+    </p>
+
+    <section>
+        <h3>Researcher Querying Software Trends</h3>
+        <p>
+            <strong>Background:</strong> A university researcher is studying the adoption of microservices architectures across open-source projects. They need detailed information on repositories, programming languages, and development methodologies associated with this architectural style.
+        </p>
+        <p>
+            <strong>Approach:</strong>
+        </p>
+        <ul>
+            <li>The researcher logs into CodeOwl and submits a query to identify repositories tagged with "MicroservicesArchitecture."</li>
+            <li>The system processes the query using the ontology and returns a list of relevant projects, including details such as programming languages, GitHub star counts, and associated methodologies.</li>
+            <li>The researcher saves the search for future reference and exports the results as a CSV file for further analysis.</li>
+        </ul>
+        <p>
+            <strong>Outcome:</strong> The researcher identifies key projects adopting microservices, uncovers trends in their usage, and uses the findings to publish a paper on architectural adoption in open-source ecosystems.
+        </p>
+    </section>
+    <section>
+        <h3>Enterprise Developer Managing Dependencies</h3>
+        <p>
+            <strong>Background:</strong> A developer at a mid-sized software company is tasked with upgrading dependencies for a project using the Spring Framework. They need to understand the dependencies' compatibility with the latest version of Spring.
+        </p>
+        <p>
+            <strong>Approach:</strong>
+        </p>
+        <ul>
+            <li>The developer queries the ontology for tools and libraries compatible with "Spring Framework" version 5.3.20.</li>
+            <li>The system processes the query and provides a list of compatible tools, including Hibernate ORM and Maven.</li>
+            <li>The developer uses the "Save Search" feature to store this query and access it during future updates.</li>
+        </ul>
+        <p>
+            <strong>Outcome:</strong> The developer successfully upgrades the project dependencies, ensuring compatibility and minimizing disruption to the software's functionality.
+        </p>
+    </section>
+
+    <section>
+        <h3>Data Analyst Monitoring Repository Metrics</h3>
+        <p>
+            <strong>Background:</strong> A data analyst is monitoring the popularity of repositories related to specific programming languages to generate a report for their company's strategy team.
+        </p>
+        <p>
+            <strong>Approach:</strong>
+        </p>
+        <ul>
+            <li>The analyst queries the ontology for repositories associated with "Python" and retrieves metadata such as star counts and creation dates.</li>
+            <li>The system processes the query and returns a ranked list of repositories, including links to their GitHub pages.</li>
+            <li>The analyst uses the "Save Search" feature to track the same query over time, observing trends in popularity.</li>
+        </ul>
+        <p>
+            <strong>Outcome:</strong> The analyst provides actionable insights on Python repository trends, aiding the company's strategic decisions regarding developer outreach and tool support.
+        </p>
+    </section>
+
 </section>
 
 <section id="user-guide" role="doc-chapter">
