@@ -15,6 +15,8 @@ import PreferencesPage from './pages/PreferencesPage';
 import SoftwareOntologyPage from './pages/SoftwareOntologyPage';
 
 const App = () => {
+    const [heroUrl] = useState("/home.png");
+    const [heroAlt] = useState("Home");
     const [loading, setLoading] = useState(true);
     const auth = useAuth();
     const styleSpinner = {
@@ -65,7 +67,7 @@ const App = () => {
                 <div style={{flexGrow: "100"}}>
                     <Header/>
                     <Routes>
-                        <Route path="/" element={<h1>Welcome to the App</h1>}/>
+                        <Route path="/" element={<img src={heroUrl} alt={heroAlt}/>}/>
                         <Route path="/search" element={<SearchPage/>}/>
                         <Route path="/saved" element={<PreferencesPage/>}/>
                         <Route path="/software-ontology" element={<SoftwareOntologyPage />} />
