@@ -377,17 +377,71 @@
     </section>
 
     <section>
-        <h3>
-            Frontend Architecture
-        </h3>
-
+        <h3>Frontend Architecture</h3>
+    
         <figure class="figure">
-            <img src="" alt="Description of the image">
-            <figcaption>Figure 4: Level 3 of the C4 diagram, the front end container.</figcaption>
+            <img src="./figures/frontend-diagram1.svg" alt="High-Level System Overview">
+            <figcaption>Figure 4: High-Level System Overview</figcaption>
         </figure>
-
-        <p></p>
-
+        <p>The context diagram provides a high-level view of the system and its interactions with external users and services. It defines the main actors and how they interact with the software components.</p>
+        <ul>
+            <li>The <strong>User</strong> interacts with the <strong>Frontend Application</strong>.</li>
+            <li>The <strong>Frontend Application</strong> communicates with the <strong>Backend API Service</strong>.</li>
+            <li>The <strong>Backend API Service</strong> processes requests and responds accordingly.</li>
+        </ul>
+    
+        <figure class="figure">
+            <img src="./figures/frontend-diagram2.svg" alt="System Containers and Communication">
+            <figcaption>Figure 5: System Containers and Communication</figcaption>
+        </figure>
+        <p>This diagram breaks down the system into logical components or "containers" that handle specific responsibilities.</p>
+        <ul>
+            <li>The <strong>User</strong> interacts with a <strong>React Single Page Application (SPA)</strong>.</li>
+            <li>The SPA consists of key components:
+                <ul>
+                    <li><strong>React Router</strong> for navigation between different views.</li>
+                    <li><strong>Authentication Context</strong> for user authentication and session management.</li>
+                    <li><strong>Axios HTTP Client</strong> for handling API requests.</li>
+                </ul>
+            </li>
+            <li>The <strong>Backend API Service</strong> handles incoming requests and provides data to the frontend.</li>
+        </ul>
+    
+        <figure class="figure">
+            <img src="./figures/frontend-diagram3.svg" alt="Frontend Component Structure">
+            <figcaption>Figure 6: Frontend Component Structure</figcaption>
+        </figure>
+        <p>This diagram focuses on the frontend application, detailing the relationships between its key components.</p>
+        <ul>
+            <li>The <strong>SearchPage, SoftwareOntologyPage, and PreferencesPage</strong> represent different UI views.</li>
+            <li>Each page uses the <strong>PrimeReact DataTable</strong> to display structured data.</li>
+            <li>The <strong>AuthProvider</strong> manages user authentication and authorization.</li>
+            <li>The <strong>Router Components</strong> handle navigation between different sections of the application.</li>
+        </ul>
+    
+        <figure class="figure">
+            <img src="./figures/frontend-diagram4.svg" alt="Search Page Code Structure">
+            <figcaption>Figure 7: Search Page Code Structure</figcaption>
+        </figure>
+        <p>This diagram provides a deeper look into the <code>SearchPage</code> component and its internal logic.</p>
+        <ul>
+            <li>The <strong>SearchPage</strong> component:
+                <ul>
+                    <li>Utilizes <strong>useState Hooks</strong> to manage component state.</li>
+                    <li>Implements <strong>useEffect Hooks</strong> to handle side effects like data fetching.</li>
+                    <li>Uses <strong>useNavigate and useLocation Hooks</strong> to manage page transitions.</li>
+                    <li>Contains methods such as:
+                        <ul>
+                            <li><strong>fetchResults</strong>: Fetches data from the backend API.</li>
+                            <li><strong>handleInputChange</strong>: Updates state based on user input.</li>
+                            <li><strong>handleSubmit</strong>: Handles form submission and triggers API calls.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    
+        <p>This document outlines the system architecture for the Software Ontology project at multiple levels of abstraction. Starting from a high-level overview, it progressively dives deeper into specific system components and their interconnections. Each diagram offers insight into different architectural aspects, ensuring clarity and maintainability in the software development process.</p>
     </section>
 
     <section>
@@ -955,6 +1009,11 @@
         </p>
     </section>
 
+</section>
+
+<section id="user-guide" role="doc-chapter">
+    <h2>User Guide</h2>
+    <p>For detailed instructions on using the CodeOwl platform, please refer to the <a href="user-guide.html" target="_blank">User Guide</a>.</p>
 </section>
 
 <section id="video-demonstration" role="doc-chapter">
