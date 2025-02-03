@@ -858,10 +858,56 @@
 </section>
 <section>
     <h2>Implementation Details</h2>
+    <section>
+        <h3>SparQL Query</h3>
+        <p>
+            SPARQL queries are at the core of the ontology query application, enabling users to retrieve specific
+            information from the ontology data. The queries are designed to be flexible, allowing users to search for
+            entities based on various criteria, such as class, property, or relationship. The implementation details of
+            SPARQL queries are as follows:
+        </p>
+        <p><strong>Example query:</strong></p>
+                <p>"Show all frameworks for java that don't hasSoftwareLicense Apache2License"</p>
+                <p>This query retrieves all frameworks related to Java that do not have the Apache2 license. It filters
+                    entities based on specific criteria, such as programming language and software license. The query
+                    execution involves pattern matching and filtering to identify relevant entities. The results are
+                    presented in a structured format, providing users with detailed information about the queried
+                    entities.</p>
+                <p><strong>SPARQL Query:</strong></p>
+<pre><code>
+    PREFIX : &lt;https://wade-8e36773161ad.herokuapp.com/software-ontology#&gt
+    PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt
+
+    SELECT DISTINCT ?indiv ?label
+    WHERE {
+        ?indiv a :Framework .
+        ?indiv :supportsLanguage :Java .
+    FILTER NOT EXISTS { ?indiv :hasSoftwareLicense :Apache2License } .
+    OPTIONAL { ?indiv rdfs:label ?label . }
+    }
+</code></pre>
+
+        <strong>Explanation:</strong>
+        <ul>
+            <li>The query uses the PREFIX directive to define the ontology namespace and the rdfs namespace for RDF
+                schema.</li>
+            <li>The SELECT clause retrieves distinct individuals (?indiv) and their labels (?label).</li>
+            <li>The WHERE clause specifies the conditions for the query:
+                <ul>
+                    <li>?indiv must be of type :Framework.</li>
+                    <li>?indiv must support the programming language :Java.</li>
+                    <li>There should not exist a relationship between ?indiv and the software license :Apache2License.</li>
+                </ul>
+            </li>
+            <li>The OPTIONAL clause retrieves the label of the individual if available.</li>
+        </ul>
+    </section>
+
+    <h3>UI Implementation</h3>
     <p>CodeOwl is structured in a modular and scalable manner, with each component designed to handle specific tasks
         efficiently. The implementation details of the frontend are as follows.</p>
     <section>
-        <h3>Search Page</h3>
+        <h4>Search Page</h4>
         <p>The search page is the main interface for users to interact with the system. It allows users to input natural
             language queries, which are then parsed and converted into SPARQL queries for execution against the ontology
             data.</p>
@@ -875,7 +921,7 @@
             explore related concepts and properties, by redirecting them to the ontology browser.</p>
     </section>
     <section>
-        <h3>Ontology Browser</h3>
+        <h4>Ontology Browser</h4>
         <p>The ontology browser allows users to explore the ontology's structure and relationships. It provides an
             interface
             for navigating through classes, properties, and instances, enabling users to understand the ontology's
@@ -890,7 +936,7 @@
             discovery and exploration.</p>
     </section>
     <section>
-        <h3>Authentication Workflow</h3>
+        <h4>Authentication Workflow</h4>
         <p>The authentication workflow ensures secure access to the system and user data. It involves generating
             one-time passwords (OTPs) for user verification and issuing JSON Web Tokens (JWTs) for authenticated
             sessions.</p>
@@ -913,7 +959,7 @@
     </section>
 
     <section>
-        <h3>Preferences Management</h3>
+        <h4>Preferences Management</h4>
         <p>The preferences management feature allows users to customize their experience within the system. Users can
             save
             preferences related to search queries, display settings, and other application-specific configurations.</p>
@@ -926,7 +972,7 @@
     </section>
 
     <section>
-        <h3>Deploy</h3>
+        <h4>Deploy</h4>
         <p>
             To deploy the ontology query application, we utilized Heroku for both the frontend and backend, while the
             ontology query engine was deployed on an AWS EC2 instance. This deployment strategy was chosen for its
