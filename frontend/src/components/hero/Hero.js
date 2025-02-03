@@ -20,7 +20,7 @@ const Hero = ({ headline, introduction, heroImage }) => {
             <img 
               src={heroImage} 
               alt="hero" 
-              style={{ width: '10%', height: 'auto' }}
+              style={{ width: '100%', height: 'auto' }}
             />
           </div>
         </div>
