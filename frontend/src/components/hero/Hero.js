@@ -14,13 +14,13 @@ const Hero = ({ headline, introduction, heroImage }) => {
             <h3 className="hero__text">{introduction}</h3>
           </div>
         </div>
-        <div className="col-md-6">
-          <div className="hero__image">
+        <div className="col-md-6" style="height: 120%">
+          <div className="hero__image" style="width: auto; height: 100%;">
             {/* inline style for width/height in React */}
             <img 
               src={heroImage} 
               alt="hero" 
-              style={{ width: '100%', height: 'auto' }}
+              style={{ width: 'auto', height: '100%' }}
             />
           </div>
         </div>
