@@ -764,6 +764,75 @@
             timely responses to user queries.
         </p>
     </section>
+</section>
+<section>
+    <h2>Implementation Details</h2>
+    <p>CodeOwl is structured in a modular and scalable manner, with each component designed to handle specific tasks
+        efficiently. The implementation details of the frontend are as follows.</p>
+    <section>
+        <h3>Search Page</h3>
+        <p>The search page is the main interface for users to interact with the system. It allows users to input natural
+            language queries, which are then parsed and converted into SPARQL queries for execution against the ontology
+            data.</p>
+        <figure class="figure">
+            <img src="./figures/search.png" alt="Description of the image">
+            <figcaption>Figure 7: Search Page.</figcaption>
+        </figure>
+        <p>The results are displayed in a structured format, providing users with detailed information about the queried
+            entities. Users can save their searches for future reference.</p>
+        <p>Each entity in the search results is linked to its detailed description in the ontology, enabling users to
+            explore related concepts and properties, by redirecting them to the ontology browser.</p>
+    </section>
+    <section>
+        <h3>Ontology Browser</h3>
+        <p>The ontology browser allows users to explore the ontology's structure and relationships. It provides an
+            interface
+            for navigating through classes, properties, and instances, enabling users to understand the ontology's
+            semantics
+            and hierarchy.</p>
+        <figure class="figure">
+            <img src="./figures/browser.png" alt="Description of the image">
+            <figcaption>Figure 8: Ontology Browser Page.</figcaption>
+        </figure>
+        <p>Users can view detailed descriptions of ontology entities, including their properties, relationships, and
+            metadata. The browser offers a user-friendly way to interact with the ontology data, facilitating knowledge
+            discovery and exploration.</p>
+    </section>
+    <section>
+        <h3>Authentication Workflow</h3>
+        <p>The authentication workflow ensures secure access to the system and user data. It involves generating
+            one-time passwords (OTPs) for user verification and issuing JSON Web Tokens (JWTs) for authenticated
+            sessions.</p>
+        <figure class="figure">
+            <img src="./figures/login_email.png" alt="Description of the image">
+            <figcaption>Figure 9: Login Email Input.</figcaption>
+        </figure>
+        <p>When a user logs in, the system generates a unique OTP and sends it to the user's email address for
+            verification. The user enters the OTP to authenticate their identity and gain access to the system. The OTP
+            is active only for 10 minutes, and you can't generate more than 3 in a 5-minute period to avoid
+            spamming.</p>
+        <figure class="figure">
+            <img src="./figures/login_otp.png" alt="Description of the image">
+            <figcaption>Figure 10: Login OTP Input.</figcaption>
+        </figure>
+        <p>Upon successful verification, the system issues a JWT token that the user can use to access protected
+            resources
+            within the application. The token contains user information and an expiration time, ensuring secure and
+            authenticated interactions.</p>
+    </section>
+
+    <section>
+        <h3>Preferences Management</h3>
+        <p>The preferences management feature allows users to customize their experience within the system. Users can
+            save
+            preferences related to search queries, display settings, and other application-specific configurations.</p>
+        <figure class="figure">
+            <img src="./figures/preferences.png" alt="Description of the image">
+            <figcaption>Figure 11: Search Page.</figcaption>
+        </figure>
+        <p>Users can create and delete preferences based on their requirements. The system stores these
+            preferences securely and associates them with the user's account for personalized interactions.</p>
+    </section>
 
     <section>
         <h3>Deploy</h3>
@@ -772,7 +841,7 @@
             ontology query engine was deployed on an AWS EC2 instance. This deployment strategy was chosen for its
             cost-effectiveness and simplicity, making it an ideal choice for a student-led project with limited
             resources.
-        <p/>
+        </p>
         <p>
             Heroku offers a free tier for application hosting, which was a significant factor in our decision as it
             allows us to deploy both the frontend and backend with minimal cost. Heroku also provides an intuitive
