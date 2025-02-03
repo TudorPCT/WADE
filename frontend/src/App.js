@@ -13,6 +13,7 @@ import Background from './assets/v796-nunny-02.jpg';
 import SearchPage from './pages/SearchPage';
 import PreferencesPage from './pages/PreferencesPage';
 import SoftwareOntologyPage from './pages/SoftwareOntologyPage';
+import Hero from './components/hero/Hero';
 
 const App = () => {
     const [heroUrl] = useState("/home.png");
@@ -67,7 +68,7 @@ const App = () => {
                 <div style={{flexGrow: "100"}}>
                     <Header/>
                     <Routes>
-                        <Route path="/" element={<img src={heroUrl} alt={heroAlt}/>}/>
+                        <Route path="/" element={<Hero/>}/>
                         <Route path="/search" element={<SearchPage/>}/>
                         <Route path="/saved" element={<PreferencesPage/>}/>
                         <Route path="/software-ontology" element={<SoftwareOntologyPage />} />
