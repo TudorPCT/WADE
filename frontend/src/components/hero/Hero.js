@@ -3,7 +3,7 @@ import './Hero.css';
 
 const Hero = ({ headline, introduction, heroImage }) => {
     headline = "Welcome to CodeOwl";
-    introduction = "Easily query and explore software-related ontologies.";
+    introduction = "CodeOwl is a semantic knowledge platform that unifies software development data—architectures, methodologies, and real-time GitHub insights—into a coherent RDF-based model. Effortlessly explore relationships between projects, technologies, and licenses, and discover hidden patterns to power informed decision-making in your software ecosystem. Enjoy intuitive natural language queries, a user-friendly interface, and rich, interconnected insights—all in one place.";
     heroImage = "/home.png";
   return (
     <div className="container-fluid">
@@ -14,13 +14,13 @@ const Hero = ({ headline, introduction, heroImage }) => {
             <h3 className="hero__text">{introduction}</h3>
           </div>
         </div>
-        <div className="col-md-6">
-          <div className="hero__image">
+        <div className="col-md-6" style={{'height': '120%'}}>
+          <div className="hero__image" style={{'width': 'auto', 'height': '100%'}}>
             {/* inline style for width/height in React */}
             <img 
               src={heroImage} 
               alt="hero" 
-              style={{ width: '100%', height: 'auto' }}
+              style={{ width: 'auto', height: '100%' }}
             />
           </div>
         </div>
