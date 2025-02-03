@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {AuthProvider} from "./core/AuthProvider";
 import {setupAuthInterceptors} from "./core/interceptors/auth";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
