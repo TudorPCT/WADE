@@ -31,13 +31,41 @@
 
 <section typeof="sa:Abstract" id="abstract" role="doc-abstract">
     <h2>Abstract</h2>
-    <p>Abstract</p>
+    <p>This technical report presents an integrated platform—referred to as CodeOwl—that utilizes a structured knowledge
+        model and cutting-edge semantic technologies to enhance software development workflows. By leveraging an
+        RDF-based ontology and aligning it with established vocabularies such as DOAP (Description of a Project) and
+        Dublin Core, CodeOwl provides a robust framework for representing key software artifacts, development
+        methodologies, architectural paradigms, and licensing information. The ontology is populated dynamically through
+        integrations with external data sources like the GitHub API, ensuring accurate and up-to-date information on
+        repositories, programming languages, and project metadata. A web-based frontend allows users to explore, query,
+        and manage semantic data, while the underlying backend architecture orchestrates authentication, ontology
+        queries, and user preferences. Through real-world case studies and a modular system design—featuring
+        microservices, a relational database for user data, and Apache Jena Fuseki for ontology management—CodeOwl
+        illustrates how semantic web principles can inform advanced analytics, knowledge-driven decision-making, and
+        automated reasoning within software ecosystems.</p>
 </section>
 
 <section id="introduction" role="doc-introduction">
     <h2>Introduction</h2>
     <p>
+        Software engineering has grown increasingly complex, with modern projects spanning a myriad of programming
+        languages, frameworks, architectural styles, and development methodologies. The emergence of semantic web
+        standards offers a unique opportunity to formalize and interlink these diverse elements, laying the groundwork
+        for intelligent analytics and improved tooling. CodeOwl addresses this demand by unifying data from multiple
+        sources—chief among them the GitHub API—into a coherent RDF-based knowledge model. This approach not only
+        streamlines the discovery and classification of software artifacts but also fosters deeper insights into the
+        relationships between software components, architecture choices, and licensing constraints.
+    </p>
 
+    <p>
+        This report describes the conceptual underpinnings, architectural design, and practical implementation details
+        of CodeOwl. Following an overview of the ontology structure, the document delves into key design considerations
+        and highlights the system’s integration of RESTful web services, relational databases, and a dedicated SPARQL
+        endpoint to support advanced queries. Additionally, it covers real-world use cases that exemplify how
+        researchers, enterprise developers, and data analysts can benefit from a semantically enriched view of software
+        ecosystems. By showcasing the platform’s capabilities—from flexible ontology-based searches to a user-friendly
+        front end—this technical report aims to demonstrate how integrating semantic technologies can strengthen
+        software development practices and foster better-informed decision-making.
     </p>
 </section>
 
@@ -378,23 +406,26 @@
 
     <section>
         <h3>Frontend Architecture</h3>
-    
+
         <figure class="figure">
             <img src="./figures/frontend-diagram1.svg" alt="High-Level System Overview">
             <figcaption>Figure 4: High-Level System Overview</figcaption>
         </figure>
-        <p>The context diagram provides a high-level view of the system and its interactions with external users and services. It defines the main actors and how they interact with the software components.</p>
+        <p>The context diagram provides a high-level view of the system and its interactions with external users and
+            services. It defines the main actors and how they interact with the software components.</p>
         <ul>
             <li>The <strong>User</strong> interacts with the <strong>Frontend Application</strong>.</li>
-            <li>The <strong>Frontend Application</strong> communicates with the <strong>Backend API Service</strong>.</li>
+            <li>The <strong>Frontend Application</strong> communicates with the <strong>Backend API Service</strong>.
+            </li>
             <li>The <strong>Backend API Service</strong> processes requests and responds accordingly.</li>
         </ul>
-    
+
         <figure class="figure">
             <img src="./figures/frontend-diagram2.svg" alt="System Containers and Communication">
             <figcaption>Figure 5: System Containers and Communication</figcaption>
         </figure>
-        <p>This diagram breaks down the system into logical components or "containers" that handle specific responsibilities.</p>
+        <p>This diagram breaks down the system into logical components or "containers" that handle specific
+            responsibilities.</p>
         <ul>
             <li>The <strong>User</strong> interacts with a <strong>React Single Page Application (SPA)</strong>.</li>
             <li>The SPA consists of key components:
@@ -404,21 +435,24 @@
                     <li><strong>Axios HTTP Client</strong> for handling API requests.</li>
                 </ul>
             </li>
-            <li>The <strong>Backend API Service</strong> handles incoming requests and provides data to the frontend.</li>
+            <li>The <strong>Backend API Service</strong> handles incoming requests and provides data to the frontend.
+            </li>
         </ul>
-    
+
         <figure class="figure">
             <img src="./figures/frontend-diagram3.svg" alt="Frontend Component Structure">
             <figcaption>Figure 6: Frontend Component Structure</figcaption>
         </figure>
         <p>This diagram focuses on the frontend application, detailing the relationships between its key components.</p>
         <ul>
-            <li>The <strong>SearchPage, SoftwareOntologyPage, and PreferencesPage</strong> represent different UI views.</li>
+            <li>The <strong>SearchPage, SoftwareOntologyPage, and PreferencesPage</strong> represent different UI views.
+            </li>
             <li>Each page uses the <strong>PrimeReact DataTable</strong> to display structured data.</li>
             <li>The <strong>AuthProvider</strong> manages user authentication and authorization.</li>
-            <li>The <strong>Router Components</strong> handle navigation between different sections of the application.</li>
+            <li>The <strong>Router Components</strong> handle navigation between different sections of the application.
+            </li>
         </ul>
-    
+
         <figure class="figure">
             <img src="./figures/frontend-diagram4.svg" alt="Search Page Code Structure">
             <figcaption>Figure 7: Search Page Code Structure</figcaption>
@@ -440,8 +474,11 @@
                 </ul>
             </li>
         </ul>
-    
-        <p>This document outlines the system architecture for the Software Ontology project at multiple levels of abstraction. Starting from a high-level overview, it progressively dives deeper into specific system components and their interconnections. Each diagram offers insight into different architectural aspects, ensuring clarity and maintainability in the software development process.</p>
+
+        <p>This document outlines the system architecture for the Software Ontology project at multiple levels of
+            abstraction. Starting from a high-level overview, it progressively dives deeper into specific system
+            components and their interconnections. Each diagram offers insight into different architectural aspects,
+            ensuring clarity and maintainability in the software development process.</p>
     </section>
 
     <section>
@@ -451,7 +488,7 @@
 
         <figure class="figure">
             <img src="./figures/wade_c3_3_backend.drawio.png" alt="Description of the image">
-            <figcaption>Figure 5: Level 3 of the C4 diagram, the back end container.</figcaption>
+            <figcaption>Figure 8: Level 3 of the C4 diagram, the back end container.</figcaption>
         </figure>
 
         <p>The Main Server Container acts as the core backend system, orchestrating the functionality between user
@@ -775,7 +812,7 @@
 
         <figure class="figure">
             <img src="./figures/database.drawio.png" alt="Description of the image">
-            <figcaption>Figure 6: Class Diagram.</figcaption>
+            <figcaption>Figure 9: Class Diagram.</figcaption>
         </figure>
 
         <h4>Design Considerations</h4>
@@ -821,16 +858,62 @@
 </section>
 <section>
     <h2>Implementation Details</h2>
+    <section>
+        <h3>SparQL Query</h3>
+        <p>
+            SPARQL queries are at the core of the ontology query application, enabling users to retrieve specific
+            information from the ontology data. The queries are designed to be flexible, allowing users to search for
+            entities based on various criteria, such as class, property, or relationship. The implementation details of
+            SPARQL queries are as follows:
+        </p>
+        <p><strong>Example query:</strong></p>
+                <p>"Show all frameworks for java that don't hasSoftwareLicense Apache2License"</p>
+                <p>This query retrieves all frameworks related to Java that do not have the Apache2 license. It filters
+                    entities based on specific criteria, such as programming language and software license. The query
+                    execution involves pattern matching and filtering to identify relevant entities. The results are
+                    presented in a structured format, providing users with detailed information about the queried
+                    entities.</p>
+                <p><strong>SPARQL Query:</strong></p>
+<pre><code>
+    PREFIX : &lt;https://wade-8e36773161ad.herokuapp.com/software-ontology#&gt
+    PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt
+
+    SELECT DISTINCT ?indiv ?label
+    WHERE {
+        ?indiv a :Framework .
+        ?indiv :supportsLanguage :Java .
+    FILTER NOT EXISTS { ?indiv :hasSoftwareLicense :Apache2License } .
+    OPTIONAL { ?indiv rdfs:label ?label . }
+    }
+</code></pre>
+
+        <strong>Explanation:</strong>
+        <ul>
+            <li>The query uses the PREFIX directive to define the ontology namespace and the rdfs namespace for RDF
+                schema.</li>
+            <li>The SELECT clause retrieves distinct individuals (?indiv) and their labels (?label).</li>
+            <li>The WHERE clause specifies the conditions for the query:
+                <ul>
+                    <li>?indiv must be of type :Framework.</li>
+                    <li>?indiv must support the programming language :Java.</li>
+                    <li>There should not exist a relationship between ?indiv and the software license :Apache2License.</li>
+                </ul>
+            </li>
+            <li>The OPTIONAL clause retrieves the label of the individual if available.</li>
+        </ul>
+    </section>
+
+    <h3>UI Implementation</h3>
     <p>CodeOwl is structured in a modular and scalable manner, with each component designed to handle specific tasks
         efficiently. The implementation details of the frontend are as follows.</p>
     <section>
-        <h3>Search Page</h3>
+        <h4>Search Page</h4>
         <p>The search page is the main interface for users to interact with the system. It allows users to input natural
             language queries, which are then parsed and converted into SPARQL queries for execution against the ontology
             data.</p>
         <figure class="figure">
             <img src="./figures/search.png" alt="Description of the image">
-            <figcaption>Figure 7: Search Page.</figcaption>
+            <figcaption>Figure 10: Search Page.</figcaption>
         </figure>
         <p>The results are displayed in a structured format, providing users with detailed information about the queried
             entities. Users can save their searches for future reference.</p>
@@ -838,7 +921,7 @@
             explore related concepts and properties, by redirecting them to the ontology browser.</p>
     </section>
     <section>
-        <h3>Ontology Browser</h3>
+        <h4>Ontology Browser</h4>
         <p>The ontology browser allows users to explore the ontology's structure and relationships. It provides an
             interface
             for navigating through classes, properties, and instances, enabling users to understand the ontology's
@@ -846,20 +929,20 @@
             and hierarchy.</p>
         <figure class="figure">
             <img src="./figures/browser.png" alt="Description of the image">
-            <figcaption>Figure 8: Ontology Browser Page.</figcaption>
+            <figcaption>Figure 11: Ontology Browser Page.</figcaption>
         </figure>
         <p>Users can view detailed descriptions of ontology entities, including their properties, relationships, and
             metadata. The browser offers a user-friendly way to interact with the ontology data, facilitating knowledge
             discovery and exploration.</p>
     </section>
     <section>
-        <h3>Authentication Workflow</h3>
+        <h4>Authentication Workflow</h4>
         <p>The authentication workflow ensures secure access to the system and user data. It involves generating
             one-time passwords (OTPs) for user verification and issuing JSON Web Tokens (JWTs) for authenticated
             sessions.</p>
         <figure class="figure">
             <img src="./figures/login_email.png" alt="Description of the image">
-            <figcaption>Figure 9: Login Email Input.</figcaption>
+            <figcaption>Figure 12: Login Email Input.</figcaption>
         </figure>
         <p>When a user logs in, the system generates a unique OTP and sends it to the user's email address for
             verification. The user enters the OTP to authenticate their identity and gain access to the system. The OTP
@@ -867,7 +950,7 @@
             spamming.</p>
         <figure class="figure">
             <img src="./figures/login_otp.png" alt="Description of the image">
-            <figcaption>Figure 10: Login OTP Input.</figcaption>
+            <figcaption>Figure 13: Login OTP Input.</figcaption>
         </figure>
         <p>Upon successful verification, the system issues a JWT token that the user can use to access protected
             resources
@@ -876,20 +959,20 @@
     </section>
 
     <section>
-        <h3>Preferences Management</h3>
+        <h4>Preferences Management</h4>
         <p>The preferences management feature allows users to customize their experience within the system. Users can
             save
             preferences related to search queries, display settings, and other application-specific configurations.</p>
         <figure class="figure">
             <img src="./figures/preferences.png" alt="Description of the image">
-            <figcaption>Figure 11: Search Page.</figcaption>
+            <figcaption>Figure 14: Search Page.</figcaption>
         </figure>
         <p>Users can create and delete preferences based on their requirements. The system stores these
             preferences securely and associates them with the user's account for personalized interactions.</p>
     </section>
 
     <section>
-        <h3>Deploy</h3>
+        <h4>Deploy</h4>
         <p>
             To deploy the ontology query application, we utilized Heroku for both the frontend and backend, while the
             ontology query engine was deployed on an AWS EC2 instance. This deployment strategy was chosen for its
@@ -922,7 +1005,7 @@
 
     <figure class="figure">
         <img src="./figures/use_case.drawio.png" alt="Description of the image">
-        <figcaption>Figure 7: Use Case Diagram.</figcaption>
+        <figcaption>Figure 15: Use Case Diagram.</figcaption>
     </figure>
 
     <p>
@@ -1013,7 +1096,9 @@
 
 <section id="user-guide" role="doc-chapter">
     <h2>User Guide</h2>
-    <p>For detailed instructions on using the CodeOwl platform, please refer to the <a href="user-guide.html" target="_blank">User Guide</a>.</p>
+    <p>For detailed instructions on using the CodeOwl platform, please refer to the <a href="user-guide.html"
+                                                                                       target="_blank">User Guide</a>.
+    </p>
 </section>
 
 <section id="video-demonstration" role="doc-chapter">
@@ -1027,8 +1112,10 @@
 <section id="references" role="doc-bibliography">
     <h2>References</h2>
     <ul>
-        <li>Reference 1</li>
-        <li>Reference 2</li>
+        <li><a href="https://profs.info.uaic.ro/sabin.buraga/teach/courses/wade/">WADE Course page</a></li>
+        <li><a href="https://docs.github.com/en/graphql">GitHub GraphQL API Doc</a></li>
+        <li><a href="https://www.heroku.com">Heroku</a></li>
+        <li><a href="https://aws.amazon.com">Amazon AWS</a></li>
     </ul>
 </section>
 
