@@ -308,11 +308,6 @@
                 (<code>followsMethodology</code>), and even to software licenses (<code>hasSoftwareLicense</code>).
             </li>
             <li>
-                <strong>GraphQL and REST Integration:</strong> The GitHub API, available via both REST and GraphQL
-                endpoints, provides flexible query options. This flexibility facilitates integration, allowing the
-                ontology to be updated in near-real time as repository data changes.
-            </li>
-            <li>
                 <strong>Interoperability and Analytics:</strong> With data sourced from GitHub, the ontology supports
                 advanced querying and analytics over the software ecosystem. This is particularly useful for studies on
                 repository popularity, language usage, and trends in software development practices.
@@ -770,6 +765,103 @@
         </p>
     </section>
 </section>
+<section>
+    <h2>Implementation Details</h2>
+    <p>CodeOwl is structured in a modular and scalable manner, with each component designed to handle specific tasks
+        efficiently. The implementation details of the frontend are as follows.</p>
+    <section>
+        <h3>Search Page</h3>
+        <p>The search page is the main interface for users to interact with the system. It allows users to input natural
+            language queries, which are then parsed and converted into SPARQL queries for execution against the ontology
+            data.</p>
+        <figure class="figure">
+            <img src="./figures/search.png" alt="Description of the image">
+            <figcaption>Figure 7: Search Page.</figcaption>
+        </figure>
+        <p>The results are displayed in a structured format, providing users with detailed information about the queried
+            entities. Users can save their searches for future reference.</p>
+        <p>Each entity in the search results is linked to its detailed description in the ontology, enabling users to
+            explore related concepts and properties, by redirecting them to the ontology browser.</p>
+    </section>
+    <section>
+        <h3>Ontology Browser</h3>
+        <p>The ontology browser allows users to explore the ontology's structure and relationships. It provides an
+            interface
+            for navigating through classes, properties, and instances, enabling users to understand the ontology's
+            semantics
+            and hierarchy.</p>
+        <figure class="figure">
+            <img src="./figures/browser.png" alt="Description of the image">
+            <figcaption>Figure 8: Ontology Browser Page.</figcaption>
+        </figure>
+        <p>Users can view detailed descriptions of ontology entities, including their properties, relationships, and
+            metadata. The browser offers a user-friendly way to interact with the ontology data, facilitating knowledge
+            discovery and exploration.</p>
+    </section>
+    <section>
+        <h3>Authentication Workflow</h3>
+        <p>The authentication workflow ensures secure access to the system and user data. It involves generating
+            one-time passwords (OTPs) for user verification and issuing JSON Web Tokens (JWTs) for authenticated
+            sessions.</p>
+        <figure class="figure">
+            <img src="./figures/login_email.png" alt="Description of the image">
+            <figcaption>Figure 9: Login Email Input.</figcaption>
+        </figure>
+        <p>When a user logs in, the system generates a unique OTP and sends it to the user's email address for
+            verification. The user enters the OTP to authenticate their identity and gain access to the system. The OTP
+            is active only for 10 minutes, and you can't generate more than 3 in a 5-minute period to avoid
+            spamming.</p>
+        <figure class="figure">
+            <img src="./figures/login_otp.png" alt="Description of the image">
+            <figcaption>Figure 10: Login OTP Input.</figcaption>
+        </figure>
+        <p>Upon successful verification, the system issues a JWT token that the user can use to access protected
+            resources
+            within the application. The token contains user information and an expiration time, ensuring secure and
+            authenticated interactions.</p>
+    </section>
+
+    <section>
+        <h3>Preferences Management</h3>
+        <p>The preferences management feature allows users to customize their experience within the system. Users can
+            save
+            preferences related to search queries, display settings, and other application-specific configurations.</p>
+        <figure class="figure">
+            <img src="./figures/preferences.png" alt="Description of the image">
+            <figcaption>Figure 11: Search Page.</figcaption>
+        </figure>
+        <p>Users can create and delete preferences based on their requirements. The system stores these
+            preferences securely and associates them with the user's account for personalized interactions.</p>
+    </section>
+
+    <section>
+        <h3>Deploy</h3>
+        <p>
+            To deploy the ontology query application, we utilized Heroku for both the frontend and backend, while the
+            ontology query engine was deployed on an AWS EC2 instance. This deployment strategy was chosen for its
+            cost-effectiveness and simplicity, making it an ideal choice for a student-led project with limited
+            resources.
+        </p>
+        <p>
+            Heroku offers a free tier for application hosting, which was a significant factor in our decision as it
+            allows us to deploy both the frontend and backend with minimal cost. Heroku also provides an intuitive
+            platform with built-in GitHub integration, enabling seamless deployment workflows.
+        </p>
+        <p>
+            The ontology query engine, being more resource-intensive, was hosted on an AWS EC2 instance. AWS's free-tier
+            program provided an accessible way to deploy this critical part of the system while allowing for future
+            scalability. EC2's flexibility ensures that we can scale up or optimize the query engine as the application
+            grows or as the complexity of ontology data increases.
+        </p>
+        <p>Communication between these components occurs via HTTPS, ensuring secure data transfer. The frontend
+            interacts with the backend through RESTful APIs, exchanging data in JSON format. JSON was chosen for its
+            lightweight structure and human-readable format, which simplifies debugging and facilitates smooth
+            communication between the client, the backend, and the query engine.</p>
+        <p>This deployment approach, leveraging free-tier services from Heroku and AWS, allowed us to build a robust and
+            scalable application while minimizing costs. It ensures secure, organized, and efficient data transfer,
+            supporting the application's primary functions effectively.</p>
+    </section>
+</section>
 
 <section id="use-cases" role="doc-chapter">
     <h2>Case Studies</h2>
@@ -780,76 +872,97 @@
     </figure>
 
     <p>
-        The following case studies illustrate real-world applications of the CodeOwl system. These scenarios demonstrate how the system can be used to enhance productivity, streamline workflows, and support research and development efforts in software engineering.
+        The following case studies illustrate real-world applications of the CodeOwl system. These scenarios demonstrate
+        how the system can be used to enhance productivity, streamline workflows, and support research and development
+        efforts in software engineering.
     </p>
 
     <section>
         <h3>Researcher Querying Software Trends</h3>
         <p>
-            <strong>Background:</strong> A university researcher is studying the adoption of microservices architectures across open-source projects. They need detailed information on repositories, programming languages, and development methodologies associated with this architectural style.
+            <strong>Background:</strong> A university researcher is studying the adoption of microservices architectures
+            across open-source projects. They need detailed information on repositories, programming languages, and
+            development methodologies associated with this architectural style.
         </p>
         <p>
             <strong>Approach:</strong>
         </p>
         <ul>
-            <li>The researcher logs into CodeOwl and submits a query to identify repositories tagged with "MicroservicesArchitecture."</li>
-            <li>The system processes the query using the ontology and returns a list of relevant projects, including details such as programming languages, GitHub star counts, and associated methodologies.</li>
-            <li>The researcher saves the search for future reference and exports the results as a CSV file for further analysis.</li>
+            <li>The researcher logs into CodeOwl and submits a query to identify repositories tagged with
+                "MicroservicesArchitecture."
+            </li>
+            <li>The system processes the query using the ontology and returns a list of relevant projects, including
+                details such as programming languages, GitHub star counts, and associated methodologies.
+            </li>
+            <li>The researcher saves the search for future reference and exports the results as a CSV file for further
+                analysis.
+            </li>
         </ul>
         <p>
-            <strong>Outcome:</strong> The researcher identifies key projects adopting microservices, uncovers trends in their usage, and uses the findings to publish a paper on architectural adoption in open-source ecosystems.
+            <strong>Outcome:</strong> The researcher identifies key projects adopting microservices, uncovers trends in
+            their usage, and uses the findings to publish a paper on architectural adoption in open-source ecosystems.
         </p>
     </section>
     <section>
         <h3>Enterprise Developer Managing Dependencies</h3>
         <p>
-            <strong>Background:</strong> A developer at a mid-sized software company is tasked with upgrading dependencies for a project using the Spring Framework. They need to understand the dependencies' compatibility with the latest version of Spring.
+            <strong>Background:</strong> A developer at a mid-sized software company is tasked with upgrading
+            dependencies for a project using the Spring Framework. They need to understand the dependencies'
+            compatibility with the latest version of Spring.
         </p>
         <p>
             <strong>Approach:</strong>
         </p>
         <ul>
-            <li>The developer queries the ontology for tools and libraries compatible with "Spring Framework" version 5.3.20.</li>
-            <li>The system processes the query and provides a list of compatible tools, including Hibernate ORM and Maven.</li>
-            <li>The developer uses the "Save Search" feature to store this query and access it during future updates.</li>
+            <li>The developer queries the ontology for tools and libraries compatible with "Spring Framework" version
+                5.3.20.
+            </li>
+            <li>The system processes the query and provides a list of compatible tools, including Hibernate ORM and
+                Maven.
+            </li>
+            <li>The developer uses the "Save Search" feature to store this query and access it during future updates.
+            </li>
         </ul>
         <p>
-            <strong>Outcome:</strong> The developer successfully upgrades the project dependencies, ensuring compatibility and minimizing disruption to the software's functionality.
+            <strong>Outcome:</strong> The developer successfully upgrades the project dependencies, ensuring
+            compatibility and minimizing disruption to the software's functionality.
         </p>
     </section>
 
     <section>
         <h3>Data Analyst Monitoring Repository Metrics</h3>
         <p>
-            <strong>Background:</strong> A data analyst is monitoring the popularity of repositories related to specific programming languages to generate a report for their company's strategy team.
+            <strong>Background:</strong> A data analyst is monitoring the popularity of repositories related to specific
+            programming languages to generate a report for their company's strategy team.
         </p>
         <p>
             <strong>Approach:</strong>
         </p>
         <ul>
-            <li>The analyst queries the ontology for repositories associated with "Python" and retrieves metadata such as star counts and creation dates.</li>
-            <li>The system processes the query and returns a ranked list of repositories, including links to their GitHub pages.</li>
-            <li>The analyst uses the "Save Search" feature to track the same query over time, observing trends in popularity.</li>
+            <li>The analyst queries the ontology for repositories associated with "Python" and retrieves metadata such
+                as star counts and creation dates.
+            </li>
+            <li>The system processes the query and returns a ranked list of repositories, including links to their
+                GitHub pages.
+            </li>
+            <li>The analyst uses the "Save Search" feature to track the same query over time, observing trends in
+                popularity.
+            </li>
         </ul>
         <p>
-            <strong>Outcome:</strong> The analyst provides actionable insights on Python repository trends, aiding the company's strategic decisions regarding developer outreach and tool support.
+            <strong>Outcome:</strong> The analyst provides actionable insights on Python repository trends, aiding the
+            company's strategic decisions regarding developer outreach and tool support.
         </p>
     </section>
 
 </section>
 
-<section id="user-guide" role="doc-chapter">
-    <h2>User Guide</h2>
-    <p>User Guide</p>
-</section>
-
 <section id="video-demonstration" role="doc-chapter">
     <h2>Video Demonstration</h2>
-    <p>An embedded video</p>
-    <video controls>
-        <source src="path-to-video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <iframe width="1160" height="715" src="https://www.youtube.com/embed/ZEjwb9rSvm4"
+            title="YouTube video player" frameborder="0" allowfullscreen>
+    </iframe>
+
 </section>
 
 <section id="references" role="doc-bibliography">
