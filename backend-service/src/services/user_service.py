@@ -7,8 +7,9 @@ import bcrypt
 import jwt
 from flask_mail import Mail, Message
 
-from src.models.user import OneTimePassword, User
+from src.models.models import OneTimePassword, User
 from src.repositories.users_repository import UserManagementRepository
+
 
 def generate_password(length=10):
     characters = string.ascii_letters + string.digits
@@ -31,6 +32,7 @@ def generate_jwt(payload, secret, algorithm="HS256", expiration_minutes=600):
 
     token = jwt.encode(payload, secret, algorithm=algorithm)
     return token
+
 
 otp_subject_template = "Your OTP Code for WADE"
 otp_email_template = """\
@@ -74,11 +76,14 @@ class UserService:
         now = datetime.datetime.now(datetime.UTC).replace(tzinfo=None)
 
         if len(active_otps) == 1 and active_otps[0].created_at > now - datetime.timedelta(minutes=1):
-            code, content = 429, (active_otps[0].created_at + datetime.timedelta(minutes=1)).replace(tzinfo=datetime.UTC)
+            code, content = 429, (active_otps[0].created_at + datetime.timedelta(minutes=1)).replace(
+                tzinfo=datetime.UTC)
         elif len(active_otps) == 2 and active_otps[1].created_at > now - datetime.timedelta(minutes=3):
-            code, content = 429, (active_otps[1].created_at + datetime.timedelta(minutes=3)).replace(tzinfo=datetime.UTC)
+            code, content = 429, (active_otps[1].created_at + datetime.timedelta(minutes=3)).replace(
+                tzinfo=datetime.UTC)
         elif len(active_otps) > 2 and active_otps[2].created_at > now - datetime.timedelta(minutes=5):
-            code, content = 429,(active_otps[2].created_at + datetime.timedelta(minutes=5)).replace(tzinfo=datetime.UTC)
+            code, content = 429, (active_otps[2].created_at + datetime.timedelta(minutes=5)).replace(
+                tzinfo=datetime.UTC)
         else:
             otp = OneTimePassword(otp=hash_password(password), user_id=user.id)
             self.user_repository.create(otp)

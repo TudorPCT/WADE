@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {AuthProvider} from "./core/AuthProvider";
 import {setupAuthInterceptors} from "./core/interceptors/auth";
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 setupAuthInterceptors();

@@ -3,99 +3,865 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Technical report describing the implementation of APIs, RDF-based knowledge models, and usage of external data sources.">
+    <meta name="description"
+          content="Technical report describing the implementation of APIs, RDF-based knowledge models, and usage of external data sources.">
     <meta name="author" content="Tudor Pasat, Valentin Borfalau">
     <meta name="keywords" content="Scholarly HTML, APIs, RDF, Linked Data, Wikidata, DBpedia, SPARQL, Knowledge Models">
-    <title>Scholarly HTML Technical Report</title>
+    <title>Technical Report</title>
+    <link rel="stylesheet" href="./report.css">
 </head>
+
 <body>
-    <!-- Header -->
-    <header>
-        <h1>Scholarly HTML Technical Report</h1>
-        <p>Authors: Tudor Pasat, Valentin Borfalau</p>
-        <p>Date: January 22, 2025</p>
-    </header>
+<header>
+    <h1>Scholarly HTML Technical Report</h1>
+    <dl>
+        <dt>Authors</dt>
+        <dd>
+            Tudor Pasat
+            &amp;
+            Valentin Borfalau
+        </dd>
+        <dt>License</dt>
+        <dd>
+            <a href="https://opensource.org/license/mit">MIT</a>
+        </dd>
+    </dl>
+    <p>Date: January 22, 2025</p>
+</header>
 
-    <!-- Abstract -->
-    <section id="abstract">
-        <h2>Abstract</h2>
-        <p>Abstract</p>
-    </section>
-	
-	<!-- System Architecture -->
-	    <section id="system-architecture">
-	        <h2>System Architecture</h2>
-	        <p>This section provides an overview of the system architecture used in the Web application. The architecture follows a service-oriented approach and consists of the following components:</p>
-	        <ul>
-	            <li><strong>Frontend:</strong> Built using modern web technologies such as ReactJS, providing an interactive and responsive user interface.</li>
-	            <li><strong>Backend:</strong> A RESTful API implemented in Python (Flask/Django) or Node.js, handling application logic and communication with external systems.</li>
-	            <li><strong>Database:</strong> A relational database like PostgreSQL or a NoSQL database like MongoDB for storing structured and unstructured data.</li>
-	            <li><strong>External Data Integration:</strong> Incorporates APIs such as GitHub's GraphQL API and knowledge graphs like DBpedia and Wikidata.</li>
-	            <li><strong>Microservices Architecture:</strong> The application is divided into independent services (e.g., user management, data processing, API gateway) for scalability and maintainability.</li>
-	            <li><strong>Cloud Hosting:</strong> Deployed on platforms like AWS, Azure, or Heroku for robust and scalable infrastructure.</li>
-	        </ul>
-	        <p>The following diagram illustrates the high-level architecture of the system:</p>
-	        <img src="path-to-architecture-diagram.png" alt="System Architecture Diagram" style="width:100%;max-width:600px;">
-	    </section>
+<section typeof="sa:Abstract" id="abstract" role="doc-abstract">
+    <h2>Abstract</h2>
+    <p>Abstract</p>
+</section>
 
-    <!-- Internal Data Structures -->
-    <section id="internal-data-structures">
-        <h2>Internal Data Structures</h2>
-        <p>Internal Data Structures</p>
-    </section>
+<section id="introduction" role="doc-introduction">
+    <h2>Introduction</h2>
+    <p>
 
-    <!-- Implemented APIs -->
-    <section id="implemented-apis">
-        <h2>Implemented APIs</h2>
-        <p>Implemented APIs</p>
-    </section>
+    </p>
+</section>
 
-    <!-- RDF-based Knowledge Models -->
-    <section id="rdf-knowledge-models">
-        <h2>RDF-based Knowledge Models</h2>
-        <p>RDF-based Knowledge Models</p>
-    </section>
-
-    <!-- External Data Sources -->
-    <section id="external-data-sources">
-        <h2>Use of External Data/Knowledge Sources</h2>
-        <p>Use of External Data/Knowledge Sources</p>
-    </section>
-
-    <!-- Case Studies -->
-    <section id="case-studies">
-        <h2>Case Studies</h2>
-        <p>Case Studies</p>
-    </section>
-
-    <!-- User Guide -->
-    <section id="user-guide">
-        <h2>User Guide</h2>
-        <p>User Guide</p>
-    </section>
-
-    <!-- Video Demonstration -->
-    <section id="video-demonstration">
-        <h2>Video Demonstration</h2>
-        <p>An embedded video</p>
-        <video controls>
-            <source src="path-to-video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </section>
-
-    <!-- References -->
-    <section id="references">
-        <h2>References</h2>
+<section id="ontology-model" role="doc-chapter">
+    <h2>Ontology Model</h2>
+    <figure id="ontology-figure" class="figure">
+        <img src="./figures/ontology.jpeg" alt="Description of the image">
+        <figcaption>Figure 1: Ontology Model</figcaption>
+    </figure>
+    <section id="foundation">
+        <h3>Foundation: Core Classes</h3>
+        <p>The foundation of the ontology is built around a few central classes:</p>
         <ul>
-            <li>Reference 1</li>
-            <li>Reference 2</li>
+            <li>
+                <strong>SoftwareArtifact</strong>: The root class representing any software-related artifact or entity.
+                It provides the base for more specialized classes.
+            </li>
+            <li>
+                <strong>Project</strong>: A subclass of <code>SoftwareArtifact</code> and aligned with <code>doap:Project</code>.
+                It represents a software project or product.
+            </li>
+            <li>
+                <strong>Repository</strong>: Also a subclass of <code>SoftwareArtifact</code>, this class aligns with
+                <code>doap:Repository</code> and represents code repositories.
+            </li>
+            <li>
+                <strong>GitHubRepository</strong>: A specialized form of <code>Repository</code> that refines the
+                repository concept for GitHub-based projects. It is also aligned with Git-specific aspects defined in
+                DOAP.
+            </li>
+            <li>
+                <strong>ProgrammingLanguage</strong>: Extends <code>SoftwareArtifact</code> and <code>doap:ProgrammingLanguage</code>,
+                representing programming languages used within the software ecosystem.
+            </li>
         </ul>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 Tudor Pasat and Valentin Borfalau. All rights reserved.</p>
-    </footer>
+    <section id="paradigms">
+        <h3>Paradigms</h3>
+        <p>This part of the ontology classifies programming paradigms that software tools and languages might adopt:</p>
+        <ul>
+            <li>
+                <strong>Paradigm</strong>: The general class for programming paradigms (e.g., object-oriented,
+                functional, procedural).
+            </li>
+            <li>
+                <strong>ObjectOrientedParadigm</strong>: A subclass representing the object-oriented paradigm.
+                <ul>
+                    <li><strong>ClassBasedOOP</strong>: Emphasizes class-based design.</li>
+                    <li><strong>PrototypeBasedOOP</strong>: Focuses on prototypes rather than classes.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>FunctionalParadigm</strong>: Represents functional programming concepts.
+            </li>
+            <li>
+                <strong>ProceduralParadigm</strong>: Covers the procedural programming style.
+            </li>
+        </ul>
+    </section>
+
+    <section id="architectures">
+        <h3>Architectures</h3>
+        <p>The ontology categorizes software architecture styles to capture different design approaches:</p>
+        <ul>
+            <li>
+                <strong>SoftwareArchitecture</strong>: The base class for architectural styles.
+            </li>
+            <li>
+                <strong>MonolithicArchitecture</strong>: A subclass that describes monolithic systems.
+                <ul>
+                    <li><strong>LayeredMonolith</strong>: A further specialization that captures layered designs within
+                        monolithic architectures.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <strong>MicroservicesArchitecture</strong>: Represents architectures built on microservices.
+            </li>
+            <li>
+                <strong>EventDrivenArchitecture</strong>: Captures systems designed around events.
+            </li>
+            <li>
+                <strong>EventDrivenMicroservices</strong>: A hybrid approach combining microservices and event-driven
+                patterns.
+            </li>
+        </ul>
+    </section>
+
+    <section id="methodologies">
+        <h3>Development Methodologies</h3>
+        <p>This segment defines the processes and methodologies used in software development:</p>
+        <ul>
+            <li>
+                <strong>DevelopmentMethodology</strong>: The parent class for various development processes.
+            </li>
+            <li>
+                <strong>AgileMethodology</strong>: Represents agile practices.
+                <ul>
+                    <li><strong>Scrum</strong>: A specific agile framework for managing projects.</li>
+                    <li><strong>Kanban</strong>: Focused on lean and continuous delivery.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>WaterfallMethodology</strong>: Represents the traditional, sequential development process.
+            </li>
+            <li>
+                <strong>DevOpsMethodology</strong>: Integrates development and operations for continuous integration and
+                delivery.
+            </li>
+        </ul>
+    </section>
+
+    <section id="licenses">
+        <h3>Software Licenses</h3>
+        <p>The model includes a class for formal software licenses, ensuring that legal aspects of software distribution
+            are modeled:</p>
+        <ul>
+            <li>
+                <strong>SoftwareLicense</strong>: A class capturing license-related details for software artifacts. It
+                is designed to align with DOAP’s licensing properties.
+            </li>
+        </ul>
+    </section>
+
+    <section id="tool-ecosystem">
+        <h3>Software Tool Ecosystem</h3>
+        <p>This section models the ecosystem of tools used in software development, arranged in a detailed
+            hierarchy:</p>
+        <ul>
+            <li>
+                <strong>SoftwareTool</strong>: The overarching class for any tool used in software development.
+            </li>
+            <li>
+                <strong>RuntimePlatform</strong>: Tools that provide runtime environments (e.g., interpreters, virtual
+                machines).
+            </li>
+            <li>
+                <strong>OperatingSystem</strong>: Captures operating systems relevant to software deployment.
+            </li>
+            <li>
+                <strong>Driver</strong>: Represents device drivers used in specific environments.
+            </li>
+            <li>
+                <strong>Utility</strong>: Includes command-line tools, CLI utilities, and other small programs.
+            </li>
+            <li>
+                <strong>VirtualMachine</strong>: A subclass for environments like the JVM or .NET CLR.
+            </li>
+            <li>
+                <strong>Compiler</strong>: Tools responsible for translating source code to machine code.
+            </li>
+            <li>
+                <strong>Interpreter</strong>: Executes code directly (e.g., Python or Ruby interpreters).
+            </li>
+            <li>
+                <strong>ApplicationServer</strong>: Servers that host enterprise applications.
+            </li>
+            <li>
+                <strong>Framework</strong>: High-level structures that support application development (e.g., web
+                frameworks).
+            </li>
+            <li>
+                <strong>SDK</strong>: Software Development Kits that provide tools and libraries for building
+                applications.
+            </li>
+            <li>
+                <strong>Library</strong>: Reusable code components and packages.
+            </li>
+            <li>
+                <strong>Component</strong>: Smaller, reusable software parts that are integrated into larger systems.
+            </li>
+            <li>
+                <strong>IDE</strong>: Integrated Development Environments, including both desktop and cloud-based
+                platforms.
+            </li>
+            <li>
+                <strong>CloudDevelopmentPlatform</strong>: Specialized IDEs or development environments provided as
+                cloud services.
+            </li>
+        </ul>
+    </section>
+
+    <section id="object-properties">
+        <h3>Object Properties</h3>
+        <p>Object properties in the ontology establish semantic relationships between different classes. Key properties
+            include:</p>
+        <ul>
+            <li>
+                <strong>adoptsParadigm</strong>: Connects a software tool (or language) to the programming paradigm it
+                implements.
+            </li>
+            <li>
+                <strong>supportsLanguage</strong>: Associates a software tool with the programming language it targets.
+            </li>
+            <li>
+                <strong>dependsOn</strong>: Models dependency relationships between tools, libraries, or components.
+            </li>
+            <li>
+                <strong>isCompatibleWith</strong>: Links software tools to architectural styles with which they are
+                compatible.
+            </li>
+            <li>
+                <strong>followsMethodology</strong>: Connects a project to the development methodology it adheres to.
+            </li>
+            <li>
+                <strong>usesArchitecture</strong>: Indicates the architectural style employed by a project.
+            </li>
+            <li>
+                <strong>hasSoftwareLicense</strong>: Associates a software artifact with its licensing information.
+            </li>
+            <li>
+                <strong>hostedOnRepository</strong>: Relates a project to the repository on which it is maintained.
+            </li>
+        </ul>
+    </section>
+
+    <section id="data-properties">
+        <h3>Data Properties</h3>
+        <p>Data properties capture literal values and attributes of classes, providing additional descriptive metadata.
+            They include:</p>
+        <ul>
+            <li>
+                <strong>hasVersion</strong>: A string indicating the version of a software tool or artifact.
+            </li>
+            <li>
+                <strong>hasStars</strong>: A non-negative integer representing metrics such as GitHub stars for a
+                repository.
+            </li>
+            <li>
+                <strong>repoUrl</strong>: A URI pointing to the canonical location of a repository.
+            </li>
+            <li>
+                <strong>dct:created</strong>: A date value (using the Dublin Core Terms vocabulary) indicating when a
+                project was created.
+            </li>
+        </ul>
+    </section>
+
+    <section id="alignment">
+        <h3>Alignment with External Vocabularies</h3>
+        <p>
+            The model is designed to integrate seamlessly with established metadata standards. The <code>Project</code>
+            class is declared equivalent to <code>doap:Project</code>, and the <code>hasSoftwareLicense</code> property
+            aligns with <code>doap:license</code>. This alignment promotes interoperability and facilitates data
+            integration with other systems using DOAP and Dublin Core.
+        </p>
+    </section>
+
+    <section id="github-integration">
+        <h3>Integration with the GitHub API</h3>
+        <p>
+            An important aspect of the model is its practical grounding in real-world data. The ontology was designed
+            with the GitHub API for repositories in mind, providing a reference framework for populating the ontology
+            with live data. Key points include:
+        </p>
+        <ul>
+            <li>
+                <strong>Data Population:</strong> The GitHub API delivers rich metadata about repositories—such as
+                repository URLs, star counts, and programming languages—that can be directly mapped to the ontology’s
+                <code>Repository</code> and <code>GitHubRepository</code> classes. This enables automatic population of
+                properties like <code>repoUrl</code>, <code>hasStars</code>, and more.
+            </li>
+            <li>
+                <strong>Semantic Enrichment:</strong> By aligning repository metadata with the ontology’s structure,
+                developers can enrich data from GitHub with additional semantic layers. For instance, repository data
+                can be linked to associated projects (<code>hostedOnRepository</code>), development methodologies
+                (<code>followsMethodology</code>), and even to software licenses (<code>hasSoftwareLicense</code>).
+            </li>
+            <li>
+                <strong>GraphQL and REST Integration:</strong> The GitHub API, available via both REST and GraphQL
+                endpoints, provides flexible query options. This flexibility facilitates integration, allowing the
+                ontology to be updated in near-real time as repository data changes.
+            </li>
+            <li>
+                <strong>Interoperability and Analytics:</strong> With data sourced from GitHub, the ontology supports
+                advanced querying and analytics over the software ecosystem. This is particularly useful for studies on
+                repository popularity, language usage, and trends in software development practices.
+            </li>
+        </ul>
+        <p>
+            In summary, leveraging the GitHub API as a reference not only grounds the ontology in practical, real-world
+            data but also supports dynamic population and continuous updates of repository-related information.
+        </p>
+    </section>
+</section>
+
+<section id="system-architecture" role="doc-chapter">
+    <h2>Architecture</h2>
+
+    <section>
+        <h3>High-Level Architecture</h3>
+        <p>The following diagram illustrates the high-level architecture of the system:</p>
+        <figure class="figure">
+            <img src="./figures/wade_c4.drawio.png" alt="Description of the image">
+            <figcaption>Figure 2: Level 1 of the C4 diagram.</figcaption>
+        </figure>
+
+        <p>
+            The diagram represents the system architecture of the CodeOwl platform, outlining its key components and
+            interactions. At the core of the system is the CodeOwl platform, depicted as a web-based application that
+            enables users to explore and query a rich knowledge base of software development ecosystems, including
+            programming languages, tools, frameworks, methodologies, and paradigms. Users access the platform securely
+            through HTTPS, ensuring safe communication between the client and the platform.
+        </p>
+
+        <p>
+            Additionally, the architecture integrates an external Email Notification System, which is responsible for
+            managing user notifications. The CodeOwl platform communicates with this system via the SMTP protocol,
+            facilitating the delivery of emails. This interaction highlights the modular nature of the system, allowing
+            CodeOwl to delegate email-related tasks to a
+            dedicated service.
+        </p>
+
+    </section>
+
+    <section>
+        <h3>System Architecture</h3>
+        <figure class="figure">
+            <img src="./figures/wade_c4_2.drawio.png" alt="Description of the image">
+            <figcaption>Figure 3: Level 2 of the C4 diagram.</figcaption>
+        </figure>
+
+        <p>This section provides an overview of the system architecture used in the Web application. The architecture
+            follows a service-oriented approach and consists of the following components:</p>
+        <ul>
+            <li><strong>Frontend:</strong> Built using modern web technologies such as ReactJS, providing an interactive
+                and
+                responsive user interface.
+            </li>
+            <li><strong>Backend:</strong> A RESTful API implemented in Python (Flask), handling
+                application logic and communication with external systems.
+            </li>
+            <li><strong>Database:</strong> A relational database (PostgreSQL) for
+                storing the user data.
+            </li>
+            <li><strong>Query Engine:</strong> Uses Apache Jena Fuseki for querying and managing RDF data, providing
+                SPARQL
+                endpoints for efficient data retrieval and integration.
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>
+            Frontend Architecture
+        </h3>
+
+        <figure class="figure">
+            <img src="" alt="Description of the image">
+            <figcaption>Figure 4: Level 3 of the C4 diagram, the front end container.</figcaption>
+        </figure>
+
+        <p></p>
+
+    </section>
+
+    <section>
+        <h3>
+            Backend Architecture
+        </h3>
+
+        <figure class="figure">
+            <img src="./figures/wade_c3_3_backend.drawio.png" alt="Description of the image">
+            <figcaption>Figure 5: Level 3 of the C4 diagram, the back end container.</figcaption>
+        </figure>
+
+        <p>The Main Server Container acts as the core backend system, orchestrating the functionality between user
+            interactions, ontology processing, and database operations. It is designed to handle requests from the
+            Single-Page Application (SPA) and facilitate communication with external services such as the Ontology Query
+            Engine, Email Notification System, and the Database. The container is modular and comprises several
+            controllers, services, and repositories, each performing distinct roles.</p>
+
+        <section>
+            <h4>
+                Controllers
+            </h4>
+            <p>
+                The controllers serve as entry points for handling HTTP requests from the frontend. Each controller is
+                responsible for a specific domain of functionality:
+            </p>
+            <ol type="1">
+                <li>
+                    <p>Ontology Controller</p>
+                    <ul>
+                        <li>Manages interactions with the ontology.</li>
+                        <li>Provides endpoints for ontology descriptions and SPARQL queries.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p>Search Controller</p>
+                    <ul>
+                        <li>Facilitates natural language query interpretation for ontology interrogation.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p>User Controller</p>
+                    <ul>
+                        <li>Handles user authentication through one-time-use passwords.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p>Preferences Controller</p>
+                    <ul>
+                        <li>Offers endpoints for creating, reading, updating, and deleting user preferences.</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
+        <section>
+            <h4>
+                Services
+            </h4>
+            <p>
+                Services implement the business logic and act as intermediaries between the controllers and
+                repositories:
+            </p>
+            <ol type="1">
+                <li>
+                    <p>Ontology Service</p>
+                    <p>The Ontology Service serves as a layer for interacting with the ontology data, enabling both
+                        granular and high-level operations. It provides the ability to describe specific inputs in terms
+                        of their relationships and properties within the ontology, as well as execute SPARQL queries to
+                        retrieve customized data. By delegating all ontology-related interactions to the
+                        OntologyRepository, the service ensures a clean separation of concerns and focuses on processing
+                        and formatting results for downstream use. This service is integral to systems that rely on
+                        semantic data for reasoning or querying.</p>
+                    <ol type="A">
+                        <li>
+                            <p>Input Description</p>
+                            <ul>
+                                <li>Takes user input and queries the ontology to retrieve a detailed description of the
+                                    input entity or concept.
+                                </li>
+                                <li>Returns a structured list of subject-predicate-object triples if the input exists in
+                                    the ontology, or None if no match is found.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Ontology Description</p>
+                            <ul>
+                                <li>Retrieves an overall description of the ontology structure or metadata.</li>
+                                <li>Acts as a way to understand the scope and entities present in the ontology.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Query Execution:</p>
+                            <ul>
+                                <li>Accepts a SPARQL query, executes it against the ontology, and retrieves results in
+                                    the desired format (default: JSON).
+                                </li>
+                                <li>Provides a mechanism for flexible, custom queries beyond predefined methods.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <p>Parsing Service</p>
+                    <p>The Parsing Service translates user queries written in natural language into machine-executable
+                        SPARQL queries. It acts as a bridge between user intent and the ontology system by parsing
+                        inputs, extracting meaningful entities, and dynamically generating queries. The results are
+                        fetched from the ontology repository and provided back in a structured format. This service
+                        enables users to interact with complex ontological data intuitively and efficiently.</p>
+                    <ol type="A">
+                        <li>
+                            <p>Input Handling</p>
+                            <ul>
+                                <li>The user provides a natural language query.</li>
+                                <li>The input is passed to the ParsingService.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Query Parsing</p>
+                            <ul>
+                                <li>The service uses the OntologyQueryService to identify relevant ontology classes
+                                    (e.g., "software," "license") and map keywords to ontology properties and
+                                    relationships (e.g., "depends on," "supports").
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Filter Extraction</p>
+                            <ul>
+                                <li>Filters are created by linking identified properties (e.g., "licensed under") to
+                                    specific entities in the ontology (e.g., a particular software license).
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>SPARQL Query Generation</p>
+                            <ul>
+                                <li>Based on the identified class and filters, a SPARQL query is dynamically built using
+                                    appropriate prefixes, SELECT statements, and WHERE clauses.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Execution and Results</p>
+                            <ul>
+                                <li>The SPARQL query is sent to the ontology repository for execution.</li>
+                                <li>The results are retrieved and returned as output.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <p>User Service</p>
+                    <p>The User Service is a core authentication and user management component that handles password
+                        generation, user verification, and token management. It integrates tightly with the user
+                        repository for data storage and retrieval and ensures secure and efficient user authentication
+                        through hashed OTPs and JWT tokens. Additionally, the service sends email notifications for OTPs
+                        and manages inactive users to keep the database clean.
+                        This service is vital for ensuring secure, user-friendly authentication workflows in the
+                        system.</p>
+                    <ol type="A">
+                        <li>
+                            <p>Password Management</p>
+                            <ul>
+                                <li>The service generates temporary one-time passwords (OTPs) for users to
+                                    authenticate.
+                                </li>
+                                <li>Passwords are hashed and stored securely in the repository.</li>
+                                <li>It enforces rate limits on OTP generation to prevent abuse. Only 3 otp can be active
+                                    at one time. After the first 1 is sent, there is a cooldown of 1 minute and after
+                                    the second a cooldown of 3 minutes
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Email Notification</p>
+                            <ul>
+                                <li>Sends OTPs to users via email using a predefined email template.</li>
+                                <li>Utilizes Flask-Mail for email delivery.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>User Authentication</p>
+                            <ul>
+                                <li>Verifies user-submitted OTPs by comparing them with stored hashed passwords.</li>
+                                <li>Marks OTPs as used once verified.</li>
+                                <li>Activates the user account upon successful OTP verification and generates a JWT
+                                    token for authentication.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Token Management</p>
+                            <ul>
+                                <li>Generates JWT tokens with payloads containing user information and expiration
+                                    times.
+                                </li>
+                                <li>Validates tokens for authenticity and expiration.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>User Cleanup</p>
+                            <ul>
+                                <li>Periodically deletes unactivated users from the repository to maintain database
+                                    hygiene.
+                                </li>
+                                <li>To achieve this we set up a cron job that runs every day at 12:01AM and deletes all
+                                    the unactivated users that created their account more than 7 days before the moment
+                                    of the run.
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+                <li>
+                    <p>Preferences Service</p>
+                    <p>The Preferences Service provides an interface for managing user-specific preferences, ensuring
+                        personalized functionality within the system. It supports creating, retrieving, and deleting
+                        user preferences while maintaining data integrity and security. The service interacts with the
+                        user repository to handle all database operations efficiently. Its streamlined design allows
+                        users to easily manage their preferences while ensuring proper validation and ownership
+                        checks.</p>
+                    <ol type="A">
+                        <li>
+                            <p>Saving Preferences</p>
+                            <ul>
+                                <li>A user can save a specific preference by providing a key-value pair.</li>
+                                <li>The service creates a new UserPreference instance and stores it in the repository.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Deleting Preferences</p>
+                            <ul>
+                                <li>The service allows users to delete specific preferences by their ID.</li>
+                                <li>It validates the preference's existence and ownership before removing it from the
+                                    repository.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Fetching Preferences by Key</p>
+                            <ul>
+                                <li>Users can retrieve preferences filtered by a specific key.</li>
+                                <li>The service queries the repository for preferences matching the key and user ID.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p>Retrieving All Preferences</p>
+                            <ul>
+                                <li>The service supports fetching all preferences associated with a specific user.</li>
+                                <li>It returns a comprehensive list of preferences for the user.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </li>
+            </ol>
+        </section>
+        <section>
+            <h4>Repositories</h4>
+            <p>Repositories abstract data access, enabling seamless interaction with external systems.</p>
+            <p>Each repository serves as the primary data store for a specific set of information. It
+                provides methods for querying and executing queries. By encapsulating all interactions within the
+                repository, the system achieves
+                a clean separation of concerns and ensures efficient data access. The repositories are designed to
+                handle complex queries and deliver structured results to the service layer.</p>
+            <ol type="1">
+                <li>
+                    <p>Ontology Repository</p>
+                    <p>Uses SPARQLWrapper to send SPARQL queries to the Ontology Query Engine.</p>
+                    <p>Incorporates a caching system implemented using an LRU cache with TTL (Time-to-Live) to optimize
+                        query performance. Frequently accessed queries are stored temporarily, ensuring fast retrieval
+                        while reducing load on the Ontology Query Engine.</p>
+                </li>
+
+                <li>
+                    <p>User Repository</p>
+                    <p>Implements SQLAlchemy to read and write user-related data to and from the PostgreSQL
+                        database.</p>
+                </li>
+                <li>
+                    <p>Preferences Repository</p>
+                    <p>Implements SQLAlchemy to read and write user's preferences-related data to and from the
+                        PostgreSQL database.</p>
+                </li>
+            </ol>
+
+        </section>
+        <section>
+            <h4>Security Filter</h4>
+            <p>The Authentication Decorator provides a reusable mechanism for securing Flask routes by enforcing
+                token-based authentication. It ensures that incoming requests contain a valid Authorization header with
+                a properly formatted Bearer token. The decorator uses the UserService to validate tokens, verify their
+                integrity, and extract user information. By injecting the authenticated user's ID into the request
+                context, it simplifies access control for protected resources. This approach promotes security and
+                reduces boilerplate code in the application.</p>
+        </section>
+        <section>
+            <h4>Design Considerations</h4>
+            <p>The backend architecture is designed to be modular, scalable, and maintainable. By following the
+                principles of separation of concerns and single responsibility, the system ensures that each component
+                focuses on a specific domain of functionality. This design approach enhances code readability,
+                maintainability, and testability, allowing for easier debugging and future enhancements.</p>
+            <p>Python was the ideal choice for the backend server due to its simplicity, readability, and extensive
+                ecosystem of libraries that support web development, authentication, and ontology querying. Its seamless
+                integration with frameworks like Flask allows for rapid API development while maintaining flexibility
+                and scalability. Python’s support for SQLAlchemy ensures efficient database management, and its
+                compatibility with SPARQLWrapper simplifies interaction with ontology-based data sources. Additionally,
+                Python's strong security libraries for cryptographic functions, such as bcrypt for password hashing and
+                PyJWT for token management, make it a robust choice for handling user authentication. Furthermore,
+                Python excels at text processing and parsing, making it particularly well-suited for the Parsing
+                Service, which involves transforming natural language queries into structured SPARQL queries. With
+                built-in string manipulation tools and powerful libraries like NLTK and spaCy, Python makes parsing
+                tasks significantly easier compared to more rigidly typed languages like Java or C++. Unlike lower-level
+                languages that may require extensive boilerplate code or higher learning curves, Python offers a balance
+                between developer productivity and performance, making it an optimal choice for building and maintaining
+                a secure, scalable, and maintainable backend system.</p>
+
+        </section>
+    </section>
+
+    <section>
+        <h3>
+            Database Architecture
+        </h3>
+
+        <p>The class diagram illustrates the relationships between three main entities in the system: Users, User
+            Preferences, and One-Time Passwords (OTPs). These entities are interconnected through foreign key
+            relationships, with the Users table acting as the central entity.</p>
+
+        <figure class="figure">
+            <img src="./figures/database.drawio.png" alt="Description of the image">
+            <figcaption>Figure 6: Class Diagram.</figcaption>
+        </figure>
+
+        <h4>Design Considerations</h4>
+        <p>Using SQL with PostgreSQL instead of an RDF-based database for this system was a deliberate decision based on
+            the specific nature of the data and its operational requirements. The data model for user management,
+            preferences, and one-time passwords is highly structured and relational, with clearly defined entities and
+            relationships. SQL databases like PostgreSQL are optimized for such scenarios, providing robust support for
+            schema definition, constraints, and indexing, which are essential for ensuring the integrity and efficiency
+            of the data.</p>
+        <p>PostgreSQL offers advanced query optimization, transactional support, and performance tuning capabilities,
+            making it particularly well-suited for tasks like retrieving user preferences, validating one-time
+            passwords, and handling user authentication workflows. For instance, storing hashed passwords and tracking
+            OTPs demand strict control over data consistency, which PostgreSQL enforces through its ACID-compliant
+            transaction model. Additionally, the relational model naturally fits operations like linking user IDs to
+            their respective preferences or OTPs, ensuring data is efficiently stored and queried.</p>
+        <p>While RDF-based databases excel at managing semantic, graph-like data, they are less ideal for transactional
+            operations involving strict relationships and constraints. The core requirements of this system, such as
+            enforcing foreign key constraints and handling highly structured, tabular data, align more closely with the
+            strengths of a relational database. Furthermore, the need for precise, performant querying in authentication
+            workflows would not benefit from the complexity and overhead of an RDF model, which is more appropriate for
+            ontology-related tasks.</p>
+        <p>By choosing PostgreSQL, the system also benefits from a mature ecosystem of tools and libraries, including
+            seamless integration with Python frameworks like SQLAlchemy and Flask. This enhances development
+            productivity, maintainability, and scalability while providing the flexibility to evolve the schema as the
+            system grows. Separating the ontology data into an RDF store and operational data into PostgreSQL ensures
+            that each technology is used for its intended purpose, creating a robust and efficient architecture tailored
+            to the needs of the application.</p>
+    </section>
+
+    <section>
+        <h3>
+            Ontology Query Engine
+        </h3>
+        <p>
+            The Ontology Query Engine is a critical component of the system, responsible for managing and querying the
+            RDF-based knowledge model. It provides a SPARQL endpoint for executing queries against the ontology data,
+            enabling users to retrieve relevant information based on their requirements. The engine is built on Apache
+            Jena Fuseki, a robust and scalable triple store that supports efficient storage and retrieval of RDF data.
+            By leveraging Fuseki's capabilities, the system can handle complex SPARQL queries, ensuring accurate and
+            timely responses to user queries.
+        </p>
+    </section>
+</section>
+
+<section id="use-cases" role="doc-chapter">
+    <h2>Case Studies</h2>
+
+    <figure class="figure">
+        <img src="./figures/use_case.drawio.png" alt="Description of the image">
+        <figcaption>Figure 7: Use Case Diagram.</figcaption>
+    </figure>
+
+    <p>
+        The following case studies illustrate real-world applications of the CodeOwl system. These scenarios demonstrate how the system can be used to enhance productivity, streamline workflows, and support research and development efforts in software engineering.
+    </p>
+
+    <section>
+        <h3>Researcher Querying Software Trends</h3>
+        <p>
+            <strong>Background:</strong> A university researcher is studying the adoption of microservices architectures across open-source projects. They need detailed information on repositories, programming languages, and development methodologies associated with this architectural style.
+        </p>
+        <p>
+            <strong>Approach:</strong>
+        </p>
+        <ul>
+            <li>The researcher logs into CodeOwl and submits a query to identify repositories tagged with "MicroservicesArchitecture."</li>
+            <li>The system processes the query using the ontology and returns a list of relevant projects, including details such as programming languages, GitHub star counts, and associated methodologies.</li>
+            <li>The researcher saves the search for future reference and exports the results as a CSV file for further analysis.</li>
+        </ul>
+        <p>
+            <strong>Outcome:</strong> The researcher identifies key projects adopting microservices, uncovers trends in their usage, and uses the findings to publish a paper on architectural adoption in open-source ecosystems.
+        </p>
+    </section>
+    <section>
+        <h3>Enterprise Developer Managing Dependencies</h3>
+        <p>
+            <strong>Background:</strong> A developer at a mid-sized software company is tasked with upgrading dependencies for a project using the Spring Framework. They need to understand the dependencies' compatibility with the latest version of Spring.
+        </p>
+        <p>
+            <strong>Approach:</strong>
+        </p>
+        <ul>
+            <li>The developer queries the ontology for tools and libraries compatible with "Spring Framework" version 5.3.20.</li>
+            <li>The system processes the query and provides a list of compatible tools, including Hibernate ORM and Maven.</li>
+            <li>The developer uses the "Save Search" feature to store this query and access it during future updates.</li>
+        </ul>
+        <p>
+            <strong>Outcome:</strong> The developer successfully upgrades the project dependencies, ensuring compatibility and minimizing disruption to the software's functionality.
+        </p>
+    </section>
+
+    <section>
+        <h3>Data Analyst Monitoring Repository Metrics</h3>
+        <p>
+            <strong>Background:</strong> A data analyst is monitoring the popularity of repositories related to specific programming languages to generate a report for their company's strategy team.
+        </p>
+        <p>
+            <strong>Approach:</strong>
+        </p>
+        <ul>
+            <li>The analyst queries the ontology for repositories associated with "Python" and retrieves metadata such as star counts and creation dates.</li>
+            <li>The system processes the query and returns a ranked list of repositories, including links to their GitHub pages.</li>
+            <li>The analyst uses the "Save Search" feature to track the same query over time, observing trends in popularity.</li>
+        </ul>
+        <p>
+            <strong>Outcome:</strong> The analyst provides actionable insights on Python repository trends, aiding the company's strategic decisions regarding developer outreach and tool support.
+        </p>
+    </section>
+
+</section>
+
+<section id="user-guide" role="doc-chapter">
+    <h2>User Guide</h2>
+    <p>User Guide</p>
+</section>
+
+<section id="video-demonstration" role="doc-chapter">
+    <h2>Video Demonstration</h2>
+    <p>An embedded video</p>
+    <video controls>
+        <source src="path-to-video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</section>
+
+<section id="references" role="doc-bibliography">
+    <h2>References</h2>
+    <ul>
+        <li>Reference 1</li>
+        <li>Reference 2</li>
+    </ul>
+</section>
+
+<footer>
+    <p>© 2025 Tudor Pasat and Valentin Borfalau. All rights reserved.</p>
+</footer>
 </body>
 </html>
