@@ -56,21 +56,14 @@ Maybe you can mention me or this repo in the acknowledgements too
 # :notebook_with_decorative_cover: Table of Contents
 
 - [About the Project](#star2-about-the-project)
-  * [Screenshots](#camera-screenshots)
   * [Tech Stack](#space_invader-tech-stack)
   * [Features](#dart-features)
   * [Color Reference](#art-color-reference)
-  * [Environment Variables](#key-environment-variables)
 - [Getting Started](#toolbox-getting-started)
   * [Prerequisites](#bangbang-prerequisites)
   * [Installation](#gear-installation)
-  * [Running Tests](#test_tube-running-tests)
   * [Run Locally](#running-run-locally)
-  * [Deployment](#triangular_flag_on_post-deployment)
 - [Usage](#eyes-usage)
-- [Roadmap](#compass-roadmap)
-- [Contributing](#wave-contributing)
-- [FAQ](#grey_question-faq)
 - [License](#warning-license)
 - [Contact](#handshake-contact)
 - [Acknowledgements](#gem-acknowledgements)
@@ -80,78 +73,54 @@ Maybe you can mention me or this repo in the acknowledgements too
 <!-- About the Project -->
 ## :star2: About the Project
 
-
-<!-- Screenshots -->
-### :camera: Screenshots
-
-<div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
-</div>
-
-
 <!-- TechStack -->
 ### :space_invader: Tech Stack
 
 <details>
   <summary>Client</summary>
-  <!-- <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://nextjs.org/">Next.js</a></li>
+  <ul>
     <li><a href="https://reactjs.org/">React.js</a></li>
-    <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
-  </ul> -->
+  </ul>
 </details>
 
 <details>
   <summary>Server</summary>
-  <!-- <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
-    <li><a href="https://go.dev/">Golang</a></li>
-    <li><a href="https://nestjs.com/">Nest.js</a></li>
-    <li><a href="https://socket.io/">SocketIO</a></li>
-    <li><a href="https://www.prisma.io/">Prisma</a></li>    
-    <li><a href="https://www.apollographql.com/">Apollo</a></li>
-    <li><a href="https://graphql.org/">GraphQL</a></li>
-  </ul> -->
-</details>
-
-<details>
-<summary>Database</summary>
-  <!-- <ul>
-    <li><a href="https://www.mysql.com/">MySQL</a></li>
+  <ul>
+    <li><a href="https://www.python.org/">Python</a></li>
+    <li><a href="https://flask.palletsprojects.com/">Flask</a></li>
     <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-    <li><a href="https://redis.io/">Redis</a></li>
-    <li><a href="https://neo4j.com/">Neo4j</a></li>
-    <li><a href="https://www.mongodb.com/">MongoDB</a></li>
-  </ul> -->
+    <li><a href="https://jena.apache.org/documentation/fuseki2/">Apache Jena Fuseki</a></li>
+    <li><a href="https://www.w3.org/TR/sparql11-query/">SPARQL</a></li>
+  </ul>
 </details>
 
 <details>
-<summary>DevOps</summary>
-  <!-- <ul>
-    <li><a href="https://www.docker.com/">Docker</a></li>
-    <li><a href="https://www.jenkins.io/">Jenkins</a></li>
-    <li><a href="https://circleci.com/">CircleCLI</a></li>
-  </ul> -->
+  <summary>Database</summary>
+  <ul>
+    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
+    <li><a href="https://jena.apache.org/documentation/fuseki2/">Apache Jena Fuseki</a></li>
+    <li><a href="https://www.w3.org/TR/sparql11-query/">SPARQL</a></li>
+  </ul>
 </details>
 
 <!-- Features -->
 ### :dart: Features
 
-- Feature 1
-- Feature 2
-- Feature 3
+- Semantic knowledge model for software artifacts
+- Natural language query parsing
+- GitHub repository metadata integration
+- Ontology browser with detailed entity descriptions
+- User preferences and search history
+- Secure authentication with one-time passwords
 
 <!-- Color Reference -->
 ### :art: Color Reference
 
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| Primary Color | ![#222831](https://via.placeholder.com/10/222831?text=+) #222831 |
-| Secondary Color | ![#393E46](https://via.placeholder.com/10/393E46?text=+) #393E46 |
-| Accent Color | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
-| Text Color | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
+| Color         | Hex                         |
+| ------------- | --------------------------- |
+| Color | <span style="color: #22D3EE;">#22D3EE</span> |
+| Text Color | <span style="color: #EEEEEE;">#EEEEEE</span> & <span style="color: #CCCCCC;">#CCCCCC</span> |
+
 
 
 <!-- Env Variables -->
@@ -169,112 +138,77 @@ To run this project, you will need to add the following environment variables to
 <!-- Prerequisites -->
 ### :bangbang: Prerequisites
 
-This project uses Yarn as package manager
+- Python 3.12
 
-```bash
- npm install --global yarn
-```
+- Node.js
+
+- npm
+
+- PostgreSQL
+
+- Apache Jena Fuseki
+
 
 <!-- Installation -->
 ### :gear: Installation
 
-Install my-project with npm
-
-```bash
-  yarn install my-project
-  cd my-project
-```
-   
-<!-- Running Tests -->
-### :test_tube: Running Tests
-
-To run tests, run the following command
-
-```bash
-  yarn test test
-```
-
-<!-- Run Locally -->
-### :running: Run Locally
-
-Clone the project
+Clone the repository:
 
 ```bash
   git clone https://github.com/TudorPCT/WADE.git
+  cd WADE
 ```
 
-Go to the project directory
+Install dependencies:
+```bash 
+  # Frontend
+  cd frontend
+  npm install
 
+  # Backend
+  cd ../backend
+  pip install -r requirements.txt
+```
+<!-- Run Locally -->
+### :running: Run Locally
+
+Start the backend:
 ```bash
-  cd my-project
+  cd backend-service
+  python app.py
 ```
 
-Install dependencies
-
+Start the frontend:
 ```bash
-  yarn install
-```
-
-Start the server
-
-```bash
-  yarn start
-```
-
-
-<!-- Deployment -->
-### :triangular_flag_on_post: Deployment
-
-To deploy this project run
-
-```bash
-  yarn deploy
+  cd frontend
+  npm start
 ```
 
 
 <!-- Usage -->
 ## :eyes: Usage
 
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
+- CodeOwl enables various use cases:
 
+- Research software trends
 
-```javascript
-import Component from 'my-project'
+- Manage project dependencies
 
-function App() {
-  return <Component />
-}
+- Monitor repository metrics
+
+- Explore software ontologies
+
+Example query:
+```bash
+  Show all frameworks for java 
 ```
 
-<!-- Contributing -->
-## :wave: Contributing
-
-<a href="https://github.com/TudorPCT/WADE/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Louis3797/awesome-readme-template" />
-</a>
-
-
-Contributions are always welcome!
-
-See `contributing.md` for ways to get started.
-
-
-<!-- FAQ -->
-## :grey_question: FAQ
-
-- Question 1
-
-  + Answer 1
-
-- Question 2
-
-  + Answer 2
 
 
 <!-- License -->
 ## :warning: License
 
-Distributed under the no License. See LICENSE.txt for more information.
+See LICENSE.txt for more information.
 
 
 <!-- Contact -->
@@ -295,3 +229,6 @@ Use this section to mention useful resources and libraries that you have used in
  - [Awesome README](https://github.com/matiassingers/awesome-readme)
  - [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
  - [Readme Template](https://github.com/othneildrew/Best-README-Template)
+
+
+project infoiasi wade web
