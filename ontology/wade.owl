@@ -1,0 +1,502 @@
+@prefix : <http://127.0.0.1:5000/software-ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+
+
+###############################################################################
+# 1. FOUNDATION: Root Class and DOAP Alignment
+###############################################################################
+:SoftwareArtifact a owl:Class ;
+    rdfs:comment "A broad class for all software-related artifacts or entities." .
+
+:Project a owl:Class ;
+    rdfs:subClassOf doap:Project, :SoftwareArtifact ;
+    rdfs:comment "Represents a software project or product, aligning with DOAP's Project concept." .
+
+:Repository a owl:Class ;
+    rdfs:subClassOf doap:Repository, :SoftwareArtifact ;
+    rdfs:comment "Represents a code repository, aligning with DOAP's Repository concept." .
+
+:GitHubRepository a owl:Class ;
+    rdfs:subClassOf :Repository, doap:GitRepository ;
+    rdfs:comment "A GitHub-based repository, accessible via GraphQL API. Subclass of doap:GitRepository." .
+
+:ProgrammingLanguage a owl:Class ;
+    rdfs:subClassOf doap:ProgrammingLanguage, :SoftwareArtifact ;
+    rdfs:comment "A programming language, reusing DOAP's definition and extending SoftwareArtifact." .
+
+###############################################################################
+# 2. PARADIGMS
+###############################################################################
+:Paradigm a owl:Class ;
+    rdfs:subClassOf :SoftwareArtifact ;
+    rdfs:comment "Represents a general programming paradigm (OOP, functional, etc.)." .
+
+:ObjectOrientedParadigm a owl:Class ;
+    rdfs:subClassOf :Paradigm .
+
+:ClassBasedOOP a owl:Class ;
+    rdfs:subClassOf :ObjectOrientedParadigm .
+
+:PrototypeBasedOOP a owl:Class ;
+    rdfs:subClassOf :ObjectOrientedParadigm .
+
+:FunctionalParadigm a owl:Class ;
+    rdfs:subClassOf :Paradigm .
+
+:ProceduralParadigm a owl:Class ;
+    rdfs:subClassOf :Paradigm .
+
+###############################################################################
+# 3. ARCHITECTURES
+###############################################################################
+:SoftwareArchitecture a owl:Class ;
+    rdfs:subClassOf :SoftwareArtifact ;
+    rdfs:comment "Represents a high-level software architecture style (Monolithic, Microservices, etc.)." .
+
+:MonolithicArchitecture a owl:Class ;
+    rdfs:subClassOf :SoftwareArchitecture .
+
+:LayeredMonolith a owl:Class ;
+    rdfs:subClassOf :MonolithicArchitecture .
+
+:MicroservicesArchitecture a owl:Class ;
+    rdfs:subClassOf :SoftwareArchitecture .
+
+:EventDrivenArchitecture a owl:Class ;
+    rdfs:subClassOf :SoftwareArchitecture .
+
+:EventDrivenMicroservices a owl:Class ;
+    rdfs:subClassOf :MicroservicesArchitecture , :EventDrivenArchitecture .
+
+###############################################################################
+# 4. DEVELOPMENT METHODOLOGIES
+###############################################################################
+:DevelopmentMethodology a owl:Class ;
+    rdfs:subClassOf :SoftwareArtifact ;
+    rdfs:comment "Represents a software development methodology or process." .
+
+:AgileMethodology a owl:Class ;
+    rdfs:subClassOf :DevelopmentMethodology .
+
+:Scrum a owl:Class ;
+    rdfs:subClassOf :AgileMethodology .
+
+:Kanban a owl:Class ;
+    rdfs:subClassOf :AgileMethodology .
+
+:WaterfallMethodology a owl:Class ;
+    rdfs:subClassOf :DevelopmentMethodology .
+
+:DevOpsMethodology a owl:Class ;
+    rdfs:subClassOf :DevelopmentMethodology .
+
+###############################################################################
+# 5. SOFTWARE LICENSE (Aligning with doap:license if desired)
+###############################################################################
+:SoftwareLicense a owl:Class ;
+    rdfs:subClassOf :SoftwareArtifact ;
+    rdfs:comment "Represents a formal license under which software is distributed." .
+
+# Example license individuals
+:MITLicense a owl:NamedIndividual, :SoftwareLicense ;
+    dct:title "MIT License" ;
+    dct:description "A permissive open-source license." .
+
+:GPL3License a owl:NamedIndividual, :SoftwareLicense ;
+    dct:title "GNU GPL 3.0" ;
+    dct:description "GNU General Public License version 3." .
+
+:Apache2License a owl:NamedIndividual, :SoftwareLicense ;
+    dct:title "Apache License 2.0" ;
+    dct:description "A widely used open-source license." .
+
+###############################################################################
+# 6. SOFTWARE TOOL ECOSYSTEM
+###############################################################################
+:SoftwareTool a owl:Class ;
+    rdfs:subClassOf :SoftwareArtifact ;
+    rdfs:comment "A broad class representing any tool used in software development." .
+
+:RuntimePlatform a owl:Class ;
+    rdfs:subClassOf :SoftwareTool ;
+    rdfs:comment "E.g., Node.js, Python interpreter, .NET runtime, etc." .
+
+:OperatingSystem a owl:Class ;
+    rdfs:subClassOf :SoftwareTool ;
+    rdfs:comment "E.g., Windows, Linux, macOS, container OS images, etc." .
+
+:Driver a owl:Class ;
+    rdfs:subClassOf :SoftwareTool ;
+    rdfs:comment "Device drivers used in certain environments." .
+
+:Utility a owl:Class ;
+    rdfs:subClassOf :SoftwareTool ;
+    rdfs:comment "Command-line tools, CLI utilities, or other small programs." .
+
+:VirtualMachine a owl:Class ;
+    rdfs:subClassOf :SoftwareTool ;
+    rdfs:comment "Virtual machines like JVM, .NET CLR, or container runtimes." .
+
+:Compiler a owl:Class ;
+    rdfs:subClassOf :SoftwareTool ;
+    rdfs:comment "Compilers or transpilers (e.g., Babel, GCC, Clang)." .
+
+:Interpreter a owl:Class ;
+    rdfs:subClassOf :SoftwareTool ;
+    rdfs:comment "Interpreters for scripting languages (e.g., Python, Ruby)." .
+
+:ApplicationServer a owl:Class ;
+    rdfs:subClassOf :SoftwareTool ;
+    rdfs:comment "Servers that run enterprise apps (e.g. Tomcat, JBoss, GlassFish)." .
+
+:Framework a owl:Class ;
+    rdfs:subClassOf :SoftwareTool ;
+    rdfs:comment "Software frameworks such as React, Django, Spring, etc." .
+
+:SDK a owl:Class ;
+    rdfs:subClassOf :SoftwareTool ;
+    rdfs:comment "Software Development Kits (Android SDK, AWS SDK, etc.)." .
+
+:Library a owl:Class ;
+    rdfs:subClassOf :SoftwareTool ;
+    rdfs:comment "Libraries, components, packages (e.g., NumPy, Lodash)." .
+
+:Component a owl:Class ;
+    rdfs:subClassOf :SoftwareTool ;
+    rdfs:comment "Reusable software components, smaller than full libraries or frameworks." .
+
+:IDE a owl:Class ;
+    rdfs:subClassOf :SoftwareTool ;
+    rdfs:comment "Integrated Development Environments like VSCode, IntelliJ, Replit, etc." .
+
+:CloudDevelopmentPlatform a owl:Class ;
+    rdfs:subClassOf :IDE ;
+    rdfs:comment "Specifically for cloud-based dev environments like Replit, Gitpod, etc." .
+
+###############################################################################
+# 7. OBJECT PROPERTIES (Linking concepts)
+###############################################################################
+
+:adoptsParadigm a owl:ObjectProperty ;
+    rdfs:domain :SoftwareTool ;
+    rdfs:range :Paradigm ;
+    rdfs:comment "A tool (or language) implements or adopts a particular paradigm." .
+
+:supportsLanguage a owl:ObjectProperty ;
+    rdfs:domain :SoftwareTool ;
+    rdfs:range :ProgrammingLanguage ;
+    rdfs:comment "A software tool targets a programming language (e.g., compilers, frameworks)." .
+
+:dependsOn a owl:ObjectProperty ;
+    rdfs:domain :SoftwareTool ;
+    rdfs:range :SoftwareTool ;
+    rdfs:comment "One tool depends on another tool or library." .
+
+:isCompatibleWith a owl:ObjectProperty ;
+    rdfs:domain :SoftwareTool ;
+    rdfs:range :SoftwareArchitecture ;
+    rdfs:comment "A software tool is compatible with a certain architecture." .
+
+:followsMethodology a owl:ObjectProperty ;
+    rdfs:domain :Project ;
+    rdfs:range :DevelopmentMethodology ;
+    rdfs:comment "A project follows a certain dev methodology (Agile, Waterfall, etc.)." .
+
+:usesArchitecture a owl:ObjectProperty ;
+    rdfs:domain :Project ;
+    rdfs:range :SoftwareArchitecture ;
+    rdfs:comment "A project employs a particular architecture style (e.g., microservices)." .
+
+:hasSoftwareLicense a owl:ObjectProperty ;
+    rdfs:domain :SoftwareArtifact ;
+    rdfs:range :SoftwareLicense ;
+    rdfs:comment "Links a software artifact to its license." .
+
+:hostedOnRepository a owl:ObjectProperty ;
+    rdfs:domain :Project ;
+    rdfs:range :Repository ;
+    rdfs:comment "Indicates which repository a project is hosted on (e.g., GitHub)." .
+
+################################################################################
+# 8. DATA PROPERTIES (Simple literal fields, plus DCT reuse)
+################################################################################
+
+# DOAP commonly uses doap:name, doap:description, doap:homepage, etc.
+# Dublin Core (DCT) can be used for title, description, creator, etc.
+
+:hasVersion a owl:DatatypeProperty ;
+    rdfs:domain :SoftwareTool ;
+    rdfs:range xsd:string ;
+    rdfs:comment "A version string for a software tool (e.g., '18.2.0')." .
+
+:hasStars a owl:DatatypeProperty ;
+    rdfs:domain :Repository ;
+    rdfs:range xsd:nonNegativeInteger ;
+    rdfs:comment "Number of GitHub stars for a repository, must be non-negative." .
+
+:repoUrl a owl:DatatypeProperty ;
+    rdfs:domain :Repository ;
+    rdfs:range xsd:anyURI ;
+    rdfs:comment "Canonical URL for a repository (e.g., GitHub repo link)." .
+
+:dct:created a owl:DatatypeProperty ;
+    rdfs:domain :Project ;
+    rdfs:range xsd:date ;
+    rdfs:comment "Date when a project was created (reuse of dct:created)." .
+
+################################################################################
+# 9. ALIGNMENT WITH DOAP & DCT
+################################################################################
+
+:Project owl:equivalentClass doap:Project .
+
+:hasSoftwareLicense owl:equivalentProperty doap:license .
+
+
+################################################################################
+# 10. INDIVIDUALS
+################################################################################
+
+
+# Individuals for Programming Languages
+:Java a owl:NamedIndividual, :ProgrammingLanguage ;
+    rdfs:comment "Java as a named individual of ProgrammingLanguage." .
+
+:Kotlin a owl:NamedIndividual, :ProgrammingLanguage ;
+    rdfs:comment "Kotlin, often used with Java and Android development." .
+
+:Python a owl:NamedIndividual, :ProgrammingLanguage ;
+    rdfs:comment "Python as a named individual of ProgrammingLanguage." .
+
+:JavaScript a owl:NamedIndividual, :ProgrammingLanguage ;
+    rdfs:comment "JavaScript as a named individual of ProgrammingLanguage." .
+
+:CSharp a owl:NamedIndividual, :ProgrammingLanguage ;
+    rdfs:comment "C# as a named individual of ProgrammingLanguage." .
+
+:Ruby a owl:NamedIndividual, :ProgrammingLanguage ;
+    rdfs:comment "Ruby as a named individual of ProgrammingLanguage." .
+
+# Paradigms
+:OOP a owl:NamedIndividual, :ObjectOrientedParadigm ;
+    rdfs:comment "Object-Oriented Programming paradigm." .
+
+:Functional a owl:NamedIndividual, :FunctionalParadigm ;
+    rdfs:comment "Functional Programming paradigm." .
+
+:Procedural a owl:NamedIndividual, :ProceduralParadigm ;
+    rdfs:comment "Procedural Programming paradigm." .
+
+:AspectOriented a owl:NamedIndividual, :Paradigm ;
+    rdfs:comment "Aspect-Oriented Programming paradigm." .
+
+# Frameworks
+:Spring a owl:NamedIndividual, :Framework ;
+    doap:name "Spring Framework" ;
+    :supportsLanguage :Java ;
+    :hasVersion "5.3.20" ;
+    :hasSoftwareLicense :Apache2License ;
+    rdfs:comment "A comprehensive framework for Java enterprise applications." .
+
+:Hibernate a owl:NamedIndividual, :Framework ;
+    doap:name "Hibernate ORM" ;
+    :supportsLanguage :Java ;
+    :hasVersion "6.1.5" ;
+    :hasSoftwareLicense :GPL3License ;
+    rdfs:comment "A popular Java framework for Object-Relational Mapping (ORM)." .
+
+:Django a owl:NamedIndividual, :Framework ;
+    doap:name "Django Framework" ;
+    :supportsLanguage :Python ;
+    :hasVersion "4.2" ;
+    :hasSoftwareLicense :BSDLicense ;
+    rdfs:comment "A Python web framework (BSD-licensed)." .
+
+:ReactJS a owl:NamedIndividual, :Framework ;
+    doap:name "ReactJS" ;
+    :supportsLanguage :JavaScript ;
+    :hasVersion "18.0.2" ;
+    :hasSoftwareLicense :MITLicense ;
+    rdfs:comment "A JavaScript library for building user interfaces." .
+
+:RubyOnRails a owl:NamedIndividual, :Framework ;
+    doap:name "Ruby on Rails" ;
+    :supportsLanguage :Ruby ;
+    :hasVersion "7.0.4" ;
+    :hasSoftwareLicense :MITLicense ;
+    rdfs:comment "A server-side web application framework for Ruby." .
+
+:ASPNetCore a owl:NamedIndividual, :Framework ;
+    doap:name "ASP.NET Core" ;
+    :supportsLanguage :CSharp ;
+    :hasVersion "6.0" ;
+    :hasSoftwareLicense :MITLicense ;
+    rdfs:comment "A cross-platform framework for building modern web apps and services." .
+
+# Software Projects
+:EnterpriseApp a owl:NamedIndividual, :Project ;
+    doap:name "Enterprise Application" ;
+    dct:description "An enterprise-level application developed with Java and Spring." ;
+    :followsMethodology :Scrum ;
+    :usesArchitecture :LayeredMonolith ;
+    :hasSoftwareLicense :Apache2License ;
+    dct:created "2022-08-15"^^xsd:date ;
+    rdfs:comment "Uses Java and Spring with Hibernate ORM for database interactions." .
+
+:MyWebApp a owl:NamedIndividual, :Project ;
+    doap:name "My Web Application" ;
+    dct:description "A microservices-based web application that follows Scrum." ;
+    :followsMethodology :Scrum ;
+    :usesArchitecture :MicroservicesArchitecture ;
+    :hasSoftwareLicense :MITLicense ;
+    dct:created "2023-05-01"^^xsd:date ;
+    rdfs:comment "A sample project illustrating use of microservices + Scrum." .
+
+:ECommercePlatform a owl:NamedIndividual, :Project ;
+    doap:name "E-Commerce Platform" ;
+    dct:description "A scalable e-commerce platform using ReactJS and Node.js." ;
+    :followsMethodology :Kanban ;
+    :usesArchitecture :EventDrivenArchitecture ;
+    :hasSoftwareLicense :Apache2License ;
+    dct:created "2021-03-20"^^xsd:date ;
+    rdfs:comment "Built with a modern stack for high scalability." .
+
+# Repositories
+:EnterpriseAppRepo a owl:NamedIndividual, :GitHubRepository ;
+    doap:name "EnterpriseAppRepo" ;
+    dct:description "GitHub repository for the Enterprise Application." ;
+    :repoUrl <https://github.com/org/EnterpriseApp> ;
+    :hasStars 1200 ;
+    rdfs:comment "Hosted on GitHub and actively maintained." .
+
+:MyWebAppRepo a owl:NamedIndividual, :GitHubRepository ;
+    doap:name "MyWebAppRepo" ;
+    dct:description "GitHub repository for My Web Application." ;
+    :repoUrl <https://github.com/myorg/MyWebApp> ;
+    :hasStars 250 ;
+    rdfs:comment "Hosted on GitHub, can be queried via GraphQL." .
+
+:ECommercePlatformRepo a owl:NamedIndividual, :GitHubRepository ;
+    doap:name "ECommercePlatformRepo" ;
+    dct:description "GitHub repository for the E-Commerce Platform." ;
+    :repoUrl <https://github.com/ecommerce/Platform> ;
+    :hasStars 3400 ;
+    rdfs:comment "A well-starred repository showcasing modern architecture." .
+
+:EnterpriseApp :hostedOnRepository :EnterpriseAppRepo .
+:MyWebApp :hostedOnRepository :MyWebAppRepo .
+:ECommercePlatform :hostedOnRepository :ECommercePlatformRepo .
+
+# Runtime Platforms
+:JVM a owl:NamedIndividual, :VirtualMachine, :RuntimePlatform  ;
+    doap:name "Java Virtual Machine" ;
+    :supportsLanguage :Java ;
+    :hasVersion "17" ;
+    rdfs:comment "Runtime environment for Java applications." .
+
+:NodeJS a owl:NamedIndividual, :RuntimePlatform ;
+    :supportsLanguage :JavaScript ;
+    :hasVersion "18.14.0" ;
+    :hasSoftwareLicense :MITLicense ;
+    rdfs:comment "Node.js runtime environment for JS." .
+
+:DotNetCLR a owl:NamedIndividual, :VirtualMachine, :RuntimePlatform ;
+    doap:name ".NET Runtime" ;
+    :supportsLanguage :CSharp ;
+    :hasVersion "6.0" ;
+    :hasSoftwareLicense :MITLicense ;
+    rdfs:comment "Runtime for .NET applications." .
+
+# Tools
+:Maven a owl:NamedIndividual, :Utility ;
+    doap:name "Apache Maven" ;
+    :supportsLanguage :Java ;
+    :hasVersion "3.8.6" ;
+    :hasSoftwareLicense :Apache2License ;
+    rdfs:comment "Build automation tool for Java projects." .
+
+:Gradle a owl:NamedIndividual, :Utility ;
+    doap:name "Gradle" ;
+    :supportsLanguage :Java ;
+    :hasVersion "8.2.1" ;
+    :hasSoftwareLicense :Apache2License ;
+    rdfs:comment "Flexible build automation tool often used with Java and Kotlin." .
+
+:Webpack a owl:NamedIndividual, :Utility ;
+    doap:name "Webpack" ;
+    :supportsLanguage :JavaScript ;
+    :hasVersion "5.75.0" ;
+    :hasSoftwareLicense :MITLicense ;
+    rdfs:comment "A module bundler for JavaScript applications." .
+
+:Bundler a owl:NamedIndividual, :Utility ;
+    doap:name "Ruby Bundler" ;
+    :supportsLanguage :Ruby ;
+    :hasVersion "2.4.2" ;
+    :hasSoftwareLicense :MITLicense ;
+    rdfs:comment "Dependency manager for Ruby applications." .
+
+# Libraries
+:JDBC a owl:NamedIndividual, :Library ;
+    doap:name "Java Database Connectivity (JDBC)" ;
+    :supportsLanguage :Java ;
+    :hasVersion "4.3" ;
+    rdfs:comment "Standard library for database connectivity in Java." .
+
+:Lodash a owl:NamedIndividual, :Library ;
+    doap:name "Lodash" ;
+    :supportsLanguage :JavaScript ;
+    :hasVersion "4.17.21" ;
+    :hasSoftwareLicense :MITLicense ;
+    rdfs:comment "A utility library delivering modularity, performance, and extras." .
+
+:EFCore a owl:NamedIndividual, :Library ;
+    doap:name "Entity Framework Core" ;
+    :supportsLanguage :CSharp ;
+    :hasVersion "6.0.0" ;
+    :hasSoftwareLicense :Apache2License ;
+    rdfs:comment "An ORM library for .NET." .
+
+# Operating Systems
+:Linux a owl:NamedIndividual, :OperatingSystem ;
+    doap:name "Linux" ;
+    rdfs:comment "Linux operating system, often used for server deployments." .
+
+:Windows a owl:NamedIndividual, :OperatingSystem ;
+    doap:name "Windows" ;
+    rdfs:comment "Microsoft Windows operating system." .
+
+:MacOS a owl:NamedIndividual, :OperatingSystem ;
+    doap:name "MacOS" ;
+    rdfs:comment "Apple's MacOS operating system." .
+
+# Development Methodologies
+:Scrum a owl:NamedIndividual, :AgileMethodology ;
+    rdfs:comment "Scrum methodology for agile project management." .
+
+:Kanban a owl:NamedIndividual, :AgileMethodology ;
+    rdfs:comment "Kanban methodology for lean development." .
+
+:Waterfall a owl:NamedIndividual, :WaterfallMethodology ;
+    rdfs:comment "Traditional waterfall development methodology." .
+
+# Linking Paradigms and Tools
+:Spring :adoptsParadigm :OOP .
+:Hibernate :adoptsParadigm :OOP .
+:Gradle :adoptsParadigm :Functional .
+:JDBC :adoptsParadigm :OOP .
+:ReactJS :adoptsParadigm :Functional .
+:ASPNetCore :adoptsParadigm :OOP .
+
+# Linking Projects to Tools
+:EnterpriseApp :dependsOn :Spring, :Hibernate, :Maven, :JDBC .
+:MyWebApp :dependsOn :ReactJS, :NodeJS, :Webpack .
+:ECommercePlatform :dependsOn :ReactJS, :NodeJS, :Webpack .
+
+
