@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import { Button } from 'primereact/button';
+import React, {useEffect, useState} from 'react';
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
+import {Button} from 'primereact/button';
 import axios from "axios";
-import { useNavigate } from 'react-router-dom';
-import './PreferencesPage.css'; 
+import {useNavigate} from 'react-router-dom';
+import './PreferencesPage.css';
 
 const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:5000";
 
@@ -21,7 +21,7 @@ const PreferencesPage = () => {
     const handleDelete = (id) => {
         axios.delete(`${API_URL}/api/preferences?id=${id}`)
             .then(() => {
-                setData(data.filter(item => item.id !== id));
+                setData(prevData => prevData.filter(item => item.id !== id));
             })
             .catch(error => console.error('Error deleting data:', error));
     };
@@ -32,21 +32,36 @@ const PreferencesPage = () => {
 
     const actionBodyTemplate = (rowData) => {
         return (
-            <React.Fragment>
-                <Button label="Search" onClick={() => handleSearchRedirect(rowData.value)} className="p-button-primary" />
-                <Button label="Delete" onClick={() => handleDelete(rowData.id)} className="p-button-danger" />
-            </React.Fragment>
+            <>
+                <Button
+                    label="Search"
+                    onClick={() => handleSearchRedirect(rowData.value)}
+                    className="p-button-primary"
+                />
+                <Button
+                    label="Delete"
+                    onClick={() => handleDelete(rowData.id)}
+                    className="p-button-danger"
+                />
+            </>
         );
     };
 
     return (
-        <div>
-            <h1>Preferences</h1>
-            <DataTable value={data} showGridlines>
-                <Column field="id" header="ID" />
-                <Column field="value" header="Value" />
-                <Column body={actionBodyTemplate} header="Actions" />
-            </DataTable>
+        <div
+            className="preferences-page"
+            prefix="schema: http://schema.org/"
+            typeof="schema:WebPage"
+        >
+            <h1 property="schema:name">Preferences</h1>
+
+            <section property="schema:mainEntity" typeof="schema:ItemList">
+                <DataTable value={data} showGridlines>
+                    <Column field="id" header="ID"/>
+                    <Column field="value" header="Value"/>
+                    <Column body={actionBodyTemplate} header="Actions"/>
+                </DataTable>
+            </section>
         </div>
     );
 };

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
+import React, {useEffect, useState} from 'react';
+import {useLocation, useNavigate} from 'react-router-dom';
+import {DataTable} from 'primereact/datatable';
+import {Column} from 'primereact/column';
 import './SoftwareOntologyPage.css'; // Import the CSS file
 
 const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:5000";
@@ -50,30 +50,61 @@ const SoftwareOntologyPage = () => {
 
     const predicateTemplate = (rowData) => {
         return template(rowData.predicate);
-    }
+    };
 
     const objectTemplate = (rowData) => {
         return template(rowData.object);
-    }
+    };
+
     const template = (link) => {
         const url = getURL(link);
         if (url) {
             if (url.href.includes('/software-ontology')) {
-                return <a href={url.href} onClick={(e) => handleLinkClick(e, url)}>{url.hash.substring(1)}</a>;
+                return (
+                    <a href={url.href} onClick={(e) => handleLinkClick(e, url)}>
+                        {url.hash.substring(1)}
+                    </a>
+                );
             }
-            console.log(url.hash.substring(1));
-            return <a href={url.href} target="_blank" rel="noopener noreferrer">{url.hash.substring(1)}</a>;
+            return (
+                <a href={url.href} target="_blank" rel="noopener noreferrer">
+                    {url.hash.substring(1)}
+                </a>
+            );
         }
         return <span>{link}</span>;
     };
 
     return (
-        <div className="ontology-page">
-            <h1 className="ontology-title">Software Ontology - {fragment}</h1>
-            <DataTable value={data} showGridlines>
-                <Column field="predicate" header="Predicate" body={predicateTemplate}></Column>
-                <Column field="object" header="Object" body={objectTemplate}></Column>
-            </DataTable>
+        <div
+            className="ontology-page"
+            prefix="schema: http://schema.org/"
+            typeof="schema:WebPage"
+        >
+            <h1
+                className="ontology-title"
+                property="schema:name"
+            >
+                Software Ontology - {fragment}
+            </h1>
+
+            <section
+                property="schema:mainEntity"
+                typeof="schema:ItemList"
+            >
+                <DataTable value={data} showGridlines>
+                    <Column
+                        field="predicate"
+                        header="Predicate"
+                        body={predicateTemplate}
+                    />
+                    <Column
+                        field="object"
+                        header="Object"
+                        body={objectTemplate}
+                    />
+                </DataTable>
+            </section>
         </div>
     );
 };
