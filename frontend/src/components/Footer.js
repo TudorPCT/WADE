@@ -31,6 +31,16 @@ const Footer = () => {
             >
                 Image by rawpixel.com on Freepik
             </a>
+            <a
+                className="p-text-secondary"
+                href="https://wade-fe-b58b6efc1256.herokuapp.com/report/report.html"
+                style={linkStyle}
+                property="schema:url"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Documentation
+            </a>
         </footer>
     );
 };
