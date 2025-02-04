@@ -53,6 +53,15 @@ Maybe you can mention me or this repo in the acknowledgements too
 <br />
 
 <!-- Table of Contents -->
+# Deliverables:
+- Public Wiki: https://github.com/TudorPCT/WADE/blob/main/README.md
+- Technical Report(Includes the Architecture details): https://github.com/TudorPCT/WADE/tree/main/report
+- OpenApi spec: https://github.com/TudorPCT/WADE/blob/main/openapi/spec.yaml
+- Fully implemented and deployed app:
+    - Frontend: https://github.com/TudorPCT/WADE/tree/main/frontend
+    - Backend: https://github.com/TudorPCT/WADE/tree/main/backend-service
+    - Ontology: https://github.com/TudorPCT/WADE/blob/main/ontology/wade.owl
+
 # :globe_with_meridians: URLs
 - APP: https://wade-fe-b58b6efc1256.herokuapp.com
 - SlideShow: https://docs.google.com/presentation/d/1J4sWsYhr2gf8POh7x0QC75uy9yG_y97-s-7nUDYVpSg/edit?usp=sharing
@@ -129,13 +138,19 @@ Maybe you can mention me or this repo in the acknowledgements too
 
 
 <!-- Env Variables -->
-<!-- ### :key: Environment Variables
+### :key: Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
+To run the React project, you will need to add the following environment variables to your .env file:
 
-`API_KEY`
+`REACT_APP_API_URL`
 
-`ANOTHER_API_KEY` -->
+To run the Python project, you will need to add the following environment variables to your python configuration:
+
+`DATABASE_URL`
+`MAIL_USERNAME`
+`MAIL_PASSWORD`
+`SECRET`
+`SPARQL_ENDPOINT`
 
 <!-- Getting Started -->
 ## 	:toolbox: Getting Started
@@ -173,9 +188,19 @@ Install dependencies:
   # Backend
   cd ../backend
   pip install -r requirements.txt
+
+  # Query Engine
+  Download the Apache Jena Fuseki from the official website
 ```
 <!-- Run Locally -->
 ### :running: Run Locally
+
+Start the query engine:
+```bash
+  cd apache-jena-fuseki
+  ./fuseki-server
+```
+And upload the ontology
 
 Start the backend:
 ```bash
