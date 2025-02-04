@@ -137,6 +137,7 @@ const SearchPage = () => {
                     <section
                         property="schema:mainEntity"
                         typeof="schema:ItemList"
+                        style={{"width": "100%"}}    
                     >
                         <DataTable value={results} showGridlines>
                             <Column body={renderFragment} header="Individual"/>
