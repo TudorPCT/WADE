@@ -55,7 +55,7 @@ Maybe you can mention me or this repo in the acknowledgements too
 <!-- Table of Contents -->
 # Deliverables:
 - Public Wiki: https://github.com/TudorPCT/WADE/blob/main/README.md
-- Technical Report(Includes the Architecture details): https://github.com/TudorPCT/WADE/tree/main/report
+- Technical Report(Includes the Architecture details): https://wade-fe-b58b6efc1256.herokuapp.com/report/report.html
 - OpenApi spec: https://github.com/TudorPCT/WADE/blob/main/openapi/spec.yaml
 - Fully implemented and deployed app:
     - Frontend: https://github.com/TudorPCT/WADE/tree/main/frontend
