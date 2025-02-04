@@ -797,6 +797,66 @@
                 languages that may require extensive boilerplate code or higher learning curves, Python offers a balance
                 between developer productivity and performance, making it an optimal choice for building and maintaining
                 a secure, scalable, and maintainable backend system.</p>
+        </section>
+        <section>
+            <h4>Conformance to Linked Data Principles</h4>
+            <p>The overall architecture (ontology, GitHub integration, Jena Fuseki, etc.) demonstrates compliance with
+                the well-known Linked Data principles set forth by Tim Berners-Lee:</p>
+            <ol>
+                <li>Use URIs as names for things.</li>
+                <ul>
+                    <li>The ontology and instance data employ URIs (e.g.,
+                        https://wade-8e36773161ad.herokuapp.com/software-ontology#SomeClassOrEntity) to uniquely
+                        identify resources like repositories, programming languages, or development methodologies.
+                    </li>
+                    <li>Each software artifact or concept (e.g., :Project, :Repository, :SoftwareTool) has its own URI,
+                        ensuring global uniqueness and preventing naming collisions.
+                    </li>
+                </ul>
+                <li>Use HTTP URIs so that people can look them up.</li>
+                <ul>
+                    <li>By hosting the ontology on a web-accessible location (e.g., a Heroku domain or AWS instance),
+                        you give each resource an HTTP URI.
+                    </li>
+                    <li>These URIs can be resolved, facilitating direct access to your resource descriptions.</li>
+                </ul>
+                <li>Provide useful information (standards such as RDF, SPARQL).</li>
+                <ul>
+                    <li>The system uses an RDF-based ontology (aligned with DOAP and Dublin Core) and serves data via
+                        SPARQL endpoints in Apache Jena Fuseki.
+                    </li>
+                    <li>When someone queries a URI, they can receive RDF data describing the resource’s properties and
+                        relationships (adoptsParadigm, dependsOn, hasSoftwareLicense, etc.).
+                    </li>
+                    <li>We also store relevant metadata (e.g., star counts, creation dates) that external users or
+                        services can retrieve, thus “providing useful information.”
+                    </li>
+                </ul>
+                <li>Include links to other URIs so that they can discover more things.</li>
+                <ul>
+                    <li>By mapping certain concepts in your ontology to external vocabularies (e.g., doap:Project or
+                        dct:created), the data can link out to other well-known entities.
+                    </li>
+                    <li>Likewise, the system’s representation of a GitHub repository includes references (URIs) to
+                        GitHub itself (e.g., repoUrl property). This effectively links the local data to the broader web
+                        of data.
+                    </li>
+                </ul>
+            </ol>
+
+            <p>Consequently, the platform:</p>
+            <ol>
+                <li>Exposes RDF data for software projects, tools, and licenses.</li>
+                <li>Aligns with external vocabularies (DOAP, DC, etc.).</li>
+                <li>Uses a SPARQL endpoint for structured queries.</li>
+                <li>Embeds additional context in the HTML front end (through RDFa) to describe pages and content in
+                    semantic terms.
+                </li>
+            </ol>
+
+            <p>By fulfilling these principles, the solution integrates seamlessly with the larger Linked Data ecosystem,
+                allowing other systems (e.g., data aggregators, semantic crawlers, or external applications) to
+                discover, link, and reason about our software development data.</p>
 
         </section>
     </section>
@@ -867,14 +927,14 @@
             SPARQL queries are as follows:
         </p>
         <p><strong>Example query:</strong></p>
-                <p>"Show all frameworks for java that don't hasSoftwareLicense Apache2License"</p>
-                <p>This query retrieves all frameworks related to Java that do not have the Apache2 license. It filters
-                    entities based on specific criteria, such as programming language and software license. The query
-                    execution involves pattern matching and filtering to identify relevant entities. The results are
-                    presented in a structured format, providing users with detailed information about the queried
-                    entities.</p>
-                <p><strong>SPARQL Query:</strong></p>
-<pre><code>
+        <p>"Show all frameworks for java that don't hasSoftwareLicense Apache2License"</p>
+        <p>This query retrieves all frameworks related to Java that do not have the Apache2 license. It filters
+            entities based on specific criteria, such as programming language and software license. The query
+            execution involves pattern matching and filtering to identify relevant entities. The results are
+            presented in a structured format, providing users with detailed information about the queried
+            entities.</p>
+        <p><strong>SPARQL Query:</strong></p>
+        <pre><code>
     PREFIX : &lt;https://wade-8e36773161ad.herokuapp.com/software-ontology#&gt
     PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt
 
@@ -890,13 +950,15 @@
         <strong>Explanation:</strong>
         <ul>
             <li>The query uses the PREFIX directive to define the ontology namespace and the rdfs namespace for RDF
-                schema.</li>
+                schema.
+            </li>
             <li>The SELECT clause retrieves distinct individuals (?indiv) and their labels (?label).</li>
             <li>The WHERE clause specifies the conditions for the query:
                 <ul>
                     <li>?indiv must be of type :Framework.</li>
                     <li>?indiv must support the programming language :Java.</li>
-                    <li>There should not exist a relationship between ?indiv and the software license :Apache2License.</li>
+                    <li>There should not exist a relationship between ?indiv and the software license :Apache2License.
+                    </li>
                 </ul>
             </li>
             <li>The OPTIONAL clause retrieves the label of the individual if available.</li>
@@ -907,13 +969,26 @@
     <p>CodeOwl is structured in a modular and scalable manner, with each component designed to handle specific tasks
         efficiently. The implementation details of the frontend are as follows.</p>
     <section>
+        <h4>Home Page</h4>
+        <p>The home page serves as the entry point for users, providing an overview of the system's features and
+            capabilities. It offers a brief introduction to the ontology query application, guiding users on how to
+            interact with the system.</p>
+        <figure class="figure">
+            <img src="./figures/home.png" alt="Description of the image">
+            <figcaption>Figure 10: Home Page.</figcaption>
+        </figure>
+        <p>The home page also includes links to the search page, ontology browser, and user preferences, enabling users
+            to navigate seamlessly between different sections of the application. It serves as a central hub for
+            accessing key features and functionalities.</p>
+    </section>
+    <section>
         <h4>Search Page</h4>
         <p>The search page is the main interface for users to interact with the system. It allows users to input natural
             language queries, which are then parsed and converted into SPARQL queries for execution against the ontology
             data.</p>
         <figure class="figure">
             <img src="./figures/search.png" alt="Description of the image">
-            <figcaption>Figure 10: Search Page.</figcaption>
+            <figcaption>Figure 11: Search Page.</figcaption>
         </figure>
         <p>The results are displayed in a structured format, providing users with detailed information about the queried
             entities. Users can save their searches for future reference.</p>
@@ -929,7 +1004,7 @@
             and hierarchy.</p>
         <figure class="figure">
             <img src="./figures/browser.png" alt="Description of the image">
-            <figcaption>Figure 11: Ontology Browser Page.</figcaption>
+            <figcaption>Figure 12: Ontology Browser Page.</figcaption>
         </figure>
         <p>Users can view detailed descriptions of ontology entities, including their properties, relationships, and
             metadata. The browser offers a user-friendly way to interact with the ontology data, facilitating knowledge
@@ -942,7 +1017,7 @@
             sessions.</p>
         <figure class="figure">
             <img src="./figures/login_email.png" alt="Description of the image">
-            <figcaption>Figure 12: Login Email Input.</figcaption>
+            <figcaption>Figure 13: Login Email Input.</figcaption>
         </figure>
         <p>When a user logs in, the system generates a unique OTP and sends it to the user's email address for
             verification. The user enters the OTP to authenticate their identity and gain access to the system. The OTP
@@ -950,7 +1025,7 @@
             spamming.</p>
         <figure class="figure">
             <img src="./figures/login_otp.png" alt="Description of the image">
-            <figcaption>Figure 13: Login OTP Input.</figcaption>
+            <figcaption>Figure 14: Login OTP Input.</figcaption>
         </figure>
         <p>Upon successful verification, the system issues a JWT token that the user can use to access protected
             resources
@@ -965,10 +1040,51 @@
             preferences related to search queries, display settings, and other application-specific configurations.</p>
         <figure class="figure">
             <img src="./figures/preferences.png" alt="Description of the image">
-            <figcaption>Figure 14: Search Page.</figcaption>
+            <figcaption>Figure 15: Search Page.</figcaption>
         </figure>
         <p>Users can create and delete preferences based on their requirements. The system stores these
             preferences securely and associates them with the user's account for personalized interactions.</p>
+    </section>
+
+    <section>
+        <h4>RDFa in React Component</h4>
+        <p>
+            RDFa (Resource Description Framework in Attributes) is a method for embedding structured data within HTML
+            documents. By adding RDFa attributes to HTML elements, developers can annotate content with semantic
+            information, making it machine-readable and interpretable by search engines and other applications.
+        </p>
+        <p>
+            In the context of the CodeOwl system, RDFa is used to enhance the ontology browser's functionality. By
+            embedding RDFa attributes in React components, we can expose ontology data in a structured format, enabling
+            users to explore and understand the relationships between entities more effectively.
+        </p>
+        <p>The project incorporates RDFa (Resource Description Framework in Attributes) within various React components
+            (e.g., SearchPage, PreferencesPage, SoftwareOntologyPage, Header, Footer, Hero) to embed structured data
+            that conforms to the schema.org vocabulary. The key RDFa attributes include:</p>
+        <ul>
+            <li><strong>prefix="schema: http://schema.org/"</strong>: Declares the namespace for schema: references.
+            </li>
+            <li><strong>typeof="schema:SomeType"</strong>: Identifies the type of the content (e.g., schema:WebPage,
+                schema:SearchResultsPage, schema:WPHeader).
+            </li>
+            <li><strong>property="schema:propertyName"</strong>: Describes content as a property of the declared type
+                (e.g., schema:name, schema:headline, schema:description).
+            </li>
+        </ul>
+        <p>For example, in the <strong>SearchPage</strong> component:</p>
+        <pre><code>
+        </code></pre>
+
+        <p>This signals to RDFa-aware parsers (and potentially search engines) that:</p>
+        <ol type="1">
+            <li>This page is a SearchResultsPage.</li>
+            <li>The heading (“Search Page”) is the page name.</li>
+            <li>The “main entity” is an ItemList (the search results).</li>
+        </ol>
+        <p>Likewise, in the Footer, we labeled the
+        <footer> as a schema:WPFooter, used property="schema:text" for the text, and property="schema:url" for the link.
+            This semantic markup does not alter how the site visually looks or behaves, but does add machine-readable
+            context.</p>
     </section>
 
     <section>
@@ -1005,7 +1121,7 @@
 
     <figure class="figure">
         <img src="./figures/use_case.drawio.png" alt="Description of the image">
-        <figcaption>Figure 15: Use Case Diagram.</figcaption>
+        <figcaption>Figure 16: Use Case Diagram.</figcaption>
     </figure>
 
     <p>
