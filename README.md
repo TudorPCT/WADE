@@ -53,8 +53,10 @@ Maybe you can mention me or this repo in the acknowledgements too
 <br />
 
 <!-- Table of Contents -->
-# :globe_with_meridians: URL to APP
-https://wade-fe-b58b6efc1256.herokuapp.com
+# :globe_with_meridians: URLs
+APP: https://wade-fe-b58b6efc1256.herokuapp.com
+SlideShow: https://docs.google.com/presentation/d/1J4sWsYhr2gf8POh7x0QC75uy9yG_y97-s-7nUDYVpSg/edit?usp=sharing
+GitHub: https://github.com/TudorPCT/WADE
 
 # :notebook_with_decorative_cover: Table of Contents
 
